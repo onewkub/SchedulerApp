@@ -2,7 +2,7 @@
 
 <mat-icon class="icon">dashboard</mat-icon>
 
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" (ngSubmit) = "onSubmit()">
     <mat-form-field>
         <input formControlName="email" type="text" matInput placeholder="Email" autocomplete="off">
     </mat-form-field>

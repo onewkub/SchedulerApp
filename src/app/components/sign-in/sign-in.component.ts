@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
-  constructor() { }
+  loginForm: FormGroup;
+  constructor(private formBuilder :FormBuilder) { 
+    this.loginForm = formBuilder.group({
+      email: [''],
+      password: ['']
+    });
+  }
 
   ngOnInit() {
   }
 
+
+  onSubmit(){
+    console.log(this.loginForm.value);
+  }
 }
