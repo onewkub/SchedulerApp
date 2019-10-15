@@ -1,14 +1,52 @@
 <mat-drawer-container class="sidenav" autosize>
-    <mat-drawer #drawer mode="side" disableClose="true" opened="true">
+    <mat-drawer #drawer class="sideDrawer" mode="side" opened="true" disableClose="true">
         <mat-nav-list>
-            <mat-list-item (click) = "isExpanded = !isExpanded">
-                <mat-icon mat-list-icon>menu</mat-icon>
-                <h4 mat-line *ngIf="isExpanded">Panel</h4>
+            <mat-list-item (click)="toggleMenu()">
+                <span class="menuIcon">
+                    <mat-icon>menu</mat-icon>
+                </span>
+                <span *ngIf="isExpanded" class="menuText">
+                    <p>Menu</p>
+                </span>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+
+            <mat-list-item disableRipple style="background-color: transparent;">
+                <span class="menuIcon">
+                    <mat-icon>person</mat-icon>
+                </span>
+                <span *ngIf="isExpanded" class="menuText">
+                    <p>{{account.name}}</p>
+                </span>
+                <span *ngIf="isExpanded" class="menuIcon"> 
+                    <button mat-raised-button style="box-shadow: none; color: tomato;" ><mat-icon>exit_to_app</mat-icon></button>
+                </span>
+            </mat-list-item>
+
+            <mat-divider></mat-divider>
+            <mat-list-item>
+                <span class="menuIcon">
+                    <mat-icon>dashboard</mat-icon>
+                </span>
+                <span *ngIf="isExpanded" class="menuText">
+                    <p>Dashboard</p>
+                </span>
             </mat-list-item>
             <mat-list-item>
-                <mat-icon mat-list-icon>dashboard</mat-icon>
-                <h4 mat-line *ngIf="isExpanded">Dashboard</h4>
+                <span class="menuIcon">
+                    <mat-icon>add</mat-icon>
+                </span>
+                <span *ngIf="isExpanded" class="menuText">
+                    <p>Add Proejct</p>
+                </span>
             </mat-list-item>
+
+
         </mat-nav-list>
     </mat-drawer>
+    <mat-drawer-content class="content">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+
 </mat-drawer-container>

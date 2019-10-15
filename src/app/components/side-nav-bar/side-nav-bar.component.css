@@ -1,5 +1,30 @@
 .sidenav {
     height: 100%;
-    top: 0px;
-    left: 0px;
   }
+.sideDrawer{
+  margin-right: 2em;
+}
+.menuIcon{
+  margin: 0.1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.menuText{
+  margin-left: 0.2em;
+  padding-right: 0.4em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.menuText p{
+  font-weight: bold;
+  margin: auto;
+}
+
+.content{
+  display: flex;
+  padding-left: 3em;
+  padding-top: 3em;
+  height: 100%;
+}

@@ -38,11 +38,19 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SideNavBarComponent
+    SideNavBarComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
