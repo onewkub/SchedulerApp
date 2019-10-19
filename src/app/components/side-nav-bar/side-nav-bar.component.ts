@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -7,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavBarComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {}
+  acount: any;
+  constructor(
+    public authService: AuthService
+  ) {
+    this.acount = {
+      name: authService.user.name
+    }
+  }
+  ngOnInit() { }
   isExpanded = false;
-  toggleMenu(): void{
+  checkAccount(){
+    console.log(this.authService.user);
+  }
+
+  toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
   }
 }

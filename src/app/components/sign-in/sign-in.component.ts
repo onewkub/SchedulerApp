@@ -28,7 +28,8 @@ export class SignInComponent implements OnInit {
     this.tryLogin(this.loginForm.value);
   }
   tryLogin(value){
-    this.authService.doLogin(value);
+    // this.authService.doLogin(value);
+    this.authService.doLoginWihtPersistent(value);
   }
   tryLogout(){
     this.authService.doLogout();
