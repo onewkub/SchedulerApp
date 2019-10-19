@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,7 +28,11 @@ export class SignUpComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router : Router,
+    public authService: AuthService
+    ) {
     this.registerForm = this.formBuilder.group({
       displayName: [''],
       email: ['', Validators.email], 
@@ -44,10 +50,14 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit(formDirective: FormGroupDirective){
-    console.log(this.registerForm.value);
+    this.tryRegister(this.registerForm.value);
     this.registerForm.reset();
     formDirective.resetForm();
     
+  }
+
+  tryRegister(value){
+    this.authService.doRegister(value);
   }
 
 }

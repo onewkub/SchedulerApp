@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { HomeComponent } from "./components/home/home.component";
 import { SideNavBarComponent} from "./components/side-nav-bar/side-nav-bar.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'app', component: SideNavBarComponent },
+  { path: 'app', component: SideNavBarComponent, children:[
+    { path: '', component: DashboardComponent },
+    { path: '', pathMatch: 'full', redirectTo: '' }
+   ], canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
+  { path: 'login', component: HomeComponent },
   { path: '', pathMatch: 'full', redirectTo: '' }
 ];
 

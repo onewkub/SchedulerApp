@@ -8,8 +8,9 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input formControlName="password" type="text" matInput placeholder="Password" autocomplete="off">
+        <input formControlName="password" type="password" matInput placeholder="Password" autocomplete="off">
     </mat-form-field>
 
     <button type="submit" mat-raised-button color="primary">Sign In</button>
 </form>
+<button (click)= "tryLogout()">Logout</button>

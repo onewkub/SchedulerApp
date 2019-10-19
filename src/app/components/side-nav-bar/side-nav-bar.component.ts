@@ -11,10 +11,6 @@ export class SideNavBarComponent implements OnInit {
 
   ngOnInit() {}
   isExpanded = false;
-  account = {
-    name : "Wachira Norasing"
-  }
-
   toggleMenu(): void{
     this.isExpanded = !this.isExpanded;
   }
