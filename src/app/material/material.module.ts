@@ -39,6 +39,7 @@ import { MatCheckboxModule, MatButtonModule, MatInputModule, MatAutocompleteModu
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    
   ]
 })
 export class MaterialModule { }

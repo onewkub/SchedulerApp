@@ -20,7 +20,7 @@ export class SideNavBarComponent implements OnInit {
     public dialog: MatDialog
   ) {
     
-    this.account = this.userSevice.getCurentUserData();
+    // this.account = this.userSevice.getCurentUserData();
     
   }
   ngOnInit() {
@@ -41,7 +41,7 @@ export class SideNavBarComponent implements OnInit {
   openDialog(): void {
     console.log("Open Dialog");
     const dialogRef = this.dialog.open(AddProjectComponent, {
-      width: '50em'
+      width: '40em'
     });
 
     dialogRef.afterClosed().subscribe(result => {

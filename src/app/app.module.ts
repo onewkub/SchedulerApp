@@ -25,6 +25,7 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AddProjectComponent } from './components/add-project/add-project.component';
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    MatNativeDateModule
   ],
   providers: [AuthService, UserService,AuthGuard],
   bootstrap: [AppComponent]
