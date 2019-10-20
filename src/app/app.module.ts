@@ -24,6 +24,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/auth.guard';
+import { AddProjectComponent } from './components/add-project/add-project.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AuthGuard } from './guards/auth.guard';
     DashboardComponent,
     SignInComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,
