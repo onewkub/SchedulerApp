@@ -1,0 +1,11 @@
+.mat-form-field{
+    margin-right: 1em;
+}
+.mat-nav-list{
+    overflow-y: scroll;
+    height: 15em;
+}
+.mat-list{
+    overflow-y: scroll;
+    height: 15em;
+}

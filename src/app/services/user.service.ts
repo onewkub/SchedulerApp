@@ -29,7 +29,9 @@ export class UserService {
   }
   getCurentUserData(): User {
     return {
+      uid: this.user.uid,
       name: this.user.displayName
+
     }
   }
 }

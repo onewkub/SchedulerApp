@@ -1,24 +1,42 @@
 <h1 mat-dialog-title>Add Project</h1>
 <div mat-dialog-content>
   <form>
-      <div>
-          <mat-form-field>
-              <input type="text" matInput placeholder="Project Name">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="startPicker" placeholder="Start Date">
-            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="endPicker" placeholder="End Date">
-            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-            <mat-datepicker #endPicker></mat-datepicker>
-          </mat-form-field>
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Project Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="startPicker" placeholder="Start Date">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="endPicker" placeholder="End Date">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label>Member</label>
+        <mat-nav-list>
+          <mat-list-item (click)="SelectedUser(user)" *ngFor="let user of users">
+            <p>{{user.name}}</p>
+          </mat-list-item>
+        </mat-nav-list>
       </div>
+      <div class="col-6">
+        <label>Selected</label>
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let user of selectedUsers">
+            <p>{{user.name}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button >Add Project</button>
+  <button mat-button>Add Project</button>
 </div>
