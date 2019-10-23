@@ -13,7 +13,6 @@ const routes: Routes = [
     { path: 'addProject', component: AddProjectComponent },
    ], canActivate: [AuthGuard] },
   { path: '', component: HomeComponent },
-  { path: 'login', component: HomeComponent },
   { path: '', pathMatch: 'full', redirectTo: '' }
 ];
 

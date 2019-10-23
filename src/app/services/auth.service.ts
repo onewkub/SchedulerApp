@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -25,18 +25,27 @@ export class AuthService {
         const userUid = result.user.uid;
         const email = result.user.email;
         const displayName = value.displayName;
-        //result.user.displayName = value.displayName;
-        // firebase.auth().currentUser.updateProfile({
-        //   displayName: value.displayName
-        // });
-        const acoount = {
+        const account = {
           userUID: userUid,
           email: email,
           displayName: displayName,
         }
-        firebase.firestore().collection('accounts').doc(userUid).set(acoount);
-        firebase.auth().signOut();
-        alert("Your registation succesful.");
+        console.log(account);
+
+        firebase.firestore().collection('accounts').doc(userUid).set(account).then(
+          function(result){
+            firebase.auth().signOut();
+            console.log(result);
+            alert("Your registation succesful.");
+          }
+        )
+        .catch(function(error){
+          var errorMessage = error.message;
+          alert(errorMessage);
+          console.log(error);
+        });
+        
+
 
       })
       .catch(function (error) {

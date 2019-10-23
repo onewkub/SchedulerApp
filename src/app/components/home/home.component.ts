@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { 
-    document.body.style.background = 'rgba(0, 0, 0, .6)';
+  constructor(private accessService: AccessService) { 
+    // document.body.style.background = 'rgba(0, 0, 0, .6)';
   }
 
   ngOnInit() {

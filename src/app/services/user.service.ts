@@ -20,7 +20,7 @@ export class UserService {
         // router.navigate(['/app']);
         // return user;
         this.user = user;
-        console.log(this.user.displayName);
+        // console.log(this.user.displayName);
       }
       else {
         console.log("No user Loging in");

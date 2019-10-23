@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectComponent } from '../add-project/add-project.component';
+import { AccessService } from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -17,7 +18,8 @@ export class SideNavBarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public userSevice: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private accessService: AccessService
   ) {
     
     this.account = this.userSevice.getCurentUserData();

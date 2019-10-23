@@ -9,3 +9,9 @@
     overflow-y: scroll;
     height: 15em;
 }
+.mat-dialog-actions {
+    justify-content: flex-end;
+}
+.mat-dialog-content{
+    overflow-y: hidden;
+}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from "@angular/router";
+import { AccessService } from 'src/app/services/access.service';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -10,9 +12,8 @@ import { Router } from "@angular/router";
 export class SignInComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
-    private formBuilder :FormBuilder,
+    public formBuilder :FormBuilder,
     public authService: AuthService,
-    private router: Router
     ) { 
     this.loginForm = formBuilder.group({
       email: [''],

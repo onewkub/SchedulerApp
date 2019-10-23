@@ -25,7 +25,7 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AddProjectComponent } from './components/add-project/add-project.component';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { MatNativeDateModule } from '@angular/material';
     MaterialModule,
     MatNativeDateModule
   ],
-  providers: [AuthService, UserService,AuthGuard],
+  providers: [AuthService, UserService, AuthGuard, {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
