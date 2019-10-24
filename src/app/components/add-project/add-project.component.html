@@ -3,7 +3,8 @@
   <form [formGroup]="addProjectForm" (ngSubmit)="onSubmit()">
     <div>
       <mat-form-field>
-        <input formControlName="projectName" type="text" matInput placeholder="Project Name" autocomplete="off"required>
+        <input formControlName="projectName" type="text" matInput placeholder="Project Name" autocomplete="off"
+          required>
       </mat-form-field>
       <mat-form-field>
         <input formControlName="startDate" matInput [matDatepicker]="startPicker" placeholder="Start Date"
@@ -20,10 +21,14 @@
   </form>
   <div class="row">
     <div class="col-6">
-      <label>Member</label>
+      <label style="margin-right: 3rem;">Member</label>
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="searchName" autocomplete="off" placeholder="Search Name">
+      </mat-form-field>
       <mat-nav-list>
-        <mat-list-item (click)="SelectedUser(user, i)" *ngFor="let user of users; let i=index">
-          <mat-checkbox disableRipple = "true" [(ngModel)]="checkList[i]">{{user.name}}</mat-checkbox>
+        <mat-list-item (click)="SelectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">
+          <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.name}}</mat-checkbox>
+
         </mat-list-item>
       </mat-nav-list>
     </div>

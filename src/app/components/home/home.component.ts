@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   constructor() { 
-    // document.body.style.background = 'rgba(0, 0, 0, .6)';
+    document.body.style.background = 'rgb(140, 140, 140)';
   }
 
   ngOnInit() {

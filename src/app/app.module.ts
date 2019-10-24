@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 //other import
 import { environment } from '../environments/environment';
@@ -49,7 +50,8 @@ import { MatNativeDateModule, MAT_CHECKBOX_CLICK_ACTION } from '@angular/materia
     AngularFireAuthModule,
     FormsModule,
     MaterialModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    Ng2SearchPipeModule
   ],
   providers: [AuthService, UserService, AuthGuard, {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'}],
   bootstrap: [AppComponent]

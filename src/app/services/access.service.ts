@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app'
 import { User } from '../models/user.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,46 @@ export class AccessService {
   userList: User[] = [];
 
   constructor(
+    public userService: UserService
   ) {
     firebase.firestore().collection("accounts").get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        // console.log(doc.id, '=>', doc.data());
-        var temp: User = { uid: doc.data().userUID, name: doc.data().displayName };
-        this.userList.push(temp);
-        // console.log(temp);
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          var temp: User = { uid: doc.data().userUID, name: doc.data().displayName };
+          if (temp.uid != userService.getCurentUserData().uid)
+            this.userList.push(temp);
+        });
+      })
+      .catch(err => {
+        console.log('Error getting documents', err);
       });
-      // console.log(this.userList);
-    })
-    .catch(err => {
-      console.log('Error getting documents', err);
-    });
   }
 
   getAllUsers(): User[] {
     return this.userList;
+  }
+  addProject(projectForm): void {
+    var project: {
+      projectName: string;
+      startDate: any;
+      endDate: any;
+      members: any[];
+    };
+    project = {
+      projectName: projectForm.projectName,
+      startDate: firebase.firestore.Timestamp.fromDate(projectForm.startDate),
+      endDate: firebase.firestore.Timestamp.fromDate(projectForm.endDate),
+      members: []
+    }
+    projectForm.memberArray.forEach(element => {
+      project.members.push(firebase.firestore().doc('accounts/' + element.member.uid));
+    });
+    firebase.firestore().collection("projects").add(project).then(function (docRef) {
+      console.log("Document written with ID: ", docRef.id);
+    })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+    console.log(project);
   }
 }

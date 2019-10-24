@@ -5,15 +5,23 @@ import { AddProject } from 'src/app/models/add-project.model';
 import { User } from 'src/app/models/user.model';
 import { AccessService } from 'src/app/services/access.service';
 
+interface userItem{
+  user : User;
+  id: number;
+}
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
   styleUrls: ['./add-project.component.css']
 })
+
+
+
 export class AddProjectComponent implements OnInit {
-  users: User[];
+
+  userItems:userItem[];
+  userList: User[];
   selectedUsers: User[];
-  checked = true;
   addProjectForm: FormGroup;
   checkList : boolean[];
   constructor(
@@ -29,15 +37,25 @@ export class AddProjectComponent implements OnInit {
           memberArray: this.formbuilder.array([])
         }
       );
+
      }
 
   ngOnInit() {
-    this.users = this.accesService.getAllUsers();
+    this.userList = this.accesService.getAllUsers();
+    this.userItems = [];
+    for(var i = 0; i < this.userList.length; i++){
+      var temp = {
+        user : this.userList[i],
+        id : i
+      }
+      
+      this.userItems.push(temp);
+    }
     this.selectedUsers = [];
-    this.checkList = new Array(this.users.length).fill(false);
-    // console.log(this.checkList);    
+    this.checkList = new Array(this.userList.length).fill(false); 
 
   }
+
   addItem(user:User){
     return this.formbuilder.group({
       member: user
@@ -49,21 +67,18 @@ export class AddProjectComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  SelectedUser(user: User, i : number):void{
+  SelectedUser(userItem: userItem):void{
     // console.log(i);
+    this.checkList[userItem.id] = !this.checkList[userItem.id];
     var selected = false;
     this.selectedUsers.forEach(element => {
-      if(user.uid == element.uid) selected = true;
+      if(userItem.user.uid == element.uid) selected = true;
     });
-    if(!selected) this.addSelectedUser(user);
-    else this.removeSelectedUser(user);
-    this.checkList[i] = !this.checkList[i];
-    // console.log(this.checkList);
+    if(!selected) this.addSelectedUser(userItem.user);
+    else this.removeSelectedUser(userItem.user);
   }
   addSelectedUser(user: User):void{
-    // console.log(user);
     this.selectedUsers.push(user);
-    // this.formArr.push(this.addItem(user));
   }
   removeSelectedUser(user: User):void{
     for(var i = 0; i < this.selectedUsers.length; i++){
@@ -80,7 +95,8 @@ export class AddProjectComponent implements OnInit {
   }
   onSubmit(){
     this.addArrayToArrayForm();
-    console.log(this.addProjectForm.value);
+    // console.log(this.addProjectForm.value);
+    this.accesService.addProject(this.addProjectForm.value);
   }
 
 }
