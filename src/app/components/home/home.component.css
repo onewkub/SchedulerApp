@@ -1,8 +1,12 @@
-.jumbotron{
-	text-align: center;
-	width: 25rem;
-	height: 40rem;
-	margin: auto;
-	border-radius: 0.5rem;
-
+.jumbotron {
+  text-align: center;
+  width: 25rem;
+  height: 40rem;
+  margin: auto;
+  border-radius: 0.5rem;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
