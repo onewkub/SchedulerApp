@@ -22,7 +22,6 @@ export class UserService {
         console.log("No user Loging in");
       }
     });
-    // this.getProject();
 
 
   }
