@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app'
 import { User } from '../models/user.model';
 import { UserService } from './user.service';
+import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,7 @@ export class AccessService {
     return this.userList;
   }
   addProject(projectForm): void {
-    var project: {
-      projectName: string;
-      startDate: any;
-      endDate: any;
-      projectOwner: any;
-      members: any[];
-    };
+    var project: Project;
     project = {
       projectName: projectForm.projectName,
       startDate: firebase.firestore.Timestamp.fromDate(projectForm.startDate),
