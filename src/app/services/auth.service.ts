@@ -34,6 +34,9 @@ export class AuthService {
 
         firebase.firestore().collection('accounts').doc(userUid).set(account).then(
           function(result){
+            firebase.firestore().collection('users').doc(userUid).set({
+              project: []
+            });
             firebase.auth().signOut();
             console.log(result);
             alert("Your registation succesful.");

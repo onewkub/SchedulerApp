@@ -68,6 +68,7 @@ export class AddProjectComponent implements OnInit {
     this.dialogRef.close();
   }
   SelectedUser(userItem: userItem):void{
+    console.log(this.selectedUsers);
     // console.log(i);
     this.checkList[userItem.id] = !this.checkList[userItem.id];
     var selected = false;
@@ -97,6 +98,9 @@ export class AddProjectComponent implements OnInit {
     this.addArrayToArrayForm();
     // console.log(this.addProjectForm.value);
     this.accesService.addProject(this.addProjectForm.value);
+    this.addProjectForm.reset();
+    this.onNoClick();
+
   }
 
 }
