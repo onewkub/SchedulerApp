@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import * as firebase from 'firebase/app';
-
+import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   user: any = null;
-  project: any[];
+  project: Project[];
   constructor(
   ) {
     this.user = firebase.auth().onAuthStateChanged(user => {
@@ -22,8 +22,6 @@ export class UserService {
         console.log("No user Loging in");
       }
     });
-
-
   }
   getCurentUserData(): User {
     return {
@@ -32,11 +30,27 @@ export class UserService {
 
     }
   }
+  getAllProeject(){
+    // return this.project;
+  }
   getProject(uid: string) {
     firebase.firestore().collection("users").doc(uid).get()
     .then(function (doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data().project);
+        console.log("Docment data:", doc.data().project);
+        // this.project = doc.data().project;
+        doc.data().project.forEach(element => {
+            element.get().then(function(doc) {
+              if (doc.exists) {
+                  console.log("Document data:", doc.data());
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!");
+              }
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });
+        });
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -45,4 +59,5 @@ export class UserService {
       console.log("Error getting document:", error);
     });
   }
+  
 }
