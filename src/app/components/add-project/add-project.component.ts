@@ -27,37 +27,37 @@ export class AddProjectComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddProject,
-    public formbuilder: FormBuilder,
-    public accesService: AccessService) 
-    {  this.addProjectForm = this.formbuilder.group(
+    public formBuilder: FormBuilder,
+    public accessService: AccessService)
+    {  this.addProjectForm = this.formBuilder.group(
         {
           projectName: [''],
           startDate: [''],
           endDate: [''],
-          memberArray: this.formbuilder.array([])
+          memberArray: this.formBuilder.array([])
         }
       );
 
      }
 
   ngOnInit() {
-    this.userList = this.accesService.getAllUsers();
+    this.userList = this.accessService.getAllUsers();
     this.userItems = [];
     for(var i = 0; i < this.userList.length; i++){
       var temp = {
         user : this.userList[i],
         id : i
       }
-      
+
       this.userItems.push(temp);
     }
     this.selectedUsers = [];
-    this.checkList = new Array(this.userList.length).fill(false); 
+    this.checkList = new Array(this.userList.length).fill(false);
 
   }
 
   addItem(user:User){
-    return this.formbuilder.group({
+    return this.formBuilder.group({
       member: user
     });
   }
@@ -97,7 +97,7 @@ export class AddProjectComponent implements OnInit {
   onSubmit(){
     this.addArrayToArrayForm();
     // console.log(this.addProjectForm.value);
-    this.accesService.addProject(this.addProjectForm.value);
+    this.accessService.addProject(this.addProjectForm.value);
     this.addProjectForm.reset();
     this.onNoClick();
 

@@ -19,14 +19,14 @@ export class SideNavBarComponent implements OnInit {
   project: DocumentReference[];
   constructor(
     public authService: AuthService,
-    public userSevice: UserService,
+    public userService: UserService,
     public dialog: MatDialog,
     public accessService: AccessService,
   ) {
-    
-    this.account = this.userSevice.getCurentUserData();
+
+    this.account = this.userService.getCurrentUserData();
     // console.log(this.userSevice.getAllProeject());
-    
+
   }
   ngOnInit() {
 
@@ -40,7 +40,7 @@ export class SideNavBarComponent implements OnInit {
   }
   toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
-    this.account = this.userSevice.getCurentUserData();
+    this.account = this.userService.getCurrentUserData();
 
   }
   openDialog(): void {

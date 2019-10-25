@@ -23,7 +23,7 @@ export class UserService {
       }
     });
   }
-  getCurentUserData(): User {
+  getCurrentUserData(): User {
     return {
       uid: this.user.uid,
       name: this.user.displayName
@@ -59,5 +59,5 @@ export class UserService {
       console.log("Error getting document:", error);
     });
   }
-  
+
 }

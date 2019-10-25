@@ -18,7 +18,7 @@ export class AccessService {
       .then(snapshot => {
         snapshot.forEach(doc => {
           var temp: User = { uid: doc.data().userUID, name: doc.data().displayName };
-          if (temp.uid != userService.getCurentUserData().uid)
+          if (temp.uid != userService.getCurrentUserData().uid)
             this.userList.push(temp);
         });
       })
@@ -38,7 +38,7 @@ export class AccessService {
       endDate: firebase.firestore.Timestamp.fromDate(projectForm.endDate),
       projectOwner: firebase.firestore().doc('account/' + this.userService.user.uid),
       members: []
-      
+
     }
     projectForm.memberArray.forEach(element => {
       project.members.push(firebase.firestore().doc('accounts/' + element.member.uid));
