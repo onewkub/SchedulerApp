@@ -40,7 +40,6 @@ export class AccessService {
     newProject.members = [];
     form.memberArray.forEach(user => newProject.members.push(user.member.uid));
     this.projectList.push(newProject);
-    console.log(newProject);
   }
 
   getAllUsers(): User[] {
