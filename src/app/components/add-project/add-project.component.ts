@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AddProject} from 'src/app/models/add-project.model';
 import {User} from 'src/app/models/user.model';
 import {AccessService} from 'src/app/services/access.service';
+import {AuthService} from '../../services/auth.service';
 
 interface UserItem {
   user: User;
@@ -16,9 +17,7 @@ interface UserItem {
   styleUrls: ['./add-project.component.css']
 })
 
-
 export class AddProjectComponent implements OnInit {
-
   userItems: UserItem[];
   userList: User[];
   selectedUsers: User[];
@@ -29,6 +28,7 @@ export class AddProjectComponent implements OnInit {
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddProject,
     public formBuilder: FormBuilder,
+    public authService: AuthService,
     public accessService: AccessService) {
     this.addProjectForm = this.formBuilder.group(
       {
@@ -38,7 +38,6 @@ export class AddProjectComponent implements OnInit {
         memberArray: this.formBuilder.array([])
       }
     );
-
   }
 
   ngOnInit() {
@@ -50,11 +49,12 @@ export class AddProjectComponent implements OnInit {
         id: i
       };
 
-      this.userItems.push(temp);
+      if (temp.user.uid !== this.authService.currentUser.uid) {
+        this.userItems.push(temp);
+      }
     }
     this.selectedUsers = [];
     this.checkList = new Array(this.userList.length).fill(false);
-
   }
 
   addItem(user: User) {
@@ -102,8 +102,8 @@ export class AddProjectComponent implements OnInit {
   }
 
   addArrayToArrayForm(): void {
-    this.selectedUsers.forEach(element => {
-      this.formArr.push(this.addItem(element));
+    this.selectedUsers.forEach(user => {
+      this.formArr.push(this.addItem(user));
     });
   }
 
@@ -113,7 +113,5 @@ export class AddProjectComponent implements OnInit {
     this.accessService.addProject(this.addProjectForm.value);
     this.addProjectForm.reset();
     this.onNoClick();
-
   }
-
 }
