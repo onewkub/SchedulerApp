@@ -7,13 +7,14 @@ import {AuthService} from './auth.service';
   providedIn: 'root'
 })
 export class AccessService {
-
+  isExpand: boolean;
   projectList: Project[] = [];
-  selectedProject: Project;
+  selectedProject: Project = null;
 
   constructor(
     public authService: AuthService
   ) {
+    this.isExpand = false;
     this.projectList = [
       {
         name: 'Project A',
@@ -30,7 +31,10 @@ export class AccessService {
         members: []
       }
     ];
-    this.selectedProject = this.projectList[0];
+  }
+
+  toggleExpend(): void {
+    this.isExpand = !this.isExpand;
   }
 
   addProject(form): void {
@@ -46,5 +50,10 @@ export class AccessService {
 
   getAllUsers(): User[] {
     return this.authService.users;
+  }
+
+  resetState(): void {
+    this.isExpand = false;
+    this.selectedProject = null;
   }
 }
