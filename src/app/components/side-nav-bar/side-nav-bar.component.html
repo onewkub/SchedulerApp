@@ -25,8 +25,8 @@
             </mat-list-item>
 
             <mat-divider></mat-divider>
-
-            <mat-list-item>
+            <!-- Dashboard -->
+            <mat-list-item (click)="switchToDashboard()">
                 <span class="menuIcon">
                     <mat-icon>dashboard</mat-icon>
                 </span>
@@ -36,12 +36,12 @@
             </mat-list-item>
             <mat-divider></mat-divider>
             <!-- ProjectList -->
-            <mat-list-item *ngFor="let item of this.userService.userProject">
+            <mat-list-item *ngFor="let project of this.userService.userProject" (click)="switchToProject(project)">
                 <span class="menuIcon">
                     <mat-icon>label</mat-icon>
                 </span>
                 <span *ngIf="isExpanded" class="menuText">
-                    <p>{{item.projectName}}</p>
+                    <p>{{project.projectName}}</p>
                 </span>
             </mat-list-item>
             <!-- Add Project -->
@@ -54,7 +54,7 @@
                     <p>Add Project</p>
                 </span>
             </mat-list-item>
-            
+
 
 
 

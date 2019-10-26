@@ -4,6 +4,13 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddProjectComponent} from '../add-project/add-project.component';
 import {UserService} from 'src/app/services/user.service';
 import {ProjectService} from 'src/app/services/project.service';
+import {Project} from '../../models/project.model';
+import {Router} from '@angular/router';
+
+enum PageType {
+  dashboard,
+  project,
+}
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -12,13 +19,17 @@ import {ProjectService} from 'src/app/services/project.service';
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
+  selectedProjectID: number;
+  activePage = PageType.dashboard;
 
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
+    public router: Router,
     public userService: UserService,
     public projectService: ProjectService
   ) {
+    this.selectedProjectID = null;
     projectService.getUserProject(userService.currentUser.uid);
     console.log('Account: ' + this.userService.currentUser.displayName);
   }
@@ -46,21 +57,23 @@ export class SideNavBarComponent implements OnInit {
     });
   }
 
-  // isSelectedProject(project: Project): boolean {
-  //   return this.accessService.selectedProject === project;
-  // }
+  isSelectedProject(project: Project): boolean {
+    return this.selectedProjectID === project.projectID && this.activePage === PageType.project;
+  }
 
-  // isSelectedDashboard(): boolean {
-  //   return this.accessService.selectedProject === null;
-  // }
+  isSelectedDashboard(): boolean {
+    return this.activePage === PageType.dashboard;
+  }
 
-  // switchToProject(project: Project): void {
-  //   this.accessService.selectedProject = project;
-  //   this.router.navigate(['/projects']);
-  // }
+  switchToProject(project: Project): void {
+    this.isExpanded = false;
+    this.activePage = PageType.project;
+    this.selectedProjectID = project.projectID;
+    this.router.navigate(['/projects']);
+  }
 
-  // switchToDashboard(): void {
-  //   this.router.navigate(['/dashboard']);
-  //   this.accessService.selectedProject = null;
-  // }
+  switchToDashboard(): void {
+    this.activePage = PageType.dashboard;
+    this.router.navigate(['/dashboard']);
+  }
 }
