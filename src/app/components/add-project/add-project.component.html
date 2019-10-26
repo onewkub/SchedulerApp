@@ -34,8 +34,8 @@
     <div class="col-6">
       <mat-nav-list>
         <mat-list-item (click)="SelectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">
-          <mat-checkbox disableRipple="true"
-                        [(ngModel)]="checkList[userItem.id]">{{userItem.user.displayName}}</mat-checkbox>
+          <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.displayName}}</mat-checkbox>
+
         </mat-list-item>
       </mat-nav-list>
     </div>
