@@ -30,10 +30,9 @@ export class SideNavBarComponent implements OnInit {
     this.authService.doLogout();
   }
 
-  // toggleMenu(): void {
-  //   this.accessService.toggleExpend();
-  //   this.isExpanded = this.accessService.isExpand;
-  // }
+  toggleMenu(): void {
+    this.isExpanded = !this.isExpanded;
+  }
 
   openDialog(): void {
     console.log('Open Dialog');

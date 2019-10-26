@@ -28,11 +28,18 @@ export class ApiService {
         uid: 2,
         displayName: 'Tapanapong Chuntama',
         email: 'livenze2397@gmail.com'
+      },
+      {
+        uid: 3,
+        displayName: 'Nattakit Hosapsin',
+        email: 'relta@chifumi.net'
       }
+      
     ];
     this.authTable = [
       { uid: 1, email: 'oldnew123@gmail.com', password: 'onewkub123', logedIn: false },
       { uid: 2, email: 'Livenze2397@gmail.com', password: '12345678', logedIn: false },
+      { uid: 3, email: 'relta@chifumi.net', password: '2oDydeJVPZs2zRsW', logedIn: false},
     ];
     this.project = [
       {
@@ -41,13 +48,14 @@ export class ApiService {
         startDate: new Date("2019-10-27"),
         endDate: new Date("2019-10-30"),
         projectOwner: 0,
-        members: [1, 2]
+        members: [1, 2, 3]
       }
     ];
     this.userData = [
       { uid: 0, projectID: [0] },
       { uid: 1, projectID: [0]},
-      { uid: 2, projectID: [0]}  
+      { uid: 2, projectID: [0]},
+      { uid: 3, projectID: [0]}  
     ];
   }
 

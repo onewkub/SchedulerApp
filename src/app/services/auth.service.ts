@@ -54,7 +54,7 @@ export class AuthService {
         return null;
       });
       console.log(this.userService.currentUser.displayName);
-      this.router.navigate(['/app']);
+      this.router.navigate(['/dashboard']);
       return true;
     }
     return false;
