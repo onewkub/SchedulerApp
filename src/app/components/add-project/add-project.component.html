@@ -4,11 +4,11 @@
     <div>
       <mat-form-field>
         <input formControlName="projectName" type="text" matInput placeholder="Project Name" autocomplete="off"
-          required>
+               required>
       </mat-form-field>
       <mat-form-field>
         <input formControlName="startDate" matInput [matDatepicker]="startPicker" placeholder="Start Date"
-          autocomplete="off">
+               autocomplete="off">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
@@ -25,6 +25,13 @@
       <mat-form-field>
         <input matInput type="text" [(ngModel)]="searchName" autocomplete="off" placeholder="Search Name">
       </mat-form-field>
+    </div>
+    <div class="col-6" style="margin: auto">
+      <label style="vertical-align: middle">Selected</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
       <mat-nav-list>
         <mat-list-item (click)="SelectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">
           <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.displayName}}</mat-checkbox>
@@ -33,7 +40,6 @@
       </mat-nav-list>
     </div>
     <div class="col-6">
-      <label>Selected</label>
       <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let user of selectedUsers">
           <p>{{user.displayName}}</p>

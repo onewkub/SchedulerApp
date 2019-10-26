@@ -1,36 +1,37 @@
 <h2>Sche3dul3r</h2>
 <form [formGroup]="registerForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
-    <div>
-        <mat-form-field>
-            <input formControlName="displayName" type="text" matInput placeholder="์Display Name" autocomplete="off" required>
-            <mat-error *ngIf="registerForm.hasError('required', 'displayName')">
-                Please enter your display name.
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-            <input formControlName="email" type="email" matInput placeholder="์Email" autocomplete="off" required>
-            <mat-error *ngIf="registerForm.hasError('required', 'email') || registerForm.hasError('email', 'email')">
-                Please enter your email.
-            </mat-error>
+  <div>
+    <mat-form-field>
+      <input formControlName="displayName" type="text" matInput placeholder="์Display Name" autocomplete="off" required>
+      <mat-error *ngIf="registerForm.hasError('required', 'displayName')">
+        Please enter your display name.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="email" type="email" matInput placeholder="์Email" autocomplete="off" required>
+      <mat-error *ngIf="registerForm.hasError('required', 'email') || registerForm.hasError('email', 'email')">
+        Please enter your email.
+      </mat-error>
 
-        </mat-form-field>
+    </mat-form-field>
 
-        <mat-form-field>
-            <input type="password" matInput placeholder="New password" formControlName="password" required
-                minlength="8">
-            <mat-error *ngIf="registerForm.hasError('required', 'password') || registerForm.hasError('minlength', 'password')">
-                Please enter your password at least 8 character.
-            </mat-error>
-        </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput placeholder="New password" formControlName="password" required
+             minlength="8">
+      <mat-error
+        *ngIf="registerForm.hasError('required', 'password') || registerForm.hasError('minlength', 'password')">
+        Please enter your password at least 8 character.
+      </mat-error>
+    </mat-form-field>
 
-        <mat-form-field>
-            <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword"
-                [errorStateMatcher]="matcher">
-            <mat-error *ngIf="registerForm.hasError('notSame')">
-                Passwords do not match.
-            </mat-error>
-        </mat-form-field>
-    </div>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="registerForm.hasError('notSame')">
+        Passwords do not match.
+      </mat-error>
+    </mat-form-field>
+  </div>
 
-    <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Sign Up</button>
+  <button type="submit" [disabled]="registerForm.invalid" mat-raised-button color="primary">Sign Up</button>
 </form>

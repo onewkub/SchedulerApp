@@ -23,26 +23,44 @@ export class SideNavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   logOut(){
     console.log("logout");
     this.authService.doLogout();
   }
-  toggleMenu(): void {
-    this.isExpanded = !this.isExpanded;
 
-  }
+  // toggleMenu(): void {
+  //   this.accessService.toggleExpend();
+  //   this.isExpanded = this.accessService.isExpand;
+  // }
+
   openDialog(): void {
-    console.log("Open Dialog");
+    console.log('Open Dialog');
     const dialogRef = this.dialog.open(AddProjectComponent, {
       width: '45em'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
 
+  // isSelectedProject(project: Project): boolean {
+  //   return this.accessService.selectedProject === project;
+  // }
+
+  // isSelectedDashboard(): boolean {
+  //   return this.accessService.selectedProject === null;
+  // }
+
+  // switchToProject(project: Project): void {
+  //   this.accessService.selectedProject = project;
+  //   this.router.navigate(['/projects']);
+  // }
+
+  // switchToDashboard(): void {
+  //   this.router.navigate(['/dashboard']);
+  //   this.accessService.selectedProject = null;
+  // }
 }

@@ -59,9 +59,8 @@ export class AuthService {
     }
     return false;
   }
-  doLogout():void{
-    this.userService.currentUser = null;
-    this.router.navigate(['/']);
-  }
 
+  doLogout(): void {
+    this.router.navigate(['/']).then(() => console.log('Logout'));
+  }
 }

@@ -1,14 +1,14 @@
 .sidenav {
   height: 100%;
+}
+
+.sideDrawer {
+  margin-right: 2em;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.sideDrawer {
-  margin-right: 2em;
 }
 
 .menuIcon {
@@ -29,6 +29,10 @@
 .menuText p {
   font-weight: bold;
   margin: auto;
+}
+
+.selectedMenu {
+  background: #d2d2d2;
 }
 
 .content {

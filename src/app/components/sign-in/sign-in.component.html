@@ -2,15 +2,15 @@
 
 <mat-icon class="icon">dashboard</mat-icon>
 
-<form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit) = "onSubmit(formDirective)">
-    <mat-form-field>
-        <input formControlName="email" type="text" matInput placeholder="Email" autocomplete="off">
-    </mat-form-field>
+<form [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+  <mat-form-field>
+    <input formControlName="email" type="text" matInput placeholder="Email" autocomplete="off">
+  </mat-form-field>
 
-    <mat-form-field>
-        <input formControlName="password" type="password" matInput placeholder="Password" autocomplete="off">
-    </mat-form-field>
+  <mat-form-field>
+    <input formControlName="password" type="password" matInput placeholder="Password" autocomplete="off">
+  </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary">Sign In</button>
+  <button type="submit" mat-raised-button color="primary">Sign In</button>
 </form>
 <!-- <button (click)= "tryLogout()">Logout</button> -->
