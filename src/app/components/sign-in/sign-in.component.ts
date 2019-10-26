@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormGroupDirective } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -23,14 +23,17 @@ export class SignInComponent implements OnInit {
   }
 
 
-  onSubmit(){
-    this.tryLogin(this.loginForm.value);
+  onSubmit(formDirective: FormGroupDirective){
+    this.tryLogin(this.loginForm.value, formDirective);
   }
-  tryLogin(value){
-    // this.authService.doLogin(value);
-    this.authService.doLoginWihtPersistent(value);
+  tryLogin(value, formDirective: FormGroupDirective){
+    if(!this.authService.doLogin(value)){
+      alert("Your Email or Password Wrong");
+      this.loginForm.reset();
+      formDirective.resetForm();
+    }
   }
   tryLogout(){
-    this.authService.doLogout();
+    console.log("log out");
   }
 }

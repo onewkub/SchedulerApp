@@ -5,8 +5,6 @@ import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectComponent } from '../add-project/add-project.component';
 import { AccessService } from 'src/app/services/access.service';
-import { Project } from 'src/app/models/project.model';
-import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -15,32 +13,26 @@ import { DocumentReference } from '@angular/fire/firestore';
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
-  account: User;
-  project: DocumentReference[];
+  account: User = null;
   constructor(
     public authService: AuthService,
     public userService: UserService,
     public dialog: MatDialog,
     public accessService: AccessService,
   ) {
-
-    this.account = this.userService.getCurrentUserData();
-    // console.log(this.userSevice.getAllProeject());
-
+    this.account = authService.currentUser;
   }
+
   ngOnInit() {
 
   }
-    checkAccount() {
-    console.log(this.account.name);
-  }
 
   logOut(){
-    this.authService.doLogout();
+    console.log("logout");
+    this.account = null;
   }
   toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
-    this.account = this.userService.getCurrentUserData();
 
   }
   openDialog(): void {
