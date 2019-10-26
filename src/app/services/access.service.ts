@@ -20,9 +20,7 @@ export class AccessService {
         endDate: new Date( 2020, 5, 29),
         owner: 1,
         members: [2, 3]
-      }
-    ];
-    this.projectList = [
+      },
       {
         name: 'test-project-b',
         startDate: new Date(2019, 8, 15),
