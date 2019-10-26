@@ -42,7 +42,7 @@ export class UserService {
         doc.data().project.forEach(element => {
             element.get().then(function(doc) {
               if (doc.exists) {
-                  console.log("Document data:", doc.data());
+                  console.log(doc.data());
               } else {
                   // doc.data() will be undefined in this case
                   console.log("No such document!");
