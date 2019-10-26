@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
+import { UserService } from './user.service';
+import { ApiService } from './api.service';
 
 
 @Injectable({
@@ -8,74 +9,59 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
-  private user: User[];
-  currentUser = null;
   lastedUid: number;
-  authTable: { uid: number; email: string; password: string;  logedIn: boolean}[];
   constructor(
+    public userService: UserService,
+    public apiService: ApiService,
     public router: Router
   ) {
-    this.user = [
-      {
-        uid: 1,
-        displayName: 'Wachira Norasing',
-        email: 'oldnew123@gmail.com'
-      },
-      {
-        uid: 2,
-        displayName: 'Tapanapong Chuntama',
-        email: 'Livenze2397@gmail.com'
-      }
-    ];
-    this.authTable = [
-      {uid: 1, email: 'oldnew123@gmail.com', password: 'onewkub123',logedIn: false},
-      {uid: 2, email: 'Livenze2397@gmail.com', password: '12345678', logedIn: false},
+    
 
-
-    ]
-    this.lastedUid = this.user.length;
-    console.log(this.currentUser);
+    this.lastedUid = this.apiService.authTable.length;
   }
 
   doRegister(value): boolean {
-    console.log(value);
-    var emailBeUsed = this.user.find(function (element) {
+    console.log("Registing Hahaah");
+    var emailBeUsed = this.apiService.users.find(function (element) {
       return element.email == value.email;
-    })
+    });
 
     if (!emailBeUsed) {
-      this.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
-      this.user.push({
+      this.apiService.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
+      this.apiService.users.push({
         uid: this.lastedUid,
         displayName: value.displayName,
         email: value.email,
       });
-      alert("Your registation succesful.")
+      this.apiService.userData.push({uid: this.lastedUid, projectID: []});
+      alert("Your registation succesful.");
       return true;
     }
-    alert("Your registation not succesful.")
+    alert("Your registation not succesful.");
     this.lastedUid++;
     // console.log(this.authTable);
     return false;
   }
   doLogin(value): boolean {
-    var validate = this.authTable.find(function (element) {
+    var validate = this.apiService.authTable.find(function (element) {
       if(element.email === value.email && element.password === value.password)
         return element;
       return null;
     });
     if (validate != null) {
-      this.currentUser = this.user.find(function(element){
+      this.userService.currentUser = this.apiService.users.find(function(element){
         if(element.uid == validate.uid) return element;
+        return null;
       });
-      console.log(this.currentUser.displayName);
+      console.log(this.userService.currentUser.displayName);
       this.router.navigate(['/app']);
       return true;
     }
     return false;
   }
   doLogout():void{
-    
+    this.userService.currentUser = null;
+    this.router.navigate(['/']);
   }
 
 }

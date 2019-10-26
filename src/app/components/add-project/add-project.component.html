@@ -27,7 +27,7 @@
       </mat-form-field>
       <mat-nav-list>
         <mat-list-item (click)="SelectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">
-          <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.name}}</mat-checkbox>
+          <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.displayName}}</mat-checkbox>
 
         </mat-list-item>
       </mat-nav-list>
@@ -36,7 +36,7 @@
       <label>Selected</label>
       <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let user of selectedUsers">
-          <p>{{user.name}}</p>
+          <p>{{user.displayName}}</p>
         </mat-list-item>
       </mat-list>
     </div>

@@ -17,7 +17,7 @@
                     <mat-icon>person</mat-icon>
                 </span>
                 <span *ngIf="isExpanded" class="menuText">
-                    <p>{{account.displayName}}</p>
+                    <p>{{this.userService.currentUser.displayName}}</p>
                 </span>
                 <span *ngIf="isExpanded" class="menuIcon">
                     <button (click)= "logOut()" mat-raised-button style="box-shadow: none; color: tomato;" ><mat-icon>exit_to_app</mat-icon></button>
@@ -25,6 +25,7 @@
             </mat-list-item>
 
             <mat-divider></mat-divider>
+
             <mat-list-item>
                 <span class="menuIcon">
                     <mat-icon>dashboard</mat-icon>
@@ -33,6 +34,18 @@
                     <p>Dashboard</p>
                 </span>
             </mat-list-item>
+            <mat-divider></mat-divider>
+            <!-- ProjectList -->
+            <mat-list-item *ngFor="let item of this.userService.userProject">
+                <span class="menuIcon">
+                    <mat-icon>label</mat-icon>
+                </span>
+                <span *ngIf="isExpanded" class="menuText">
+                    <p>{{item.projectName}}</p>
+                </span>
+            </mat-list-item>
+            <!-- Add Project -->
+            <mat-divider></mat-divider>
             <mat-list-item (click) = "openDialog()">
                 <span class="menuIcon">
                     <mat-icon>add</mat-icon>
@@ -41,6 +54,8 @@
                     <p>Add Project</p>
                 </span>
             </mat-list-item>
+            
+
 
 
         </mat-nav-list>

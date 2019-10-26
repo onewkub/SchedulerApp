@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProjectComponent } from '../add-project/add-project.component';
-import { AccessService } from 'src/app/services/access.service';
+import { UserService } from 'src/app/services/user.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -13,14 +12,14 @@ import { AccessService } from 'src/app/services/access.service';
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
-  account: User = null;
   constructor(
     public authService: AuthService,
-    public userService: UserService,
     public dialog: MatDialog,
-    public accessService: AccessService,
+    public userService : UserService,
+    public projectService: ProjectService
   ) {
-    this.account = authService.currentUser;
+    projectService.getUserProject(userService.currentUser.uid);
+    console.log( "Account: "+ this.userService.currentUser.displayName);
   }
 
   ngOnInit() {
@@ -29,7 +28,7 @@ export class SideNavBarComponent implements OnInit {
 
   logOut(){
     console.log("logout");
-    this.account = null;
+    this.authService.doLogout();
   }
   toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
