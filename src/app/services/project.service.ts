@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {UserService} from './user.service';
+import {Project} from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,21 @@ export class ProjectService {
     this.lastProjectID = apiService.project.length;
   }
 
-  addProject(value) {
-    const projectTemp = {
+  addProject(input) {
+    const projectTemp: Project = {
       projectID: this.lastProjectID,
-      projectName: value.projectName,
-      startDate: value.startDate,
-      endDate: value.endDate,
+      projectName: input.projectName,
+      startDate: input.startDate,
+      endDate: input.endDate,
       projectOwner: this.userService.currentUser.uid,
       members: []
     };
 
-    value.memberArray.forEach(element => {
+    input.memberArray.forEach(element => {
       projectTemp.members.push(element.member.uid);
     });
 
-    console.log(value.members);
+    console.log(input.members);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
@@ -38,6 +39,7 @@ export class ProjectService {
 
     this.apiService.project.push(projectTemp);
     this.lastProjectID++;
+    this.getUserProject(this.userService.currentUser.uid);
   }
 
   getUserProject(uid) {
@@ -49,5 +51,4 @@ export class ProjectService {
     });
     this.userService.userProject = userProject;
   }
-
 }
