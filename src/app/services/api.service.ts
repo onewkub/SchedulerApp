@@ -46,19 +46,27 @@ export class ApiService {
     this.project = [
       {
         projectID: 0,
-        projectName: 'FirstProject',
+        projectName: 'Project Alpha',
         startDate: new Date('2019-10-27'),
         endDate: new Date('2019-10-30'),
         projectOwner: 0,
         members: [1, 2, 3]
+      },
+      {
+        projectID: 1,
+        projectName: 'Project Beta',
+        startDate: new Date('2019-10-25'),
+        endDate: new Date('2019-10-31'),
+        projectOwner: 1,
+        members: [0, 2, 3]
       }
     ];
 
     this.userData = [
-      {uid: 0, projectID: [0]},
-      {uid: 1, projectID: [0]},
-      {uid: 2, projectID: [0]},
-      {uid: 3, projectID: [0]}
+      {uid: 0, projectID: [0, 1]},
+      {uid: 1, projectID: [0, 1]},
+      {uid: 2, projectID: [0, 1]},
+      {uid: 3, projectID: [0, 1]},
     ];
   }
 }
