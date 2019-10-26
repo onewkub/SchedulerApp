@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app'
 import { User } from '../models/user.model';
 import { UserService } from './user.service';
+import { Project } from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AccessService {
       .then(snapshot => {
         snapshot.forEach(doc => {
           var temp: User = { uid: doc.data().userUID, name: doc.data().displayName };
-          if (temp.uid != userService.getCurentUserData().uid)
+          if (temp.uid != userService.getCurrentUserData().uid)
             this.userList.push(temp);
         });
       })
@@ -30,20 +31,14 @@ export class AccessService {
     return this.userList;
   }
   addProject(projectForm): void {
-    var project: {
-      projectName: string;
-      startDate: any;
-      endDate: any;
-      projectOwner: any;
-      members: any[];
-    };
+    var project: Project;
     project = {
       projectName: projectForm.projectName,
       startDate: firebase.firestore.Timestamp.fromDate(projectForm.startDate),
       endDate: firebase.firestore.Timestamp.fromDate(projectForm.endDate),
       projectOwner: firebase.firestore().doc('account/' + this.userService.user.uid),
       members: []
-      
+
     }
     projectForm.memberArray.forEach(element => {
       project.members.push(firebase.firestore().doc('accounts/' + element.member.uid));

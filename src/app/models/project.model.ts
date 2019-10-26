@@ -1,7 +1,7 @@
 export class Project {
     projectName: string;
     startDate: any;
-    end: any;
+    endDate: any;
     projectOwner: any;
-    member: any[];
+    members: any[];
 }
