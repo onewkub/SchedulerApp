@@ -1,14 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AddProject } from 'src/app/models/add-project.model';
-import { User } from 'src/app/models/user.model';
-import { AccessService } from 'src/app/services/access.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {AddProject} from 'src/app/models/add-project.model';
+import {User} from 'src/app/models/user.model';
+import {AccessService} from 'src/app/services/access.service';
 
-interface userItem{
-  user : User;
+interface UserItem {
+  user: User;
   id: number;
 }
+
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -16,38 +17,38 @@ interface userItem{
 })
 
 
-
 export class AddProjectComponent implements OnInit {
 
-  userItems:userItem[];
+  userItems: UserItem[];
   userList: User[];
   selectedUsers: User[];
   addProjectForm: FormGroup;
-  checkList : boolean[];
+  checkList: boolean[];
+
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddProject,
     public formBuilder: FormBuilder,
-    public accessService: AccessService)
-    {  this.addProjectForm = this.formBuilder.group(
-        {
-          projectName: [''],
-          startDate: [''],
-          endDate: [''],
-          memberArray: this.formBuilder.array([])
-        }
-      );
+    public accessService: AccessService) {
+    this.addProjectForm = this.formBuilder.group(
+      {
+        projectName: [''],
+        startDate: [''],
+        endDate: [''],
+        memberArray: this.formBuilder.array([])
+      }
+    );
 
-     }
+  }
 
   ngOnInit() {
     this.userList = this.accessService.getAllUsers();
     this.userItems = [];
-    for(var i = 0; i < this.userList.length; i++){
-      var temp = {
-        user : this.userList[i],
-        id : i
-      }
+    for (let i = 0; i < this.userList.length; i++) {
+      const temp = {
+        user: this.userList[i],
+        id: i
+      };
 
       this.userItems.push(temp);
     }
@@ -56,45 +57,57 @@ export class AddProjectComponent implements OnInit {
 
   }
 
-  addItem(user:User){
+  addItem(user: User) {
     return this.formBuilder.group({
       member: user
     });
   }
-  get formArr(){
+
+  get formArr() {
     return this.addProjectForm.get('memberArray') as FormArray;
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
-  SelectedUser(userItem: userItem):void{
+
+  SelectedUser(userItem: UserItem): void {
     console.log(this.selectedUsers);
     // console.log(i);
     this.checkList[userItem.id] = !this.checkList[userItem.id];
-    var selected = false;
+    let selected = false;
     this.selectedUsers.forEach(element => {
-      if(userItem.user.uid == element.uid) selected = true;
+      if (userItem.user.uid === element.uid) {
+        selected = true;
+      }
     });
-    if(!selected) this.addSelectedUser(userItem.user);
-    else this.removeSelectedUser(userItem.user);
+    if (!selected) {
+      this.addSelectedUser(userItem.user);
+    } else {
+      this.removeSelectedUser(userItem.user);
+    }
   }
-  addSelectedUser(user: User):void{
+
+  addSelectedUser(user: User): void {
     this.selectedUsers.push(user);
   }
-  removeSelectedUser(user: User):void{
-    for(var i = 0; i < this.selectedUsers.length; i++){
-      if(this.selectedUsers[i].uid === user.uid){
+
+  removeSelectedUser(user: User): void {
+    for (let i = 0; i < this.selectedUsers.length; i++) {
+      if (this.selectedUsers[i].uid === user.uid) {
         this.selectedUsers.splice(i, 1);
         i--;
       }
     }
   }
-  addArrayToArrayForm():void{
-    this.selectedUsers.forEach(element =>{
+
+  addArrayToArrayForm(): void {
+    this.selectedUsers.forEach(element => {
       this.formArr.push(this.addItem(element));
     });
   }
-  onSubmit(){
+
+  onSubmit() {
     this.addArrayToArrayForm();
     // console.log(this.addProjectForm.value);
     this.accessService.addProject(this.addProjectForm.value);

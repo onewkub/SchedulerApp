@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AddProjectComponent } from '../add-project/add-project.component';
-import { AccessService } from 'src/app/services/access.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth.service';
+import {User} from 'src/app/models/user.model';
+import {UserService} from 'src/app/services/user.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AddProjectComponent} from '../add-project/add-project.component';
+import {AccessService} from 'src/app/services/access.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -14,6 +14,7 @@ import { AccessService } from 'src/app/services/access.service';
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
   account: User = null;
+
   constructor(
     public authService: AuthService,
     public userService: UserService,
@@ -27,16 +28,18 @@ export class SideNavBarComponent implements OnInit {
 
   }
 
-  logOut(){
-    console.log("logout");
+  logOut() {
     this.account = null;
+    this.authService.doLogout();
   }
+
   toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
 
   }
+
   openDialog(): void {
-    console.log("Open Dialog");
+    console.log('Open Dialog');
     const dialogRef = this.dialog.open(AddProjectComponent, {
       width: '45em'
     });

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from '../models/user.model';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from '../models/user.model';
 
 
 @Injectable({
@@ -8,14 +8,15 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
-  private user: User[];
-  currentUser = null;
+  public users: User[];
+  currentUser: User;
   lastedUid: number;
-  authTable: { uid: number; email: string; password: string;  logedIn: boolean}[];
+  authTable: { uid: number; email: string; password: string; logedIn: boolean }[];
+
   constructor(
     public router: Router
   ) {
-    this.user = [
+    this.users = [
       {
         uid: 1,
         displayName: 'Wachira Norasing',
@@ -25,57 +26,63 @@ export class AuthService {
         uid: 2,
         displayName: 'Tapanapong Chuntama',
         email: 'Livenze2397@gmail.com'
+      },
+      {
+        uid: 3,
+        displayName: 'Nattakit Hosapsin',
+        email: 'relta@chifumi.net'
       }
     ];
     this.authTable = [
-      {uid: 1, email: 'oldnew123@gmail.com', password: 'onewkub123',logedIn: false},
+      {uid: 1, email: 'oldnew123@gmail.com', password: 'onewkub123', logedIn: false},
       {uid: 2, email: 'Livenze2397@gmail.com', password: '12345678', logedIn: false},
-
-
-    ]
-    this.lastedUid = this.user.length;
+      {uid: 3, email: 'relta@chifumi.net', password: '2oDydeJVPZs2zRsW', logedIn: false},
+    ];
+    this.lastedUid = this.users.length;
     console.log(this.currentUser);
   }
 
   doRegister(value): boolean {
     console.log(value);
-    var emailBeUsed = this.user.find(function (element) {
-      return element.email == value.email;
-    })
+    const emailBeUsed = this.users.find(user => user.email === value.email);
 
     if (!emailBeUsed) {
       this.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
-      this.user.push({
+      this.users.push({
         uid: this.lastedUid,
         displayName: value.displayName,
         email: value.email,
       });
-      alert("Your registation succesful.")
+      alert('Your registration successful.');
       return true;
     }
-    alert("Your registation not succesful.")
+    alert('Your registration not successful.');
     this.lastedUid++;
     // console.log(this.authTable);
     return false;
   }
-  doLogin(value): boolean {
-    var validate = this.authTable.find(function (element) {
-      if(element.email === value.email && element.password === value.password)
-        return element;
+
+  doLogin(input): boolean {
+    const validate = this.authTable.find(user => {
+      if (user.email === input.email && user.password === input.password) {
+        return user;
+      }
       return null;
     });
     if (validate != null) {
-      this.currentUser = this.user.find(function(element){
-        if(element.uid == validate.uid) return element;
+      this.currentUser = this.users.find(user => {
+        if (user.uid === validate.uid) {
+          return user;
+        }
       });
-      console.log(this.currentUser.displayName);
-      this.router.navigate(['/app']);
+      this.router.navigate(['/app']).then(() => console.log('Log-in with : ' + this.currentUser.email));
       return true;
     }
     return false;
   }
-  doLogout():void{
-    
+
+  doLogout(): void {
+    this.router.navigate(['/']).then(() => console.log('Logout'));
   }
 
 }
