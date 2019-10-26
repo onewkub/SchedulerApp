@@ -27,23 +27,24 @@
 
       <mat-divider></mat-divider>
 
-      <mat-list-item>
-        <span class="menuIcon">
-          <mat-icon>dashboard</mat-icon>
-        </span>
-        <span *ngIf="isExpanded" class="menuText">
-          <p>Dashboard</p>
-        </span>
-      </mat-list-item>
+      <div [ngClass]="{'selectedMenu' : isSelectedDashboard()}">
+        <mat-list-item (click)="switchToDashboard()">
+          <span class="menuIcon" [style.color]="isSelectedDashboard() ? 'tomato' : 'black'">
+            <mat-icon>dashboard</mat-icon>
+          </span>
+          <span *ngIf="isExpanded" class="menuText" [style.color]="isSelectedDashboard() ? 'tomato' : 'black'">
+            <p>Dashboard</p>
+          </span>
+        </mat-list-item>
+      </div>
 
       <div *ngFor="let project of projectList">
         <div [ngClass]="{'selectedMenu' : isSelectedProject(project)}">
-          <mat-list-item (click)="switchProject(project)">
+          <mat-list-item (click)="switchToProject(project)">
           <span class="menuIcon" [style.color]="isSelectedProject(project) ? 'tomato' : 'black'">
             <mat-icon>folder</mat-icon>
           </span>
-            <span *ngIf="isExpanded" class="menuText"
-                  [style.color]="isSelectedProject(project) ? 'tomato' : 'black'">
+            <span *ngIf="isExpanded" class="menuText" [style.color]="isSelectedProject(project) ? 'tomato' : 'black'">
             <p>{{project.name}}</p>
           </span>
           </mat-list-item>

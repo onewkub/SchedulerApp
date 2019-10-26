@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../models/user.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +13,7 @@ export class AuthService {
   authTable: { uid: number; email: string; password: string; logedIn: boolean }[];
 
   constructor(
-    public router: Router
+    public router: Router,
   ) {
     this.users = [
       {
@@ -80,7 +79,7 @@ export class AuthService {
           return user;
         }
       });
-      this.router.navigate(['/app']).then(() => console.log('Log-in with : ' + this.currentUser.email));
+      this.router.navigate(['/dashboard']).then(() => console.log('Log-in with : ' + this.currentUser.email));
       return true;
     }
     return false;
@@ -89,5 +88,4 @@ export class AuthService {
   doLogout(): void {
     this.router.navigate(['/']).then(() => console.log('Logout'));
   }
-
 }
