@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AddProjectComponent } from '../add-project/add-project.component';
-import { UserService } from 'src/app/services/user.service';
-import { ProjectService } from 'src/app/services/project.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AddProjectComponent} from '../add-project/add-project.component';
+import {UserService} from 'src/app/services/user.service';
+import {ProjectService} from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -12,21 +12,22 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
+
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
-    public userService : UserService,
+    public userService: UserService,
     public projectService: ProjectService
   ) {
     projectService.getUserProject(userService.currentUser.uid);
-    console.log( "Account: "+ this.userService.currentUser.displayName);
+    console.log('Account: ' + this.userService.currentUser.displayName);
   }
 
   ngOnInit() {
   }
 
-  logOut(){
-    console.log("logout");
+  logOut() {
+    console.log('Logout');
     this.authService.doLogout();
   }
 

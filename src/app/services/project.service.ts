@@ -1,37 +1,36 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { UserService } from './user.service';
+import {Injectable} from '@angular/core';
+import {ApiService} from './api.service';
+import {UserService} from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  lastProjectID : number;
+  lastProjectID: number;
+
   constructor(
     public apiService: ApiService,
     public userService: UserService
-  ) { 
+  ) {
     this.lastProjectID = apiService.project.length;
   }
 
-
-  addProject(value){
-    var projectTemp = {
+  addProject(value) {
+    const projectTemp = {
       projectID: this.lastProjectID,
       projectName: value.projectName,
       startDate: value.startDate,
       endDate: value.endDate,
       projectOwner: this.userService.currentUser.uid,
       members: []
-    }
+    };
 
     value.memberArray.forEach(element => {
       projectTemp.members.push(element.member.uid);
-      // console.log(element.member);
     });
-    
+
     console.log(value.members);
-    projectTemp.members.forEach(element =>{
+    projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
@@ -41,15 +40,14 @@ export class ProjectService {
     this.lastProjectID++;
   }
 
-  getUserProject(uid){
-    var userProjectID = this.apiService.userData.
-    find(function(element){return element.uid == uid;}).projectID;
-    var userPorject = [];
-    userProjectID.forEach(element =>{
-      var temp = this.apiService.project.find(function(project){return (project.projectID == element);});
-      userPorject.push(temp);
+  getUserProject(uid) {
+    const userProjectID = this.apiService.userData.find(element => element.uid === uid).projectID;
+    const userProject = [];
+    userProjectID.forEach(element => {
+      const temp = this.apiService.project.find(project => (project.projectID === element));
+      userProject.push(temp);
     });
-    this.userService.userProject = userPorject;
+    this.userService.userProject = userProject;
   }
- 
+
 }

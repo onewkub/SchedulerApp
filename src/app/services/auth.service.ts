@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from './user.service';
-import { ApiService } from './api.service';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {UserService} from './user.service';
+import {ApiService} from './api.service';
 
 
 @Injectable({
@@ -10,47 +10,49 @@ import { ApiService } from './api.service';
 export class AuthService {
 
   lastedUid: number;
+
   constructor(
     public userService: UserService,
     public apiService: ApiService,
     public router: Router
   ) {
-    
+
 
     this.lastedUid = this.apiService.authTable.length;
   }
 
-  doRegister(value): boolean {
-    console.log("Registing Hahaah");
-    var emailBeUsed = this.apiService.users.find(function (element) {
-      return element.email == value.email;
-    });
+  doRegister(input): boolean {
+    console.log('Registering user account');
+    const emailUsable = this.apiService.users.find(user => user.email === input.email);
 
-    if (!emailBeUsed) {
-      this.apiService.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
+    if (!emailUsable) {
+      this.apiService.authTable.push({uid: this.lastedUid, email: input.email, password: input.password, logedIn: false});
       this.apiService.users.push({
         uid: this.lastedUid,
-        displayName: value.displayName,
-        email: value.email,
+        displayName: input.displayName,
+        email: input.email,
       });
       this.apiService.userData.push({uid: this.lastedUid, projectID: []});
-      alert("Your registation succesful.");
+      alert('Your registration successful.');
       return true;
     }
-    alert("Your registation not succesful.");
+    alert('Your registration not successful.');
     this.lastedUid++;
-    // console.log(this.authTable);
     return false;
   }
-  doLogin(value): boolean {
-    var validate = this.apiService.authTable.find(function (element) {
-      if(element.email === value.email && element.password === value.password)
-        return element;
+
+  doLogin(input): boolean {
+    const validate = this.apiService.authTable.find(user => {
+      if (user.email === input.email && user.password === input.password) {
+        return user;
+      }
       return null;
     });
     if (validate != null) {
-      this.userService.currentUser = this.apiService.users.find(function(element){
-        if(element.uid == validate.uid) return element;
+      this.userService.currentUser = this.apiService.users.find(user => {
+        if (user.uid === validate.uid) {
+          return user;
+        }
         return null;
       });
       console.log(this.userService.currentUser.displayName);

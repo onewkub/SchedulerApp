@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AddProject } from 'src/app/models/add-project.model';
-import { User } from 'src/app/models/user.model';
-import { ApiService } from 'src/app/services/api.service';
-import { UserService } from 'src/app/services/user.service';
-import { ProjectService } from 'src/app/services/project.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {AddProject} from 'src/app/models/add-project.model';
+import {User} from 'src/app/models/user.model';
+import {ApiService} from 'src/app/services/api.service';
+import {UserService} from 'src/app/services/user.service';
+import {ProjectService} from 'src/app/services/project.service';
 
 interface UserItem {
   user: User;
@@ -20,7 +20,7 @@ interface UserItem {
 
 export class AddProjectComponent implements OnInit {
   userList: User[];
-  userItems:UserItem[];
+  userItems: UserItem[];
   selectedUsers: User[];
   addProjectForm: FormGroup;
   checkList: boolean[];
@@ -32,29 +32,29 @@ export class AddProjectComponent implements OnInit {
     public apiService: ApiService,
     public userService: UserService,
     public projectService: ProjectService
-    )
-    {  this.addProjectForm = this.formBuilder.group(
-        {
-          projectName: [''],
-          startDate: [''],
-          endDate: [''],
-          memberArray: this.formBuilder.array([])
-        }
-      );
-
-     }
+  ) {
+    this.addProjectForm = this.formBuilder.group(
+      {
+        projectName: [''],
+        startDate: [''],
+        endDate: [''],
+        memberArray: this.formBuilder.array([])
+      }
+    );
+  }
 
   ngOnInit() {
     this.userList = this.apiService.users;
     this.userItems = [];
-    for(var i = 0; i < this.userList.length; i++){
-      var temp = {
-        user : this.userList[i],
-        id : i
-      }
-      if(temp.user.uid != this.userService.currentUser.uid
-         && temp.user.uid != 0)
+    for (let i = 0; i < this.userList.length; i++) {
+      const temp = {
+        user: this.userList[i],
+        id: i
+      };
+      if (temp.user.uid !== this.userService.currentUser.uid
+        && temp.user.uid !== 0) {
         this.userItems.push(temp);
+      }
     }
     this.selectedUsers = [];
     this.checkList = new Array(this.userList.length).fill(false);
@@ -73,8 +73,8 @@ export class AddProjectComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  SelectedUser(userItem: UserItem):void{
-    // console.log(this.selectedUsers);
+
+  SelectedUser(userItem: UserItem): void {
     this.checkList[userItem.id] = !this.checkList[userItem.id];
     let selected = false;
     this.selectedUsers.forEach(element => {
@@ -114,7 +114,5 @@ export class AddProjectComponent implements OnInit {
     this.projectService.addProject(this.addProjectForm.value);
     this.addProjectForm.reset();
     this.onNoClick();
-
-
   }
 }
