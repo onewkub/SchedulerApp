@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     // this.todayDateString = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd');
-    this.today = this.todayDate.getDate() + this.months[this.todayDate.getMonth()] + this.todayDate.getFullYear();
+    this.today = this.todayDate.getDate() + ' ' + this.months[this.todayDate.getMonth()] + ' ' + this.todayDate.getFullYear();
   }
 
   ngOnInit() {
