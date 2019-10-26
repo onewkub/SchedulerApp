@@ -18,6 +18,11 @@ export class AuthService {
   ) {
     this.users = [
       {
+        uid: 0,
+        displayName: 'Dummy Account',
+        email: 'dummy@internet.io'
+      },
+      {
         uid: 1,
         displayName: 'Wachira Norasing',
         email: 'oldnew123@gmail.com'
@@ -39,7 +44,7 @@ export class AuthService {
       {uid: 3, email: 'relta@chifumi.net', password: '2oDydeJVPZs2zRsW', logedIn: false},
     ];
     this.lastedUid = this.users.length;
-    console.log(this.currentUser);
+    this.currentUser = this.users[0];
   }
 
   doRegister(value): boolean {

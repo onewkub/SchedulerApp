@@ -49,7 +49,7 @@ export class AddProjectComponent implements OnInit {
         id: i
       };
 
-      if (temp.user.uid !== this.authService.currentUser.uid) {
+      if (temp.user.uid !== this.authService.currentUser.uid && temp.user.uid > 0) {
         this.userItems.push(temp);
       }
     }
@@ -73,7 +73,6 @@ export class AddProjectComponent implements OnInit {
 
   SelectedUser(userItem: UserItem): void {
     console.log(this.selectedUsers);
-    // console.log(i);
     this.checkList[userItem.id] = !this.checkList[userItem.id];
     let selected = false;
     this.selectedUsers.forEach(element => {
@@ -109,7 +108,6 @@ export class AddProjectComponent implements OnInit {
 
   onSubmit() {
     this.addArrayToArrayForm();
-    // console.log(this.addProjectForm.value);
     this.accessService.addProject(this.addProjectForm.value);
     this.addProjectForm.reset();
     this.onNoClick();

@@ -9,26 +9,28 @@ import {AuthService} from './auth.service';
 export class AccessService {
 
   projectList: Project[] = [];
+  selectedProject: Project;
 
   constructor(
     public authService: AuthService
   ) {
     this.projectList = [
       {
-        name: 'test-project-a',
+        name: 'Project A',
         startDate: new Date( 2019, 4, 6),
         endDate: new Date( 2020, 5, 29),
         owner: 1,
         members: [2, 3]
       },
       {
-        name: 'test-project-b',
+        name: 'Project B',
         startDate: new Date(2019, 8, 15),
         endDate: new Date(2020, 8, 15),
         owner: 3,
         members: []
       }
     ];
+    this.selectedProject = this.projectList[0];
   }
 
   addProject(form): void {
