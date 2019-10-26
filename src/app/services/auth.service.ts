@@ -1,85 +1,60 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {User} from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from './user.service';
+import { ApiService } from './api.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public users: User[];
-  currentUser: User;
   lastedUid: number;
-  authTable: { uid: number; email: string; password: string; logedIn: boolean }[];
-
   constructor(
-    public router: Router,
+    public userService: UserService,
+    public apiService: ApiService,
+    public router: Router
   ) {
-    this.users = [
-      {
-        uid: 0,
-        displayName: 'Dummy Account',
-        email: 'dummy@internet.io'
-      },
-      {
-        uid: 1,
-        displayName: 'Wachira Norasing',
-        email: 'oldnew123@gmail.com'
-      },
-      {
-        uid: 2,
-        displayName: 'Tapanapong Chuntama',
-        email: 'Livenze2397@gmail.com'
-      },
-      {
-        uid: 3,
-        displayName: 'Nattakit Hosapsin',
-        email: 'relta@chifumi.net'
-      }
-    ];
-    this.authTable = [
-      {uid: 1, email: 'oldnew123@gmail.com', password: 'onewkub123', logedIn: false},
-      {uid: 2, email: 'Livenze2397@gmail.com', password: '12345678', logedIn: false},
-      {uid: 3, email: 'relta@chifumi.net', password: '2oDydeJVPZs2zRsW', logedIn: false},
-    ];
-    this.lastedUid = this.users.length;
-    this.currentUser = this.users[0];
+    
+
+    this.lastedUid = this.apiService.authTable.length;
   }
 
   doRegister(value): boolean {
-    console.log(value);
-    const emailBeUsed = this.users.find(user => user.email === value.email);
+    console.log("Registing Hahaah");
+    var emailBeUsed = this.apiService.users.find(function (element) {
+      return element.email == value.email;
+    });
 
     if (!emailBeUsed) {
-      this.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
-      this.users.push({
+      this.apiService.authTable.push({uid: this.lastedUid, email: value.email, password: value.password, logedIn: false});
+      this.apiService.users.push({
         uid: this.lastedUid,
         displayName: value.displayName,
         email: value.email,
       });
-      alert('Your registration successful.');
+      this.apiService.userData.push({uid: this.lastedUid, projectID: []});
+      alert("Your registation succesful.");
       return true;
     }
-    alert('Your registration not successful.');
+    alert("Your registation not succesful.");
     this.lastedUid++;
     // console.log(this.authTable);
     return false;
   }
-
-  doLogin(input): boolean {
-    const validate = this.authTable.find(user => {
-      if (user.email === input.email && user.password === input.password) {
-        return user;
-      }
+  doLogin(value): boolean {
+    var validate = this.apiService.authTable.find(function (element) {
+      if(element.email === value.email && element.password === value.password)
+        return element;
       return null;
     });
     if (validate != null) {
-      this.currentUser = this.users.find(user => {
-        if (user.uid === validate.uid) {
-          return user;
-        }
+      this.userService.currentUser = this.apiService.users.find(function(element){
+        if(element.uid == validate.uid) return element;
+        return null;
       });
-      this.router.navigate(['/dashboard']).then(() => console.log('Log-in with : ' + this.currentUser.email));
+      console.log(this.userService.currentUser.displayName);
+      this.router.navigate(['/app']);
       return true;
     }
     return false;

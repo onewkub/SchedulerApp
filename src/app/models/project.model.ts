@@ -1,7 +1,10 @@
+import { User } from './user.model';
+
 export class Project {
-  name: string;
-  startDate: Date;
-  endDate: Date;
-  owner: number;
-  members: number[];
+    projectID: number;
+    projectName: string;
+    startDate: Date;
+    endDate: Date;
+    projectOwner: number;
+    members: number[];
 }
