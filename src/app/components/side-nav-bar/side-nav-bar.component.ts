@@ -6,11 +6,7 @@ import {UserService} from 'src/app/services/user.service';
 import {ProjectService} from 'src/app/services/project.service';
 import {Project} from '../../models/project.model';
 import {Router} from '@angular/router';
-
-enum PageType {
-  dashboard,
-  project,
-}
+import {PageType, SessionService} from '../../services/session.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -19,17 +15,15 @@ enum PageType {
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
-  selectedProjectID: number;
-  activePage = PageType.dashboard;
 
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
     public router: Router,
     public userService: UserService,
+    public session: SessionService,
     public projectService: ProjectService
   ) {
-    this.selectedProjectID = null;
     projectService.getUserProject(userService.currentUser.uid);
     console.log('Account: ' + this.userService.currentUser.displayName);
   }
@@ -58,22 +52,24 @@ export class SideNavBarComponent implements OnInit {
   }
 
   isSelectedProject(project: Project): boolean {
-    return this.selectedProjectID === project.projectID && this.activePage === PageType.project;
+    return this.session.selectedProjectID === project.projectID && this.session.activePage === PageType.project;
   }
 
   isSelectedDashboard(): boolean {
-    return this.activePage === PageType.dashboard;
+    return this.session.activePage === PageType.dashboard;
   }
 
   switchToProject(project: Project): void {
-    this.isExpanded = false;
-    this.activePage = PageType.project;
-    this.selectedProjectID = project.projectID;
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/projects']).then(() => {
+      this.isExpanded = false;
+      this.session.activePage = PageType.project;
+      this.session.selectedProjectID = project.projectID;
+    });
   }
 
   switchToDashboard(): void {
-    this.activePage = PageType.dashboard;
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']).then(() => {
+      this.session.activePage = PageType.dashboard;
+    });
   }
 }
