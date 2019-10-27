@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { AddProjectComponent } from '../add-project/add-project.component';
-import { UserService } from 'src/app/services/user.service';
-import { ProjectService } from 'src/app/services/project.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'src/app/services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {AddProjectComponent} from '../add-project/add-project.component';
+import {UserService} from 'src/app/services/user.service';
+import {ProjectService} from 'src/app/services/project.service';
+import {Project} from '../../models/project.model';
+import {Router} from '@angular/router';
+import {PageType, SessionService} from '../../services/session.service';
 
 @Component({
   selector: 'app-side-nav-bar',
@@ -12,28 +15,30 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class SideNavBarComponent implements OnInit {
   isExpanded = false;
+
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
-    public userService : UserService,
+    public router: Router,
+    public userService: UserService,
+    public session: SessionService,
     public projectService: ProjectService
   ) {
     projectService.getUserProject(userService.currentUser.uid);
-    console.log( "Account: "+ this.userService.currentUser.displayName);
+    console.log('Account: ' + this.userService.currentUser.displayName);
   }
 
   ngOnInit() {
   }
 
-  logOut(){
-    console.log("logout");
+  logOut() {
+    console.log('Logout');
     this.authService.doLogout();
   }
 
-  // toggleMenu(): void {
-  //   this.accessService.toggleExpend();
-  //   this.isExpanded = this.accessService.isExpand;
-  // }
+  toggleMenu(): void {
+    this.isExpanded = !this.isExpanded;
+  }
 
   openDialog(): void {
     console.log('Open Dialog');
@@ -46,21 +51,25 @@ export class SideNavBarComponent implements OnInit {
     });
   }
 
-  // isSelectedProject(project: Project): boolean {
-  //   return this.accessService.selectedProject === project;
-  // }
+  isSelectedProject(project: Project): boolean {
+    return this.session.selectedProjectID === project.projectID && this.session.activePage === PageType.project;
+  }
 
-  // isSelectedDashboard(): boolean {
-  //   return this.accessService.selectedProject === null;
-  // }
+  isSelectedDashboard(): boolean {
+    return this.session.activePage === PageType.dashboard;
+  }
 
-  // switchToProject(project: Project): void {
-  //   this.accessService.selectedProject = project;
-  //   this.router.navigate(['/projects']);
-  // }
+  switchToProject(project: Project): void {
+    this.router.navigate(['/projects']).then(() => {
+      this.isExpanded = false;
+      this.session.activePage = PageType.project;
+      this.session.selectedProjectID = project.projectID;
+    });
+  }
 
-  // switchToDashboard(): void {
-  //   this.router.navigate(['/dashboard']);
-  //   this.accessService.selectedProject = null;
-  // }
+  switchToDashboard(): void {
+    this.router.navigate(['/dashboard']).then(() => {
+      this.session.activePage = PageType.dashboard;
+    });
+  }
 }

@@ -1,37 +1,37 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { UserService } from './user.service';
+import {Injectable} from '@angular/core';
+import {ApiService} from './api.service';
+import {UserService} from './user.service';
+import {Project} from '../models/project.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  lastProjectID : number;
+  lastProjectID: number;
+
   constructor(
     public apiService: ApiService,
     public userService: UserService
-  ) { 
+  ) {
     this.lastProjectID = apiService.project.length;
   }
 
-
-  addProject(value){
-    var projectTemp = {
+  addProject(input) {
+    const projectTemp: Project = {
       projectID: this.lastProjectID,
-      projectName: value.projectName,
-      startDate: value.startDate,
-      endDate: value.endDate,
+      projectName: input.projectName,
+      startDate: input.startDate,
+      endDate: input.endDate,
       projectOwner: this.userService.currentUser.uid,
       members: []
-    }
+    };
 
-    value.memberArray.forEach(element => {
+    input.memberArray.forEach(element => {
       projectTemp.members.push(element.member.uid);
-      // console.log(element.member);
     });
-    
-    console.log(value.members);
-    projectTemp.members.forEach(element =>{
+
+    console.log(input.members);
+    projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
@@ -39,17 +39,16 @@ export class ProjectService {
 
     this.apiService.project.push(projectTemp);
     this.lastProjectID++;
+    this.getUserProject(this.userService.currentUser.uid);
   }
 
-  getUserProject(uid){
-    var userProjectID = this.apiService.userData.
-    find(function(element){return element.uid == uid;}).projectID;
-    var userPorject = [];
-    userProjectID.forEach(element =>{
-      var temp = this.apiService.project.find(function(project){return (project.projectID == element);});
-      userPorject.push(temp);
+  getUserProject(uid) {
+    const userProjectID = this.apiService.userData.find(element => element.uid === uid).projectID;
+    const userProject = [];
+    userProjectID.forEach(element => {
+      const temp = this.apiService.project.find(project => (project.projectID === element));
+      userProject.push(temp);
     });
-    this.userService.userProject = userPorject;
+    this.userService.userProject = userProject;
   }
- 
 }

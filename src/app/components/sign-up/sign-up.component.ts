@@ -20,15 +20,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SignUpComponent implements OnInit {
 
-
-  ngOnInit() {
-  }
-
-  registerForm: FormGroup;
-  passwordCheck: Validators;
-
-  matcher = new MyErrorStateMatcher();
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -40,12 +31,18 @@ export class SignUpComponent implements OnInit {
       password: [''],
       confirmPassword: ['']
     }, {validator: this.checkPasswords});
+  }
 
+  registerForm: FormGroup;
+  passwordCheck: Validators;
+  matcher = new MyErrorStateMatcher();
+
+  ngOnInit() {
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-    let pass = group.controls.password.value;
-    let confirmPass = group.controls.confirmPassword.value;
+    const pass = group.controls.password.value;
+    const confirmPass = group.controls.confirmPassword.value;
 
     return pass === confirmPass ? null : {notSame: true};
   }
