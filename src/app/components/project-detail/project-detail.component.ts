@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project-detail',
@@ -7,10 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  constructor() {
+  currentProjectID: number;
+  constructor(
+    public route: ActivatedRoute
+  ) {
+
   }
 
   ngOnInit() {
+    this.currentProjectID = +this.route.snapshot.paramMap.get('pid');
+    console.log(this.currentProjectID);
   }
 
 }

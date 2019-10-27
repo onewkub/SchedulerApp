@@ -60,7 +60,8 @@ export class SideNavBarComponent implements OnInit {
   }
 
   switchToProject(project: Project): void {
-    this.router.navigate(['/projects']).then(() => {
+    // console.log(project.projectID);
+    this.router.navigate([`/projects/${project.projectID}`]).then(() => {
       this.isExpanded = false;
       this.session.activePage = PageType.project;
       this.session.selectedProjectID = project.projectID;

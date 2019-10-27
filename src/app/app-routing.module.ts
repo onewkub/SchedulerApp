@@ -16,7 +16,7 @@ const routes: Routes = [
     ], canActivate: [AuthGuard]
   },
   {
-    path: 'projects', component: SideNavBarComponent,
+    path: 'projects/:pid', component: SideNavBarComponent,
     children: [{path: '', component: ProjectDetailComponent}]
   },
   {path: '', component: HomeComponent},
