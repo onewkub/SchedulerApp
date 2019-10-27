@@ -10,14 +10,24 @@ export class ProjectDetailComponent implements OnInit {
 
   currentProjectID: number;
   constructor(
-    public route: ActivatedRoute
+    public activeRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
-    this.currentProjectID = +this.route.snapshot.paramMap.get('pid');
-    console.log(this.currentProjectID);
+    // this.currentProjectID = +this.activeRoute.snapshot.paramMap.get('pid');
+    // console.log(this.activeRoute.snapshot.paramMap);
+    // this.activeRoute.queryParams.subscribe(queryParams => {
+    //   // do something with the query params
+    //   console.log(queryParams);
+    // });
+    this.activeRoute.params.subscribe(routeParams => {
+      // this.loadUserDetail(routeParams.id);
+      this.currentProjectID = routeParams.pid;
+      // console.log(routeParams);
+
+    });
   }
 
 }
