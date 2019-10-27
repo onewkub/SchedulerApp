@@ -3,12 +3,10 @@ import {Router} from '@angular/router';
 import {UserService} from './user.service';
 import {ApiService} from './api.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   lastedUid: number;
 
   constructor(
@@ -16,8 +14,6 @@ export class AuthService {
     public apiService: ApiService,
     public router: Router
   ) {
-
-
     this.lastedUid = this.apiService.authTable.length;
   }
 
@@ -56,13 +52,13 @@ export class AuthService {
         return null;
       });
       console.log(this.userService.currentUser.displayName);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['app']);
       return true;
     }
     return false;
   }
 
   doLogout(): void {
-    this.router.navigate(['/']).then(() => console.log('Logout'));
+    this.router.navigate(['']).then(() => console.log('Logout'));
   }
 }
