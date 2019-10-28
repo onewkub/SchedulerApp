@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Project} from 'src/app/models/project.model';
 import {ProjectService} from 'src/app/services/project.service';
 
@@ -16,7 +16,6 @@ export class ProjectDetailComponent implements OnInit {
     public activeRoute: ActivatedRoute,
     public projectService: ProjectService
   ) {
-
   }
 
   ngOnInit() {

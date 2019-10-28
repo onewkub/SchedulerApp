@@ -1,0 +1,75 @@
+.task-container {
+  display: flex;
+  padding-bottom: 1em;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.task-list {
+  width: 100%;
+}
+
+.task {
+  margin: 0.5em;
+}
+
+.task-summary-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.task-name {
+  width: 30%;
+  font-weight: bold;
+}
+
+.task-spacer {
+  width: 40%;
+}
+
+.task-status {
+  width: 30%;
+}
+
+.task-status mat-icon {
+  font-size: 1em;
+  position: absolute;
+  margin-top: 0.13em;
+  margin-left: -1.5em;
+  transform: scale(0.7);
+}
+
+.task-desc-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-control-container {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: row;
+}
+
+.task-status-control {
+  display: flex;
+  flex-grow: 1;
+  justify-content: right;
+}
+
+.button-done {
+  background: #0091ea;
+  color: #ffffff;
+}
+
+.button-cancel {
+  margin-right: 0.4em;
+  color: #ef5350;
+}
+
+.button-upload {
+
+}

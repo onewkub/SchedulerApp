@@ -6,6 +6,7 @@
     <mat-tab label="Table">
     </mat-tab>
     <mat-tab label="Task">
+      <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>
     </mat-tab>
     <mat-tab label="Setting">
     </mat-tab>
