@@ -6,9 +6,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireAuthModule} from '@angular/fire/auth';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 // Other Import
 import {environment} from '../environments/environment';
@@ -25,7 +22,6 @@ import {AuthGuard} from './guards/auth.guard';
 import {AddProjectComponent} from './components/add-project/add-project.component';
 import {MAT_CHECKBOX_CLICK_ACTION, MatNativeDateModule} from '@angular/material';
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
-import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +33,6 @@ import { BaseComponent } from './components/base/base.component';
     HomeComponent,
     AddProjectComponent,
     ProjectDetailComponent,
-    BaseComponent
   ],
   imports: [
     BrowserModule,
@@ -46,9 +41,6 @@ import { BaseComponent } from './components/base/base.component';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFirestoreModule,
-    // AngularFireAuthModule,
     FormsModule,
     MaterialModule,
     MatNativeDateModule,
