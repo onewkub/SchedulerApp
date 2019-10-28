@@ -6,9 +6,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireAuthModule} from '@angular/fire/auth';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 // Other Import
 import {environment} from '../environments/environment';
@@ -46,9 +43,6 @@ import { BaseComponent } from './components/base/base.component';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
-    // AngularFirestoreModule,
-    // AngularFireAuthModule,
     FormsModule,
     MaterialModule,
     MatNativeDateModule,
