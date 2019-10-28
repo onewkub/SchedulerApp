@@ -27,7 +27,9 @@
     <div class="row">
         <h1 class="display-4">Dashboard</h1>
     </div>
-    <div class="row" *ngFor="let item of this.userService.userProject">
-        <p>{{item.projectName}}</p>
-    </div>
+    <mat-nav-list>
+        <mat-list-item *ngFor="let item of this.userService.userProject">
+            <p>{{item.projectName}}</p>
+        </mat-list-item>
+    </mat-nav-list>
 </div>

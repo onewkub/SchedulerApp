@@ -4,3 +4,8 @@
 .display-3{
     font-size: 2rem;
 }
+.container{
+    width: 30rem;
+    background-color: grey;
+    
+}
