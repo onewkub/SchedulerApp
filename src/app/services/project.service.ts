@@ -51,4 +51,9 @@ export class ProjectService {
     });
     this.userService.userProject = userProject;
   }
+
+  getProject(pid): Project{
+    return this.apiService.project.find(element => (element.projectID == pid));
+  }
+
 }

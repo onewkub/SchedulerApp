@@ -25,6 +25,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {AddProjectComponent} from './components/add-project/add-project.component';
 import {MAT_CHECKBOX_CLICK_ACTION, MatNativeDateModule} from '@angular/material';
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProjectDetailComponent } from './components/project-detail/project-deta
     SignUpComponent,
     HomeComponent,
     AddProjectComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,

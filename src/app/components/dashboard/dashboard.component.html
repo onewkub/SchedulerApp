@@ -23,4 +23,11 @@
         <li>Work 2</li>
     </ul>
 </div>
-<div class="container"></div>
+<div class="container">
+    <div class="row">
+        <h1 class="display-4">Dashboard</h1>
+    </div>
+    <div class="row" *ngFor="let item of this.userService.userProject">
+        <p>{{item.projectName}}</p>
+    </div>
+</div>
