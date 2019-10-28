@@ -1,33 +1,35 @@
-<div class="row">
+<div class="home-container">
+  <div class="row">
     <h1 class="display-3">
-        Today
+      Today
     </h1>
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <h1 class="display-4">
-        {{today}}
+      {{today}}
     </h1>
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <h1 class="display-4">Hello {{this.userService.currentUser.displayName}}</h1>
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <h1 class="display-4">
-        Your work today:
+      Your work today:
     </h1>
-</div>
+  </div>
 
-<div class="row">
+  <div class="row">
     <ul>
-        <li>Work 1</li>
-        <li>Work 2</li>
+      <li>Work 1</li>
+      <li>Work 2</li>
     </ul>
-</div>
-<div class="container">
+  </div>
+  <div class="container">
     <div class="row">
-        <h1 class="display-4">Dashboard</h1>
+      <h1 class="display-4">Dashboard</h1>
     </div>
     <mat-nav-list>
+<<<<<<< HEAD
         <mat-list-item *ngFor="let item of this.userService.userProject">
             <div class="table">
                     <div class="row w-100">{{item.projectName}}</div>
@@ -37,5 +39,12 @@
             </div>
 
         </mat-list-item>
+=======
+      <mat-list-item *ngFor="let item of this.userService.userProject">
+        <p>{{item.projectName}}</p>
+      </mat-list-item>
+>>>>>>> 14adcdadc92dbad21095e302ead69a41f998acb5
     </mat-nav-list>
+  </div>
+
 </div>
