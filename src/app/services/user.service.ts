@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model';
 import {Project} from '../models/project.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,11 @@ export class UserService {
   };
   userProject: Project[];
 
-  constructor() {
+  constructor(public apiService : ApiService) {
   }
+
+  getUser(uid: number): User{
+    return this.apiService.users.find(element => { return element.uid == uid});
+  }
+
 }

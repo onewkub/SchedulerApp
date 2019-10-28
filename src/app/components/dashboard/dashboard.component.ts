@@ -13,19 +13,24 @@ export class DashboardComponent implements OnInit {
 
   todayDate = new Date();
   today: string;
-  months = ['Jan', 'Feb', 'Mar',
-    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-    'Oct', 'Nov', 'Dec'];
+
 
   constructor(
     public userService: UserService,
     // private datePipe: DatePipe
   ) {
-    // this.todayDateString = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd');
-    this.today = this.todayDate.getDate() + ' ' + this.months[this.todayDate.getMonth()] + ' ' + this.todayDate.getFullYear();
+    // dateString = this.datePipe.transform(date, 'yyyy-MM-dd');
+    this.today = this.getDate(this.todayDate);
     
   }
 
   ngOnInit() {
+  }
+
+  getDate(date: Date){
+    var months = ['Jan', 'Feb', 'Mar',
+    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+    'Oct', 'Nov', 'Dec'];
+    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
   }
 }
