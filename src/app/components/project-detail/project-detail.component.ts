@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Project } from 'src/app/models/project.model';
-import { ProjectService } from 'src/app/services/project.service';
+import {ActivatedRoute} from '@angular/router';
+import {Project} from 'src/app/models/project.model';
+import {ProjectService} from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -9,9 +9,9 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-
   currentProjectID: number;
   currentProject: Project;
+
   constructor(
     public activeRoute: ActivatedRoute,
     public projectService: ProjectService
@@ -21,12 +21,8 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.params.subscribe(routeParams => {
-      this.currentProjectID = routeParams.pid;
+      this.currentProjectID = Number(routeParams.pid);
       this.currentProject = this.projectService.getProject(this.currentProjectID);
     });
   }
-
-
-
-  
 }

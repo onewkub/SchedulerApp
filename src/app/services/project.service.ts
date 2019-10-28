@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {UserService} from './user.service';
 import {Project} from '../models/project.model';
+import {Task} from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +53,11 @@ export class ProjectService {
     this.userService.userProject = userProject;
   }
 
-  getProject(pid): Project{
-    return this.apiService.project.find(element => (element.projectID == pid));
+  getProject(pid): Project {
+    return this.apiService.project.find(element => (element.projectID === pid));
   }
 
+  getTasks(projectID): Task[] {
+    return this.apiService.taskList.filter(task => (task.projectID === projectID));
+  }
 }

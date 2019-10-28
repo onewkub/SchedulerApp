@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model';
 import {Project} from '../models/project.model';
+import {Task, TaskStatus} from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ApiService {
   public userData: { uid: number; projectID: number[] }[];
   public authTable: { uid: number; email: string; password: string; logedIn: boolean }[];
   public project: Project[];
+  public taskList: Task[];
 
   constructor() {
     this.users = [
@@ -67,6 +69,29 @@ export class ApiService {
       {uid: 1, projectID: [0, 1]},
       {uid: 2, projectID: [0, 1]},
       {uid: 3, projectID: [0, 1]},
+    ];
+
+    this.taskList = [
+      {
+        taskID: 0,
+        projectID: 0,
+        name: 'Task One',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
+        startDate: new Date('2019-10-27'),
+        endDate: new Date('2019-10-28'),
+        owner: 0,
+        status: TaskStatus.inProgress
+      },
+      {
+        taskID: 1,
+        projectID: 0,
+        name: 'Task Two',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
+        startDate: new Date('2019-10-27'),
+        endDate: new Date('2019-10-29'),
+        owner: 1,
+        status: TaskStatus.pending
+      }
     ];
   }
 }
