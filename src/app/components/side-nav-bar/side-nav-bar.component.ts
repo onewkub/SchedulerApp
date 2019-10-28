@@ -72,7 +72,7 @@ export class SideNavBarComponent implements OnInit {
   }
 
   switchToDashboard(): void {
-    this.router.navigate(['/app/dashboard']).then(() => {
+    this.router.navigate(['/app']).then(() => {
       this.activePage = PageType.dashboard;
     });
   }

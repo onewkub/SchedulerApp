@@ -33,4 +33,30 @@ export class DashboardComponent implements OnInit {
     'Oct', 'Nov', 'Dec'];
     return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
   }
+  getRemainingDay(endDate: Date):string{
+    var diff = endDate.getTime() - this.todayDate.getTime();
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    if(diff >= 0){
+      return diffDays + " Days";
+    }
+    return "Late";
+  }
+  getProgress(project: Project){
+    var diff = project.endDate.getTime() - project.startDate.getTime();
+    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    var currentDate = this.todayDate.getTime() - project.startDate.getTime();
+    var currentDays = Math.ceil(currentDate / (1000 * 3600 * 24));
+    var progress;
+    if(currentDate < 0){
+      progress = 0;
+    }
+    else{
+      progress = (currentDays/diffDays)*100;
+    }
+    // console.log(project.projectName + " : " + progress)
+    return progress;
+
+
+
+  }
 }

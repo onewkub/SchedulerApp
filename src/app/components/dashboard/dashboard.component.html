@@ -1,37 +1,37 @@
 <div class="home-container">
-  <div class="row">
-    <h1 class="display-3">
-      Today
-    </h1>
-  </div>
-  <div class="row">
-    <h1 class="display-4">
-      {{today}}
-    </h1>
-  </div>
-  <div class="row">
-    <h1 class="display-4">Hello {{this.userService.currentUser.displayName}}</h1>
-  </div>
-  <div class="row">
-    <h1 class="display-4">
-      Your work today:
-    </h1>
-  </div>
-
-  <div class="row">
-    <ul>
-      <li>Work 1</li>
-      <li>Work 2</li>
-    </ul>
-  </div>
-  <div>
     <div class="row">
-      <h1 class="display-4">Dashboard</h1>
+        <h1 class="display-3">
+            Today
+        </h1>
     </div>
-    <mat-nav-list>
-        <mat-list-item *ngFor="let item of this.userService.userProject">
-            <div class="table projectProgress">
-                    <div class="row w-100 display-4 text-left">
+    <div class="row">
+        <h1 class="display-4">
+            {{today}}
+        </h1>
+    </div>
+    <div class="row">
+        <h1 class="display-4">Hello {{this.userService.currentUser.displayName}}</h1>
+    </div>
+    <div class="row">
+        <h1 class="display-4">
+            Your work today:
+        </h1>
+    </div>
+
+    <div class="row">
+        <ul>
+            <li>Work 1</li>
+            <li>Work 2</li>
+        </ul>
+    </div>
+    <div>
+        <div class="row">
+            <h1 class="display-4">Dashboard</h1>
+        </div>
+        <mat-nav-list>
+            <a mat-list-item *ngFor="let item of this.userService.userProject" routerLink = 'projects/{{item.projectID}}' >
+                <div class="table projectProgress">
+                    <div class="row w-100 display-4 text-left proLabel">
                         <div class="col-4">
                             {{item.projectName}}
                         </div>
@@ -39,16 +39,16 @@
                             {{this.userService.getUser(item.projectOwner).displayName}}
                         </div>
                         <div class="col-4 text-right">
-                            {{this.getDate(item.endDate)}}
+                            {{getRemainingDay(item.endDate)}}
                         </div>
-                        
+
                     </div>
-                    <div class="row w-100">
-                        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                    <div class="row w-100 probar">
+                        <mat-progress-bar mode="determinate" [value]="getProgress(item)"></mat-progress-bar>
                     </div>
-            </div>
-        </mat-list-item>
-    </mat-nav-list>
-  </div>
+                </div>
+            </a>
+        </mat-nav-list>
+    </div>
 
 </div>

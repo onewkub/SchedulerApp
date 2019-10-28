@@ -18,5 +18,11 @@
 
 .projectProgress{
     width: 100%;
-    
+
+}
+.mat-list-item{
+    height: 5rem;
+}
+.probar{
+    margin-top: 1rem;
 }
