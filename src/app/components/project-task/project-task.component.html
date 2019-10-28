@@ -1,0 +1,36 @@
+<div class="task-container">
+  <div class="container-fluid">
+    <mat-accordion class="task-list">
+
+      <div *ngFor="let task of taskList">
+        <mat-expansion-panel class="task">
+          <mat-expansion-panel-header>
+            <div class="task-summary-container">
+              <span class="task-name">{{task.name}}</span>
+              <span class="task-spacer"></span>
+              <span class="task-status">
+                <mat-icon [style.color]="getStatusColor(task.status)">
+                  lens
+                </mat-icon>
+                <a>
+                  {{getStatusName(task.status)}}
+                </a>
+              </span>
+            </div>
+          </mat-expansion-panel-header>
+          <div class="task-desc-container">
+            {{task.description}}
+            <div class="task-control-container">
+              <button mat-stroked-button>Upload File</button>
+              <div class="task-status-control">
+                <button mat-stroked-button class="button-cancel">Cancel</button>
+                <button mat-raised-button class="button-done">Done</button>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+    </mat-accordion>
+  </div>
+</div>
