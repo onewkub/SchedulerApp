@@ -52,7 +52,7 @@ export class AuthService {
         return null;
       });
       console.log(this.userService.currentUser.displayName);
-      this.router.navigate(['app']);
+      this.router.navigate(['app/dashboard']);
       return true;
     }
     return false;

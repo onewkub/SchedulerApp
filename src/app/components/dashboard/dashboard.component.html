@@ -29,7 +29,7 @@
             <h1 class="display-4">Dashboard</h1>
         </div>
         <mat-nav-list>
-            <a mat-list-item *ngFor="let item of this.userService.userProject" routerLink = 'projects/{{item.projectID}}' >
+            <mat-list-item *ngFor="let item of this.userService.userProject" routerLink='/app/projects/{{item.projectID}}' >
                 <div class="table projectProgress">
                     <div class="row w-100 display-4 text-left proLabel">
                         <div class="col-4">
@@ -47,7 +47,7 @@
                         <mat-progress-bar mode="determinate" [value]="getProgress(item)"></mat-progress-bar>
                     </div>
                 </div>
-            </a>
+            </mat-list-item>
         </mat-nav-list>
     </div>
 
