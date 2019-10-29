@@ -9,10 +9,10 @@ import {SideNavBarComponent} from './components/side-nav-bar/side-nav-bar.compon
 const routes: Routes = [
   {
     path: 'app', component: SideNavBarComponent, children: [
-      {path: '', component: DashboardComponent},
+      {path: 'dashboard', component: DashboardComponent},
       {path: 'projects/:pid', component: ProjectDetailComponent},
       {path: 'addProject', component: AddProjectComponent},
-      {path: '', pathMatch: 'full', redirectTo: ''},
+      {path: 'dashboard', pathMatch: 'full', redirectTo: 'dashboard'},
     ]
   },
   {path: '', component: HomeComponent},
