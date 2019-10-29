@@ -1,0 +1,14 @@
+<div>
+    <mat-tab-group>
+        <mat-tab label="Detail">
+            <app-project-detail></app-project-detail>
+        </mat-tab>
+        <mat-tab label="Table">
+        </mat-tab>
+        <mat-tab label="Task">
+            <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>
+        </mat-tab>
+        <mat-tab label="Setting">
+        </mat-tab>
+    </mat-tab-group>
+</div>

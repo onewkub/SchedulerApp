@@ -29,8 +29,10 @@
       <mat-divider></mat-divider>
 
       <!-- Dashboard -->
-      <div [ngClass]="{'selectedMenu' : isSelectedDashboard()}">
-        <mat-list-item (click)="switchToDashboard()">
+      <!-- <div [ngClass]="{'selectedMenu' : isSelectedDashboard()}"> -->
+        <div>
+        <!-- <mat-list-item (click)="switchToDashboard()" routerLinkActive="is-active" > -->
+        <mat-list-item routerLink='dashboard' routerLinkActive="is-active" >
           <span class="menuIcon">
             <mat-icon>dashboard</mat-icon>
           </span>
@@ -44,8 +46,10 @@
 
       <!-- Project List -->
       <div *ngFor="let project of this.userService.userProject">
-        <div [ngClass]="{'selectedMenu' : isSelectedProject(project)}">
-          <mat-list-item (click)="switchToProject(project)">
+        <!-- <div [ngClass]="{'selectedMenu' : isSelectedProject(project)}"> -->
+        <div>
+          <!-- <mat-list-item (click)="switchToProject(project)"> -->
+          <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active" >
             <span class="menuIcon">
               <mat-icon>label</mat-icon>
             </span>

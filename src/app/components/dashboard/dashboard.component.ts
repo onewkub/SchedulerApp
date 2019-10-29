@@ -51,9 +51,9 @@ export class DashboardComponent implements OnInit {
       progress = 0;
     }
     else{
-      progress = (currentDays/diffDays)*100;
-    }
-    // console.log(project.projectName + " : " + progress)
+      progress = ((diffDays-currentDays)/diffDays)*100;
+  }
+    // console.log(project.projectName + " : " + progress + " : " + currentDays + " " + diffDays)
     return progress;
 
 
