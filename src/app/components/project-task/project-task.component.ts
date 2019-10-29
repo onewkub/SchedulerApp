@@ -8,7 +8,8 @@ import {Task, TaskStatus} from '../../models/task.model';
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
   @Input() taskList: Task[];
 
