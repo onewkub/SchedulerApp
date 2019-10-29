@@ -21,5 +21,10 @@ export class UserService {
   getUser(uid: number): User{
     return this.apiService.users.find(element => { return element.uid == uid});
   }
-
+  getDate(date: Date){
+    var months = ['Jan', 'Feb', 'Mar',
+    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+    'Oct', 'Nov', 'Dec'];
+    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  }
 }
