@@ -8,7 +8,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 // Other Import
-import {environment} from '../environments/environment';
+// import {environment} from '../environments/environment';
 // Components
 import {AppComponent} from './app.component';
 import {SideNavBarComponent} from './components/side-nav-bar/side-nav-bar.component';
@@ -23,6 +23,7 @@ import {AddProjectComponent} from './components/add-project/add-project.componen
 import {MAT_CHECKBOX_CLICK_ACTION, MatNativeDateModule} from '@angular/material';
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
 import { ProjectTaskComponent } from './components/project-task/project-task.component';
+import { ProjectComponent } from './components/project/project.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ProjectTaskComponent } from './components/project-task/project-task.com
     AddProjectComponent,
     ProjectDetailComponent,
     ProjectTaskComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,
