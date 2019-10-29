@@ -4,9 +4,6 @@
 .display-3{
     font-size: 3rem;
 }
-.container{
-    width: 30rem;
-}
 
 .home-container {
   display: flex;
@@ -25,4 +22,10 @@
 }
 .probar{
     margin-top: 1rem;
+}
+.dashboard{
+    padding-top: 1rem;
+    padding-left: 2rem;
+    width: 100%;
+    overflow: hidden;
 }

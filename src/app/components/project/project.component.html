@@ -4,11 +4,13 @@
             <app-project-detail></app-project-detail>
         </mat-tab>
         <mat-tab label="Table">
+            <app-project-table></app-project-table>
         </mat-tab>
         <mat-tab label="Task">
             <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>
         </mat-tab>
         <mat-tab label="Setting">
+            <app-project-setting></app-project-setting>
         </mat-tab>
     </mat-tab-group>
 </div>
