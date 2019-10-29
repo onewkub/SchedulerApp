@@ -29,7 +29,7 @@
             <h1 class="display-4">Dashboard</h1>
         </div>
         <mat-nav-list>
-            <mat-list-item *ngFor="let item of this.userService.userProject" routerLink='projects/{{item.projectID}}' >
+            <mat-list-item *ngFor="let item of this.userService.userProject" routerLink='/app/projects/{{item.projectID}}' >
                 <div class="table projectProgress">
                     <div class="row w-100 display-4 text-left proLabel">
                         <div class="col-4">
