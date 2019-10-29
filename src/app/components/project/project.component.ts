@@ -10,8 +10,8 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectComponent implements OnInit {
 
-  currentProjectID: number;
-  currentProject: Project;
+  public currentProjectID: number;
+  public currentProject: Project;
 
   constructor(
     public activeRoute: ActivatedRoute,

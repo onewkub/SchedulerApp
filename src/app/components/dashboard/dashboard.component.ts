@@ -20,19 +20,13 @@ export class DashboardComponent implements OnInit {
     // private datePipe: DatePipe
   ) {
     // dateString = this.datePipe.transform(date, 'yyyy-MM-dd');
-    this.today = this.getDate(this.todayDate);
+    this.today = this.userService.getDate(this.todayDate);
     
   }
 
   ngOnInit() {
   }
 
-  getDate(date: Date){
-    var months = ['Jan', 'Feb', 'Mar',
-    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-    'Oct', 'Nov', 'Dec'];
-    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
-  }
   getRemainingDay(endDate: Date):string{
     var diff = endDate.getTime() - this.todayDate.getTime();
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
