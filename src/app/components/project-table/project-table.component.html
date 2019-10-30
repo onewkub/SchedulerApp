@@ -1,22 +1,21 @@
 <div class="schedule">
-    <div class="row">
-        <h1 class="display-4" style="padding-left: 2rem">Project Schedule</h1>
-    </div>
+    <h1 class="display-3">{{project.projectName}} Schedule</h1>
+
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Member</th>
-                    <th>Day:</th>
+                    <th *ngFor="let date of dateLabel">{{date}}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Wachira Norasing</td>
-                    <td>work</td>
+                <tr *ngFor="let member of memberList">
+                    <td>{{member.displayName}}</td>
+                    <td *ngFor="let item of setTask(member.uid)" [attr.colspan]="item.colspan">{{item.task.name}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <button (click) = "showTask()">ShowTask</button>
+    <button (click) = "showTaskAndProject()">ShowTask</button>
 </div>

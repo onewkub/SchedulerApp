@@ -6,6 +6,10 @@
 .display-4{
     font-size: 1.5rem;
 }
-th{
-    width: 1.5rem;
+.display-3{
+    font-size: 1.5rem;
+}
+table{
+    width: 80%;
+    table-layout: auto;
 }
