@@ -60,7 +60,7 @@ export class ApiService {
         startDate: new Date('2019-10-25'),
         endDate: new Date('2019-10-31'),
         projectOwner: 1,
-        members: [0, 2, 3]
+        members: [1, 2, 3]
       }
     ];
 
@@ -79,7 +79,7 @@ export class ApiService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
         startDate: new Date('2019-10-27'),
         endDate: new Date('2019-10-28'),
-        owner: 0,
+        owner: 1,
         status: TaskStatus.inProgress
       },
       {
@@ -89,7 +89,7 @@ export class ApiService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
         startDate: new Date('2019-10-27'),
         endDate: new Date('2019-10-29'),
-        owner: 1,
+        owner: 2,
         status: TaskStatus.pending
       }
     ];

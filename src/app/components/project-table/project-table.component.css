@@ -6,6 +6,15 @@
 .display-4{
     font-size: 1.5rem;
 }
-th{
-    width: 1.5rem;
+.display-3{
+    font-size: 1.5rem;
+}
+table{
+    table-layout: auto;
+}
+td{
+    text-align: center;
+}
+.addTask:hover{
+    background: rgba(191, 191, 191, 0.6);
 }
