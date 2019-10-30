@@ -1,26 +1,18 @@
 <div class="detail">
-    <div class="table">
-        <div class="row">
-            <h1 class="display-6">
-                Project Name: {{projectComponent.currentProject.projectName}}
-            </h1>
-        </div>
-        <div class="row">
-            <div class="col-4 text-left">
-                Start Date: {{this.userService.getDate(projectComponent.currentProject.startDate)}}
-            </div>
-            <div class="col-4 text-left">
-                End Date: {{this.userService.getDate(projectComponent.currentProject.endDate)}}
-            </div>
-        </div>
-        <div class="row">
-            <mat-label>Describtion: </mat-label>
-            <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi blandit purus a tellus mollis viverra. Aliquam malesuada purus metus, vel vestibulum eros dignissim vitae. Quisque vulputate tellus id enim mattis blandit. Proin mollis feugiat massa sed hendrerit. Aliquam dolor nibh, fermentum at scelerisque vehicula, lobortis vel purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam a suscipit nisl, ut pharetra libero. Nam malesuada faucibus lorem aliquet tincidunt. Aliquam dapibus enim id viverra auctor. In vitae justo libero. Nunc convallis diam nec vulputate pellentesque. Quisque id blandit felis, sit amet venenatis dui. Integer et enim metus. Mauris vitae eros nec est viverra vestibulum et ac justo. Vestibulum risus nunc, iaculis aliquet mattis in, pharetra vel mauris.
+    <div>
+        <h1 class="display-3 text-sm">
+            Project Name: {{projectComponent.currentProject.projectName}}
+        </h1>
+        <h1 class="display-4 text-sm">
+            Start Date: {{this.userService.getDate(projectComponent.currentProject.startDate)}}
 
+        </h1>
+        <h1 class="display-4 text-sm">
+            End Date: {{this.userService.getDate(projectComponent.currentProject.endDate)}}
+        </h1>
+        <h1 class="display-4">
+            Decription
+        </h1>
 
-            </p>
-        </div>
     </div>
-
 </div>
