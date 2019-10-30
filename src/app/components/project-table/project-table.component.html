@@ -12,10 +12,10 @@
             <tbody>
                 <tr *ngFor="let member of memberList">
                     <td>{{member.displayName}}</td>
-                    <td *ngFor="let item of setTask(member.uid)" [attr.colspan]="item.colspan">{{item.task.name}}</td>
+                    <td (click) = "openDialog()" class="addTask" *ngFor="let item of userTask.get(member.uid)" [attr.colspan] = "item.colspan">{{item.task.name}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <button (click) = "showTaskAndProject()">ShowTask</button>
+    <!-- <button (click) = "showTaskAndProject()">ShowTask</button> -->
 </div>

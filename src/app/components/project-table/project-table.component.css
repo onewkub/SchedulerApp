@@ -10,6 +10,11 @@
     font-size: 1.5rem;
 }
 table{
-    width: 80%;
     table-layout: auto;
+}
+td{
+    text-align: center;
+}
+.addTask:hover{
+    background: rgba(191, 191, 191, 0.6);
 }
