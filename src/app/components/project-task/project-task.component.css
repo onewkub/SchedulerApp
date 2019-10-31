@@ -56,7 +56,7 @@
 
 .task-status-control {
   display: flex;
-  flex-grow: 1;
+  width: 100%;
   justify-content: right;
 }
 
@@ -68,8 +68,4 @@
 .button-cancel {
   margin-right: 0.4em;
   color: #ef5350;
-}
-
-.button-upload {
-
 }

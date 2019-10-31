@@ -8,12 +8,13 @@ import {Task, TaskStatus} from '../../models/task.model';
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor() { 
+  constructor() {
   }
 
   @Input() taskList: Task[];
 
   ngOnInit() {
+    this.calculateStatus();
   }
 
   getStatusName(status: TaskStatus): string {
@@ -43,7 +44,21 @@ export class ProjectTaskComponent implements OnInit {
         return '#ff9800';
       case TaskStatus.late:
         return '#ef5350';
-
     }
+  }
+
+  calculateStatus(): void {
+    const toDay = new Date();
+    this.taskList.forEach(task => {
+      if (task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed) {
+        if (task.startDate > toDay) {
+          task.status = TaskStatus.pending;
+        } else if (task.startDate <= toDay && task.endDate < toDay) {
+          task.status = TaskStatus.late;
+        } else {
+          task.status = TaskStatus.inProgress;
+        }
+      }
+    });
   }
 }
