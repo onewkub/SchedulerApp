@@ -1,1 +1,18 @@
-<mat-label>Project Detail</mat-label>
+<div class="detail">
+    <div>
+        <h1 class="display-3 text-sm">
+            Project Name: {{projectComponent.currentProject.projectName}}
+        </h1>
+        <h1 class="display-4 text-sm">
+            Start Date: {{this.userService.getDate(projectComponent.currentProject.startDate)}}
+
+        </h1>
+        <h1 class="display-4 text-sm">
+            End Date: {{this.userService.getDate(projectComponent.currentProject.endDate)}}
+        </h1>
+        <h1 class="display-4">
+            Decription
+        </h1>
+
+    </div>
+</div>

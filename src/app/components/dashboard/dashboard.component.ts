@@ -20,19 +20,13 @@ export class DashboardComponent implements OnInit {
     // private datePipe: DatePipe
   ) {
     // dateString = this.datePipe.transform(date, 'yyyy-MM-dd');
-    this.today = this.getDate(this.todayDate);
+    this.today = this.userService.getDate(this.todayDate);
     
   }
 
   ngOnInit() {
   }
 
-  getDate(date: Date){
-    var months = ['Jan', 'Feb', 'Mar',
-    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-    'Oct', 'Nov', 'Dec'];
-    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
-  }
   getRemainingDay(endDate: Date):string{
     var diff = endDate.getTime() - this.todayDate.getTime();
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
@@ -43,16 +37,16 @@ export class DashboardComponent implements OnInit {
   }
   getProgress(project: Project){
     var diff = project.endDate.getTime() - project.startDate.getTime();
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    var diffDays = Math.floor(diff / (1000 * 3600 * 24));
     var currentDate = this.todayDate.getTime() - project.startDate.getTime();
-    var currentDays = Math.ceil(currentDate / (1000 * 3600 * 24));
+    var currentDays = Math.floor(currentDate / (1000 * 3600 * 24));
     var progress;
     if(currentDate < 0){
       progress = 0;
     }
     else{
-      progress = ((diffDays-currentDays)/diffDays)*100;
-  }
+      progress = ((currentDays)/diffDays)*100;
+    }
     // console.log(project.projectName + " : " + progress + " : " + currentDays + " " + diffDays)
     return progress;
 

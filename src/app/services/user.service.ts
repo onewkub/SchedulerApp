@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../models/user.model';
 import {Project} from '../models/project.model';
 import { ApiService } from './api.service';
+import { Task } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,17 @@ export class UserService {
   getUser(uid: number): User{
     return this.apiService.users.find(element => { return element.uid == uid});
   }
-
+  getDate(date: Date){
+    var months = ['Jan', 'Feb', 'Mar',
+    'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+    'Oct', 'Nov', 'Dec'];
+    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  }
+  getUserTask(uid): Task[]{
+    var rlt : Task[] = [];
+    this.apiService.taskList.forEach(element => {
+      if(element.owner == uid) rlt.push(element);
+    });
+    return rlt;
+  }
 }

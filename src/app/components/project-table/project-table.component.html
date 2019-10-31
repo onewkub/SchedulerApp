@@ -1,0 +1,21 @@
+<div class="schedule">
+    <h1 class="display-3">{{project.projectName}} Schedule</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Member</th>
+                    <th *ngFor="let date of dateLabel">{{date}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of memberList">
+                    <td>{{member.displayName}}</td>
+                    <td (click) = "openDialog()" class="addTask" *ngFor="let item of userTask.get(member.uid)" [attr.colspan] = "item.colspan">{{item.task.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <button (click) = "showTaskAndProject()">ShowTask</button> -->
+</div>

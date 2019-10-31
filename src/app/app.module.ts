@@ -24,6 +24,9 @@ import {MAT_CHECKBOX_CLICK_ACTION, MatNativeDateModule} from '@angular/material'
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
 import { ProjectTaskComponent } from './components/project-task/project-task.component';
 import { ProjectComponent } from './components/project/project.component';
+import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
+import { ProjectTableComponent } from './components/project-table/project-table.component';
+import { ProjectAddTaskComponent } from './components/project-add-task/project-add-task.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { ProjectComponent } from './components/project/project.component';
     ProjectDetailComponent,
     ProjectTaskComponent,
     ProjectComponent,
+    ProjectSettingComponent,
+    ProjectTableComponent,
+    ProjectAddTaskComponent,
   ],
   imports: [
     BrowserModule,

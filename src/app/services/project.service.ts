@@ -3,6 +3,7 @@ import {ApiService} from './api.service';
 import {UserService} from './user.service';
 import {Project} from '../models/project.model';
 import {Task} from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,12 @@ export class ProjectService {
 
   getTasks(projectID): Task[] {
     return this.apiService.taskList.filter(task => (task.projectID === projectID));
+  }
+
+  getMember(pid): User[]{
+    var rlt : User[] = [];
+    var projectMember = this.getProject(pid).members;
+    projectMember.forEach(element=> { rlt.push(this.userService.getUser(element))});
+    return rlt;
   }
 }
