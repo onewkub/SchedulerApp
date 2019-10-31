@@ -1,1 +1,28 @@
-<h1 class="display-6">Hello World!!</h1>
+<h1 mat-dialog-title>Add Task</h1>
+<div class="mat-dialog-content">
+    <form [formGroup]="addTaskForm">
+        <mat-form-field>
+            <input formControlName="name" type="text" matInput placeholder="Task Name" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="startDate" matInput [matDatepicker]="startPicker" placeholder="Start Date"
+                autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="endDate" matInput [matDatepicker]="endPicker" placeholder="End Date"
+                autocomplete="off">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input formControlName="description" type="text" matInput placeholder="Description" autocomplete="off">
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="onSubmit()">Add Task</button>
+</div>
