@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Task, TaskStatus} from '../../models/task.model';
 import {MatDialog} from '@angular/material';
 import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-status.component';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-project-task',
@@ -10,7 +11,8 @@ import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-st
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              public userService: UserService) {
   }
 
   @Input() taskList: Task[];
@@ -94,5 +96,9 @@ export class ProjectTaskComponent implements OnInit {
     dialogRef.componentInstance.desc = 'Are you sure you want to mark this task as canceled?';
     dialogRef.componentInstance.task = task;
     dialogRef.componentInstance.toStatus = TaskStatus.canceled;
+  }
+
+  getTaskOwnerName(task: Task) {
+    return this.userService.getUser(task.owner).displayName;
   }
 }
