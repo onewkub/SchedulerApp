@@ -21,10 +21,14 @@
           <div class="task-desc-container">
             {{task.description}}
             <div class="task-control-container">
-              <button mat-stroked-button>Upload File</button>
+              <button mat-stroked-button [disabled]="!enableUploadButton(task)">Upload File</button>
               <div class="task-status-control">
-                <button mat-stroked-button class="button-cancel">Cancel</button>
-                <button mat-raised-button class="button-done">Done</button>
+                <button mat-stroked-button class="button-cancel"
+                        [disabled]="!enableCancelButton(task)"
+                        (click)="openCancelConfirmDialog(task)">Cancel</button>
+                <button mat-raised-button class="button-done"
+                        [disabled]="!enableDoneButton(task)"
+                        (click)="openDoneConfirmDialog(task)">Done</button>
               </div>
             </div>
           </div>

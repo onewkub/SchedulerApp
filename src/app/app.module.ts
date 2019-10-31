@@ -27,6 +27,7 @@ import { ProjectComponent } from './components/project/project.component';
 import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
 import { ProjectTableComponent } from './components/project-table/project-table.component';
 import { ProjectAddTaskComponent } from './components/project-add-task/project-add-task.component';
+import { ConfirmTaskStatusComponent } from './components/confirm-task-status/confirm-task-status.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProjectAddTaskComponent } from './components/project-add-task/project-a
     ProjectSettingComponent,
     ProjectTableComponent,
     ProjectAddTaskComponent,
+    ConfirmTaskStatusComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,10 @@ import { ProjectAddTaskComponent } from './components/project-add-task/project-a
     Ng2SearchPipeModule
   ],
   providers: [AuthService, UserService, AuthGuard, {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ConfirmTaskStatusComponent
+  ],
 })
 export class AppModule {
 }
