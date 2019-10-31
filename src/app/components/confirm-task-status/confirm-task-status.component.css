@@ -1,0 +1,16 @@
+.button-cancel {
+  margin-left: 0.5em;
+  color: #ef5350;
+}
+
+.button-confirm {
+  background: #0091ea;
+  color: #ffffff;
+}
+
+.task-confirm-control-container {
+  display: flex;
+  width: 100%;
+  padding-top: 1em;
+  justify-content: right;
+}
