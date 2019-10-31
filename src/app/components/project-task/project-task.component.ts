@@ -73,7 +73,7 @@ export class ProjectTaskComponent implements OnInit {
   }
 
   enableUploadButton(task: Task): boolean {
-    return this.enableDoneButton(task) && this.isTaskOrProjectOwner(task);
+    return this.enableDoneButton(task);
   }
 
   enableCancelButton(task: Task): boolean {
@@ -104,10 +104,50 @@ export class ProjectTaskComponent implements OnInit {
     return this.userService.getUser(task.owner).displayName;
   }
 
+  isTaskOwner(task: Task): boolean {
+    return  this.userService.currentUser.uid === task.owner;
+  }
+
   isTaskOrProjectOwner(task: Task): boolean {
     const currentUserID = this.userService.currentUser.uid;
     const project = this.projectService.getProject(task.projectID);
     const isProjectOwner = project.projectOwner === currentUserID;
-    return currentUserID === task.owner || isProjectOwner;
+    return this.isTaskOwner(task) || isProjectOwner;
+  }
+
+  getRemainingTimeString(task: Task): string {
+    const lessThanDay = 'less then a';
+    const timeDiff = this.getRemainingTime(task);
+    const timeDiffString = timeDiff < 1 ? lessThanDay : timeDiff.toString();
+    const dayString = timeDiff > 1 ? 'days' : 'day';
+    switch (task.status) {
+      case TaskStatus.pending:
+        return timeDiffString + ' ' + dayString + ' until start';
+      case TaskStatus.inProgress:
+        return timeDiffString + ' ' + dayString + ' remains';
+      case TaskStatus.late:
+        return timeDiffString + ' ' + dayString + ' late';
+      default:
+        return '';
+    }
+  }
+
+  getRemainingTime(task: Task): number {
+    const currentDay = new Date();
+    switch (task.status) {
+      case TaskStatus.pending:
+        return this.getDiffDays(task.startDate, currentDay);
+      case TaskStatus.inProgress:
+        return this.getDiffDays(task.endDate, currentDay);
+      case TaskStatus.late:
+        return this.getDiffDays(currentDay, task.endDate);
+      default:
+        return 0;
+    }
+  }
+
+  getDiffDays(dateA: Date, dateB: Date): number {
+    const diff = dateA.getTime() - dateB.getTime();
+    return Math.floor(diff / (1000 * 3600 * 24));
   }
 }

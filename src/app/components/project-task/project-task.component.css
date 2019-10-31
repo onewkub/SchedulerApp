@@ -28,7 +28,11 @@
 }
 
 .task-spacer {
-  width: 40%;
+  width: 25%;
+}
+
+.task-time-remain {
+  width: 15%;
 }
 
 .task-status {
