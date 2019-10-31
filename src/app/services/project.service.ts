@@ -70,4 +70,9 @@ export class ProjectService {
     });
     return result;
   }
+  getDiffDays(task: Task):number {
+    var diff = task.endDate.getTime() - task.startDate.getTime();
+    var diffDays = diff / (1000 * 3600 * 24);
+    return diffDays;
+  }
 }
