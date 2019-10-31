@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Task, TaskStatus} from '../../models/task.model';
+import {MatDialog} from '@angular/material';
+import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-status.component';
 
 @Component({
   selector: 'app-project-task',
@@ -8,7 +10,7 @@ import {Task, TaskStatus} from '../../models/task.model';
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   @Input() taskList: Task[];
@@ -60,5 +62,37 @@ export class ProjectTaskComponent implements OnInit {
         }
       }
     });
+  }
+
+  enableDoneButton(task: Task): boolean {
+    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
+  }
+
+  enableUploadButton(task: Task): boolean {
+    return this.enableDoneButton(task);
+  }
+
+  enableCancelButton(task: Task): boolean {
+    return task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed;
+  }
+
+  openDoneConfirmDialog(task: Task): void {
+    const dialogRef = this.dialog.open(ConfirmTaskStatusComponent, {
+      width: '30em'
+    });
+    dialogRef.componentInstance.title = 'Mark as done';
+    dialogRef.componentInstance.desc = 'Are you sure you want to mark this task as done?';
+    dialogRef.componentInstance.task = task;
+    dialogRef.componentInstance.toStatus = TaskStatus.completed;
+  }
+
+  openCancelConfirmDialog(task: Task): void {
+    const dialogRef = this.dialog.open(ConfirmTaskStatusComponent, {
+      width: '30em'
+    });
+    dialogRef.componentInstance.title = 'Mark as canceled';
+    dialogRef.componentInstance.desc = 'Are you sure you want to mark this task as canceled?';
+    dialogRef.componentInstance.task = task;
+    dialogRef.componentInstance.toStatus = TaskStatus.canceled;
   }
 }
