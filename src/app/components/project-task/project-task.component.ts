@@ -61,4 +61,16 @@ export class ProjectTaskComponent implements OnInit {
       }
     });
   }
+
+  enableDoneButton(task: Task): boolean {
+    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
+  }
+
+  enableUploadButton(task: Task): boolean {
+    return this.enableDoneButton(task);
+  }
+
+  enableCancelButton(task: Task): boolean {
+    return task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed;
+  }
 }

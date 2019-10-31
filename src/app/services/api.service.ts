@@ -64,13 +64,12 @@ export class ApiService {
       },
       {
         projectID: 2,
-        projectName: 'Project Beta',
+        projectName: 'Project Charlie',
         startDate: new Date('2019-10-25'),
         endDate: new Date('2019-11-30'),
         projectOwner: 0,
         members: [1, 2, 3]
       }
-      
     ];
 
     this.userData = [
