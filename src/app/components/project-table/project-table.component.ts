@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { ProjectAddTaskComponent } from '../project-add-task/project-add-task.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ProjectService } from 'src/app/services/project.service';
 @Component({
   selector: 'app-project-table',
   templateUrl: './project-table.component.html',
@@ -20,6 +21,7 @@ export class ProjectTableComponent implements OnInit {
   constructor(
     public userService: UserService,
     public dialog: MatDialog,
+    public projectService: ProjectService
   ) { }
 
 
@@ -38,7 +40,13 @@ export class ProjectTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
+      this.updateTable();
       console.log('The dialog was closed');
+    });
+  }
+  updateTable(){
+    this.memberList.forEach(element => {
+      this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.project));
     });
   }
 }
