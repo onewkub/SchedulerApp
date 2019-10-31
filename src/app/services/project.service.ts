@@ -3,7 +3,7 @@ import {ApiService} from './api.service';
 import {UserService} from './user.service';
 import {Project} from '../models/project.model';
 import {Task} from '../models/task.model';
-import { User } from '../models/user.model';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -62,11 +62,13 @@ export class ProjectService {
     return this.apiService.taskList.filter(task => (task.projectID === projectID));
   }
 
-  getMember(pid): User[]{
-    var rlt : User[] = [];
-    var projectMember = this.getProject(pid).members;
-    projectMember.forEach(element=> { rlt.push(this.userService.getUser(element))});
-    return rlt;
+  getMember(pid): User[] {
+    const result: User[] = [];
+    const projectMember = this.getProject(pid).members;
+    projectMember.forEach(element => {
+      result.push(this.userService.getUser(element));
+    });
+    return result;
   }
   getDiffDays(task: Task):number {
     var diff = task.endDate.getTime() - task.startDate.getTime();

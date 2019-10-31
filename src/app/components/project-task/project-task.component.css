@@ -32,7 +32,11 @@
 }
 
 .task-status {
-  width: 30%;
+  width: 10%;
+}
+
+.task-owner {
+  width: 20%;
 }
 
 .task-status mat-icon {

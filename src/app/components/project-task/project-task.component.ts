@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Task, TaskStatus} from '../../models/task.model';
 import {MatDialog} from '@angular/material';
 import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-status.component';
+import {UserService} from '../../services/user.service';
+import {ProjectService} from '../../services/project.service';
 
 @Component({
   selector: 'app-project-task',
@@ -10,7 +12,9 @@ import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-st
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,
+              public userService: UserService,
+              public projectService: ProjectService) {
   }
 
   @Input() taskList: Task[];
@@ -65,15 +69,15 @@ export class ProjectTaskComponent implements OnInit {
   }
 
   enableDoneButton(task: Task): boolean {
-    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
+    return (task.status === TaskStatus.inProgress || task.status === TaskStatus.late) && this.isTaskOrProjectOwner(task);
   }
 
   enableUploadButton(task: Task): boolean {
-    return this.enableDoneButton(task);
+    return this.enableDoneButton(task) && this.isTaskOrProjectOwner(task);
   }
 
   enableCancelButton(task: Task): boolean {
-    return task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed;
+    return task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed && this.isTaskOrProjectOwner(task);
   }
 
   openDoneConfirmDialog(task: Task): void {
@@ -94,5 +98,16 @@ export class ProjectTaskComponent implements OnInit {
     dialogRef.componentInstance.desc = 'Are you sure you want to mark this task as canceled?';
     dialogRef.componentInstance.task = task;
     dialogRef.componentInstance.toStatus = TaskStatus.canceled;
+  }
+
+  getTaskOwnerName(task: Task): string {
+    return this.userService.getUser(task.owner).displayName;
+  }
+
+  isTaskOrProjectOwner(task: Task): boolean {
+    const currentUserID = this.userService.currentUser.uid;
+    const project = this.projectService.getProject(task.projectID);
+    const isProjectOwner = project.projectOwner === currentUserID;
+    return currentUserID === task.owner || isProjectOwner;
   }
 }
