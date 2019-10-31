@@ -61,14 +61,23 @@ export class ApiService {
         endDate: new Date('2019-10-31'),
         projectOwner: 1,
         members: [1, 2, 3]
+      },
+      {
+        projectID: 2,
+        projectName: 'Project Beta',
+        startDate: new Date('2019-10-25'),
+        endDate: new Date('2019-11-30'),
+        projectOwner: 0,
+        members: [1, 2, 3]
       }
+      
     ];
 
     this.userData = [
-      {uid: 0, projectID: [0, 1]},
-      {uid: 1, projectID: [0, 1]},
-      {uid: 2, projectID: [0, 1]},
-      {uid: 3, projectID: [0, 1]},
+      {uid: 0, projectID: [0, 1, 2]},
+      {uid: 1, projectID: [0, 1, 2]},
+      {uid: 2, projectID: [0, 1, 2]},
+      {uid: 3, projectID: [0, 1, 2]},
     ];
 
     this.taskList = [
