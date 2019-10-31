@@ -2,6 +2,7 @@ import { Component, Inject ,OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Task } from 'src/app/models/task.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -14,16 +15,16 @@ export class ProjectAddTaskComponent implements OnInit {
   addTaskForm: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Task,
+    @Inject(MAT_DIALOG_DATA) public data: {work: Task, owner: User},
     public formBuilder: FormBuilder,
   ) 
   { 
     this.addTaskForm = this.formBuilder.group(
       {
-        name: [data.name],
-        description: [data.description],
-        startDate: [data.startDate],
-        endDate: [data.endDate]
+        name: [data.work.name],
+        description: [data.work.description],
+        startDate: [data.work.startDate],
+        endDate: [data.work.endDate]
       }
     );
   }

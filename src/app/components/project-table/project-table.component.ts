@@ -29,12 +29,13 @@ export class ProjectTableComponent implements OnInit {
   clickItem(item: Task): void {
     console.log(item);
   }
-  openDialog(item): void {
+  openDialog(task, member): void {
     console.log('Open Dialog');
     // console.log(item);
     const dialogRef = this.dialog.open(ProjectAddTaskComponent, {
-      width: '40em',
-      data : item.task
+      width: '45rem',
+      data : {work: task, owner: member}
+
     });
 
     dialogRef.afterClosed().subscribe(() => {

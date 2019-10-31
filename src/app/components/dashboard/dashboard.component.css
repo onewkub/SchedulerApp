@@ -24,8 +24,8 @@
     margin-top: 1rem;
 }
 .dashboard{
-    /* padding-top: 1rem; */
-    /* padding-left: 2rem; */
+    padding-top: 1rem;
+    padding-left: 3rem;
     width: 100%;
     overflow: hidden;
 }
