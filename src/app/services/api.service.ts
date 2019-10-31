@@ -50,7 +50,7 @@ export class ApiService {
         projectID: 0,
         projectName: 'Project Alpha',
         startDate: new Date('2019-10-27'),
-        endDate: new Date('2019-10-30'),
+        endDate: new Date('2019-11-11'),
         projectOwner: 0,
         members: [1, 2, 3]
       },
@@ -96,9 +96,19 @@ export class ApiService {
         projectID: 0,
         name: 'Task Two',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
-        startDate: new Date('2019-10-27'),
-        endDate: new Date('2019-10-29'),
+        startDate: new Date('2019-10-28'),
+        endDate: new Date('2019-11-09'),
         owner: 2,
+        status: TaskStatus.pending
+      },
+      {
+        taskID: 2,
+        projectID: 0,
+        name: 'Task Three',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
+        startDate: new Date('2019-11-09'),
+        endDate: new Date('2019-11-11'),
+        owner: 3,
         status: TaskStatus.pending
       }
     ];
