@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {UserService} from './user.service';
 import {Project} from '../models/project.model';
-import {Task} from '../models/task.model';
+import {Task, TaskStatus} from '../models/task.model';
 import {User} from '../models/user.model';
 
 @Injectable({
@@ -73,6 +73,48 @@ export class ProjectService {
   getDiffDays(task: Task):number {
     var diff = task.endDate.getTime() - task.startDate.getTime();
     var diffDays = diff / (1000 * 3600 * 24);
-    return diffDays;
+    return Math.ceil(diffDays);
   }
+  setUserTask(uid:number, currentProject: Project){
+    var taskInTable: {
+      task: Task,
+      colspan: number
+    }[] = [];
+    var tempTask: Task[] = this.userService.getUserTask(uid);
+    var temp: { task: Task, colspan: number };
+    var currentDate: Date = new Date(currentProject.startDate);
+    while (currentDate.getTime() <= currentProject.endDate.getTime()) {
+      var mathchTask = tempTask.find(element => {  
+        return element.startDate.getTime() === currentDate.getTime() && element.projectID == currentProject.projectID;
+      });
+      if (mathchTask) {
+        temp = {
+          task: mathchTask,
+          colspan: this.getDiffDays(mathchTask)
+        };
+        taskInTable.push(temp);
+        currentDate.setDate(currentDate.getDate() + temp.colspan);
+
+      }
+      else {
+        var blankTask = new Date(currentDate);
+        temp = { task: {
+          taskID: null,
+          projectID: currentProject.projectID,
+          name: "",
+          description: "",
+          startDate: new Date(blankTask),
+          endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
+          owner: uid,
+          status: TaskStatus.pending
+        }, colspan: 1 };
+        taskInTable.push(temp);
+        currentDate.setDate(currentDate.getDate() + 1);
+
+      }
+    }
+    // console.log(taskInTable);
+    return taskInTable;
+  }
+
 }

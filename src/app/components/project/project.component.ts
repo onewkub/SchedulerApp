@@ -35,54 +35,12 @@ export class ProjectComponent implements OnInit {
       this.memberList = this.projectService.getMember(this.currentProjectID);
       this.dateLabel = this.getDateLabel();
       this.memberList.forEach(element => {
-        this.userTask.set(element.uid, this.setTask(element.uid));
+        this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
       });
 
     });
   }
-  setTask(uid:number){
-    var taskInTable: {
-      task: Task,
-      colspan: number
-    }[] = [];
-    var tempTask: Task[] = this.userService.getUserTask(uid);
-    var temp: { task: Task, colspan: number };
-    var currentDate: Date = new Date(this.currentProject.startDate);
-    while (currentDate.getTime() <= this.currentProject.endDate.getTime()) {
-      var mathchTask = tempTask.find(element => {  
-        return element.startDate.getTime() === currentDate.getTime() && element.projectID == this.currentProjectID;
-      });
-      if (mathchTask) {
-        temp = {
-          task: mathchTask,
-          colspan: Math.ceil(this.projectService.getDiffDays(mathchTask))
-        };
-        taskInTable.push(temp);
-        currentDate.setDate(currentDate.getDate() + temp.colspan);
-
-      }
-      else {
-        var blankTask = new Date(currentDate);
-        temp = { task: {
-          taskID: null,
-          projectID: this.currentProject.projectID,
-          name: "",
-          description: "",
-          startDate: new Date(blankTask),
-          endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
-          owner: uid,
-          status: TaskStatus.pending
-        }, colspan: 1 };
-        taskInTable.push(temp);
-        currentDate.setDate(currentDate.getDate() + 1);
-
-      }
-    }
-    console.log(taskInTable);
-    return taskInTable;
-  }
-
-
+ 
   getDateLabel(): String[] {
     var rlt: String[] = [];
     var currentDate: Date = new Date(this.currentProject.startDate);

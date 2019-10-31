@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { ProjectComponent } from '../project/project.component';
 import { ProjectService } from 'src/app/services/project.service';
+import { ProjectTableComponent } from '../project-table/project-table.component';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class ProjectAddTaskComponent implements OnInit {
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {work: any, owner: User},
     public formBuilder: FormBuilder,
-    public projectService: ProjectService
+    public projectService: ProjectService,
   ) 
   { 
     this.taskForm = this.formBuilder.group(
@@ -47,7 +48,6 @@ export class ProjectAddTaskComponent implements OnInit {
     this.data.work.task.startDate = form.startDate;
     this.data.work.task.endDate = form.endDate;
     this.data.work.task.description = form.description;
-    this.data.work.colspan = Math.ceil(this.projectService.getDiffDays(this.data.work.task));
     this.onNoClick();
 
   }
