@@ -8,6 +8,9 @@
             <div class="task-summary-container">
               <span class="task-name">{{task.name}}</span>
               <span class="task-spacer"></span>
+              <span class="task-time-remain">
+                {{getRemainingTimeString(task)}}
+              </span>
               <span class="task-status">
                 <mat-icon [style.color]="getStatusColor(task.status)">
                   lens
@@ -17,7 +20,11 @@
                 </a>
               </span>
               <span class="task-owner">
-                Assigned to : {{getTaskOwnerName(task)}}
+                Assigned to :
+                <a *ngIf="!isTaskOwner(task); else youAreOwner">{{getTaskOwnerName(task)}}</a>
+                <ng-template #youAreOwner>
+                  You
+                </ng-template>
               </span>
             </div>
           </mat-expansion-panel-header>
