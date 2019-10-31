@@ -19,7 +19,7 @@ export class ProjectTableComponent implements OnInit {
   @Input() userTask = new Map();
   constructor(
     public userService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { }
 
 
@@ -31,7 +31,6 @@ export class ProjectTableComponent implements OnInit {
   }
   openDialog(task, member): void {
     console.log('Open Dialog');
-    // console.log(item);
     const dialogRef = this.dialog.open(ProjectAddTaskComponent, {
       width: '45rem',
       data : {work: task, owner: member}

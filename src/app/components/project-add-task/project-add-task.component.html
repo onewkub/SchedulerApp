@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Add Task</h1>
 <div class="mat-dialog-content">
-    <form [formGroup]="addTaskForm">
+    <form [formGroup]="taskForm">
         <mat-label>Task Owner: {{data.owner.displayName}}</mat-label><br>
         <mat-form-field>
             <input formControlName="name" type="text" matInput placeholder="Task Name" autocomplete="off">
@@ -26,6 +26,8 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Close</button>
-    <button mat-button mat-raised-button color="warn">Delete</button>
-    <button mat-raised-button (click)="onSubmit()">Add Task</button>
+    <button mat-button *ngIf="this.data.work.task.taskID != null" [disabled]="this.data.work.task.taskID == null" mat-raised-button color="warn">Delete</button>
+    <button mat-raised-button *ngIf="this.data.work.task.taskID == null" (click)="addTask()">Add Task</button>
+    <button mat-raised-button *ngIf="this.data.work.task.taskID != null" (click)="editTask()">Edit Task</button>
+
 </div>

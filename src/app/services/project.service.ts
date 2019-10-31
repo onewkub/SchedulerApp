@@ -68,4 +68,9 @@ export class ProjectService {
     projectMember.forEach(element=> { rlt.push(this.userService.getUser(element))});
     return rlt;
   }
+  getDiffDays(task: Task):number {
+    var diff = task.endDate.getTime() - task.startDate.getTime();
+    var diffDays = diff / (1000 * 3600 * 24);
+    return diffDays;
+  }
 }

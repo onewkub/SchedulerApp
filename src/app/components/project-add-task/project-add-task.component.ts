@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Task } from 'src/app/models/task.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+import { ProjectComponent } from '../project/project.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 @Component({
@@ -12,19 +14,20 @@ import { User } from 'src/app/models/user.model';
 })
 export class ProjectAddTaskComponent implements OnInit {
 
-  addTaskForm: FormGroup;
+  taskForm: FormGroup;
   constructor(
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {work: Task, owner: User},
+    @Inject(MAT_DIALOG_DATA) public data: {work: any, owner: User},
     public formBuilder: FormBuilder,
+    public projectService: ProjectService
   ) 
   { 
-    this.addTaskForm = this.formBuilder.group(
+    this.taskForm = this.formBuilder.group(
       {
-        name: [data.work.name],
-        description: [data.work.description],
-        startDate: [data.work.startDate],
-        endDate: [data.work.endDate]
+        name: [data.work.task.name],
+        description: [data.work.task.description],
+        startDate: [data.work.task.startDate],
+        endDate: [data.work.task.endDate]
       }
     );
   }
@@ -37,8 +40,25 @@ export class ProjectAddTaskComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit(){
-    console.log(this.addTaskForm.value);
+  editTask(){
+    console.log(this.taskForm.value);
+    var form = this.taskForm.value;
+    this.data.work.task.name = form.name;
+    this.data.work.task.startDate = form.startDate;
+    this.data.work.task.endDate = form.endDate;
+    this.data.work.task.description = form.description;
+    this.data.work.colspan = Math.ceil(this.projectService.getDiffDays(this.data.work.task));
+    this.onNoClick();
+
+  }
+
+  addTask(){
+    console.log(this.taskForm.value);
+
+  }
+  deleteTask(){
+    console.log(this.taskForm.value);
+    
   }
 
 }
