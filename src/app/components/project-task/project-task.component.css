@@ -77,3 +77,8 @@
   margin-right: 0.4em;
   color: #ef5350;
 }
+
+.cancel-reason {
+  font-style: italic;
+  color: #ef5350;
+}

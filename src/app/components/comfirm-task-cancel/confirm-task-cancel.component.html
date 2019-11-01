@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  {{desc}}
+</div>
+<mat-form-field class="cancel-text">
+  <textarea matInput placeholder="Reasons" [formControl]="reason"></textarea>
+</mat-form-field>
+<div mat-dialog-actions>
+  <div class="task-confirm-control-container">
+    <button mat-raised-button class="button-confirm" (click)="onConfirm()">Confirm</button>
+    <button mat-stroked-button class="button-cancel" (click)="onClose()">Cancel</button>
+  </div>
+</div>
