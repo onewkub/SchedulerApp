@@ -28,6 +28,7 @@ import { ProjectSettingComponent } from './components/project-setting/project-se
 import { ProjectTableComponent } from './components/project-table/project-table.component';
 import { ProjectAddTaskComponent } from './components/project-add-task/project-add-task.component';
 import { ConfirmTaskStatusComponent } from './components/confirm-task-status/confirm-task-status.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ConfirmTaskStatusComponent } from './components/confirm-task-status/con
     ProjectTableComponent,
     ProjectAddTaskComponent,
     ConfirmTaskStatusComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,10 @@ import { ConfirmTaskStatusComponent } from './components/confirm-task-status/con
   providers: [AuthService, UserService, AuthGuard, {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'}],
   bootstrap: [AppComponent],
   entryComponents: [
-    ConfirmTaskStatusComponent
+    ConfirmTaskStatusComponent,
+    ConfirmDialogComponent,
+    AddProjectComponent,
+    ProjectAddTaskComponent
   ],
 })
 export class AppModule {

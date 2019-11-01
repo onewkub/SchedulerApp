@@ -1,11 +1,10 @@
 import { Component, Inject ,OnInit } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material/dialog';
 import { Task, TaskStatus } from 'src/app/models/task.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
-import { ProjectComponent } from '../project/project.component';
 import { ProjectService } from 'src/app/services/project.service';
-import { ProjectTableComponent } from '../project-table/project-table.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -17,6 +16,7 @@ export class ProjectAddTaskComponent implements OnInit {
 
   taskForm: FormGroup;
   constructor(
+    public dialog : MatDialog,
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {work: any, owner: User},
     public formBuilder: FormBuilder,
@@ -35,7 +35,7 @@ export class ProjectAddTaskComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -70,10 +70,29 @@ export class ProjectAddTaskComponent implements OnInit {
 
   }
   deleteTask(){
-    console.log(this.taskForm.value);
-    this.projectService.deleteTask(this.data.work.task.taskID);
-    this.onNoClick();
+    // console.log(this.taskForm.value);
+    // this.projectService.deleteTask(this.data.work.task.taskID);
+    this.openConfirmDialog();
+    // this.onNoClick();
     
+  }
+  openConfirmDialog(){
+    console.log('Open Dialog');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '30rem',
+
+    });
+    dialogRef.componentInstance.title = "Delete Task";
+    dialogRef.componentInstance.desc = "Confirm to delete this task"
+    dialogRef.componentInstance.taskID = this.data.work.task.taskID;
+    dialogRef.componentInstance.confirm = false;
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+      if(dialogRef.componentInstance.confirm){
+        this.onNoClick();
+      }
+    });
   }
 
 }
