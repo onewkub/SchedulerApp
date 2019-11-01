@@ -18,6 +18,7 @@ export class ProjectTableComponent implements OnInit {
   @Input() memberList: User[];
   @Input() dateLabel: String[];
   @Input() userTask = new Map();
+  styleColor: number = 0;
   constructor(
     public userService: UserService,
     public dialog: MatDialog,
@@ -35,7 +36,7 @@ export class ProjectTableComponent implements OnInit {
     console.log('Open Dialog');
     const dialogRef = this.dialog.open(ProjectAddTaskComponent, {
       width: '45rem',
-      data : {work: task, owner: member}
+      data: { work: task, owner: member }
 
     });
 
@@ -44,9 +45,23 @@ export class ProjectTableComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-  updateTable(){
+  updateTable() {
     this.memberList.forEach(element => {
       this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.project));
     });
+  }
+  getStyle(item){
+    // if (item.taskID == null) return null;
+    var hasColor = (item.taskID != null);
+    var Color: String[] = [
+      '#ffeeff', '#c3fdff', '#e6ceff', '#c8e6c9'
+    ];
+    
+    let styles = {
+      'background': hasColor ? Color[this.styleColor] : null,
+    }; 
+    this.styleColor++;
+    this.styleColor %= Color.length;
+    return styles;
   }
 }
