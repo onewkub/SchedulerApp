@@ -7,7 +7,7 @@ import {ApiService} from 'src/app/services/api.service';
 import {UserService} from 'src/app/services/user.service';
 import {ProjectService} from 'src/app/services/project.service';
 
-interface UserItem {
+export interface UserItem {
   user: User;
   id: number;
 }
@@ -74,7 +74,7 @@ export class AddProjectComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  SelectedUser(userItem: UserItem): void {
+  selectedUser(userItem: UserItem): void {
     this.checkList[userItem.id] = !this.checkList[userItem.id];
     let selected = false;
     this.selectedUsers.forEach(element => {

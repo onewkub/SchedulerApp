@@ -15,9 +15,8 @@ export class ProjectComponent implements OnInit {
   public currentProjectID: number;
   public currentProject: Project;
   public memberList: User[];
-  public dateLabel: String[];
+  public dateLabel: string[];
   public userTask = new Map();
-
 
   constructor(
     public activeRoute: ActivatedRoute,

@@ -20,16 +20,16 @@ import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
 import {AuthGuard} from './guards/auth.guard';
 import {AddProjectComponent} from './components/add-project/add-project.component';
-import {MAT_CHECKBOX_CLICK_ACTION, MatNativeDateModule} from '@angular/material';
-import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
-import { ProjectTaskComponent } from './components/project-task/project-task.component';
-import { ProjectComponent } from './components/project/project.component';
-import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
-import { ProjectTableComponent } from './components/project-table/project-table.component';
-import { ProjectAddTaskComponent } from './components/project-add-task/project-add-task.component';
-import { ConfirmTaskStatusComponent } from './components/confirm-task-status/confirm-task-status.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/confirm-task-cancel.component';
+import {MAT_CHECKBOX_CLICK_ACTION, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material';
+import {ProjectDetailComponent} from './components/project-detail/project-detail.component';
+import {ProjectTaskComponent} from './components/project-task/project-task.component';
+import {ProjectComponent} from './components/project/project.component';
+import {ProjectSettingComponent} from './components/project-setting/project-setting.component';
+import {ProjectTableComponent} from './components/project-table/project-table.component';
+import {ProjectAddTaskComponent} from './components/project-add-task/project-add-task.component';
+import {ConfirmTaskStatusComponent} from './components/confirm-task-status/confirm-task-status.component';
+import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
+import {ConfirmTaskCancelComponent} from './components/comfirm-task-cancel/confirm-task-cancel.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,13 @@ import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/con
     MatNativeDateModule,
     Ng2SearchPipeModule
   ],
-  providers: [AuthService, UserService, AuthGuard, {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'}],
+  providers: [
+    AuthService,
+    UserService,
+    AuthGuard,
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop'},
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     ConfirmTaskStatusComponent,
