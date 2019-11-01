@@ -104,14 +104,13 @@ export class ProjectService {
           task: {
             taskID: null,
             projectID: currentProject.projectID,
-
             name: '',
             description: '',
-
             startDate: new Date(blankTask),
             endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
             owner: uid,
-            status: TaskStatus.inProgress
+            status: TaskStatus.inProgress,
+            reasonForCancel: ''
           }, colspan: 1
         };
         taskInTable.push(temp);
@@ -150,7 +149,7 @@ export class ProjectService {
   getProjectDescription(projectID){
     return this.apiService.projectDescription.find(element => {return projectID == element.projectID;})
 
-
+  }
   calculateTaskStatus(): void {
     const toDay = new Date().getTime();
     this.apiService.project.forEach((project) => {
