@@ -30,6 +30,7 @@ import { ProjectAddTaskComponent } from './components/project-add-task/project-a
 import { ConfirmTaskStatusComponent } from './components/confirm-task-status/confirm-task-status.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/confirm-task-cancel.component';
+import { EditDetailDIalogComponent } from './components/edit-detail-dialog/edit-detail-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/con
     ConfirmTaskStatusComponent,
     ConfirmDialogComponent,
     ConfirmTaskCancelComponent,
+    EditDetailDIalogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/con
     ConfirmTaskCancelComponent,
     ConfirmDialogComponent,
     AddProjectComponent,
-    ProjectAddTaskComponent
+    ProjectAddTaskComponent,
+    EditDetailDIalogComponent
   ],
 })
 export class AppModule {
