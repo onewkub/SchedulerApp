@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {UserService} from './user.service';
-import {Project} from '../models/project.model';
-import {Task, TaskStatus} from '../models/task.model';
-import {User} from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { UserService } from './user.service';
+import { Project } from '../models/project.model';
+import { Task, TaskStatus } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +32,13 @@ export class ProjectService {
       projectTemp.members.push(element.member.uid);
     });
 
-    console.log(input.members);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
     this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
 
+    this.apiService.projectDescription.push({ projectID: this.lastProjectID, description: `Example` });
     this.apiService.project.push(projectTemp);
     this.lastProjectID++;
     this.getUserProject(this.userService.currentUser.uid);
@@ -143,6 +143,10 @@ export class ProjectService {
     }
   }
 
+  getProjectDescription(projectID) {
+    return this.apiService.projectDescription.find(element => projectID === element.projectID);
+
+  }
   calculateTaskStatus(): void {
     const toDay = new Date().getTime();
     this.apiService.project.forEach((project) => {
@@ -158,5 +162,6 @@ export class ProjectService {
         }
       });
     });
+
   }
 }

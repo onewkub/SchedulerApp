@@ -42,7 +42,7 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   editTask() {
-    console.log(this.taskForm.value);
+    // console.log(this.taskForm.value);
     const form = this.taskForm.value;
     this.data.work.task.name = form.name;
     this.data.work.task.startDate = form.startDate;
@@ -53,7 +53,6 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   addTask() {
-    console.log(this.taskForm.value);
     const form = this.taskForm.value;
     const newTask: Task = {
       taskID: null,

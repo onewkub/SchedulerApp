@@ -1,18 +1,20 @@
 <div class="detail">
     <div>
-        <h1 class="display-3">
-            Project Name: {{projectComponent.currentProject.projectName}}
-        </h1>
         <h1 class="display-4">
-            Start Date: {{this.userService.getDate(projectComponent.currentProject.startDate)}}
+            Project Name: {{project.projectName}}
+        </h1>
+        <h1 class="display-3">
+            Start Date: {{this.userService.getDate(project.startDate)}}
 
         </h1>
-        <h1 class="display-4">
-            End Date: {{this.userService.getDate(projectComponent.currentProject.endDate)}}
+        <h1 class="display-3">
+            End Date: {{this.userService.getDate(project.endDate)}}
         </h1>
-        <h1 class="display-4">
+        <h1 class="display-3">
             Description: 
         </h1>
-
+        <p>
+            {{projectDescription.description}}
+        </p>
     </div>
 </div>
