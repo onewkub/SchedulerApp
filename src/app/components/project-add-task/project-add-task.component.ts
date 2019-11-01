@@ -54,6 +54,14 @@ export class ProjectAddTaskComponent implements OnInit {
 
   addTask() {
     console.log(this.taskForm.value);
+
+    var currentDate = new Date();
+    var form = this.taskForm.value;
+    var progress;
+    if(currentDate.getTime() < form.startDate.getTime()) progress = TaskStatus.pending
+    else if(currentDate.getTime() > form.endDate.getTime()) progress = TaskStatus.late
+    else progress = TaskStatus.inProgress;
+    var newTask : Task = {
     const form = this.taskForm.value;
     const newTask: Task = {
       taskID: null,
@@ -63,8 +71,9 @@ export class ProjectAddTaskComponent implements OnInit {
       startDate: form.startDate,
       endDate: form.endDate,
       owner: this.data.owner.uid,
-      status: TaskStatus.inProgress
-    };
+      status: progress
+    }
+
     this.projectService.addTask(newTask);
     this.projectService.calculateTaskStatus();
     this.onNoClick();

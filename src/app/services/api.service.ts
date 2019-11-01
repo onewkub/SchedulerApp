@@ -13,6 +13,7 @@ export class ApiService {
   public authTable: { uid: number; email: string; password: string; logedIn: boolean }[];
   public project: Project[];
   public taskList: Task[];
+  public projectDescription: {projectID: number, description: string}[];
 
   constructor() {
     this.users = [
@@ -110,6 +111,17 @@ export class ApiService {
         owner: 3,
         status: TaskStatus.pending
       }
+    ];
+
+    this.projectDescription = [
+      {projectID: 0, description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis orci non mi accumsan, egestas ullamcorper sapien condimentum.
+      Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam vel convallis ipsum. Nulla sagittis lobortis massa id scelerisque. 
+      Pellentesque at metus sit amet elit porttitor tempus. In sodales elementum sem, eget pharetra nulla varius quis. 
+      Aenean cursus dui vitae eros faucibus, et congue leo scelerisque. Cras iaculis sagittis faucibus. Nulla facilisi. 
+      Donec sollicitudin sollicitudin faucibus. Curabitur in sapien ullamcorper, hendrerit ipsum mattis, commodo turpis. 
+      Proin nec dignissim odio. Nullam pulvinar dictum diam, vel malesuada lacus faucibus eget.`},
+      {projectID: 1, description: `Example1`},
+      {projectID: 2, description: `Example2`},
     ];
   }
 }

@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {UserService} from './user.service';
-import {Project} from '../models/project.model';
-import {Task, TaskStatus} from '../models/task.model';
-import {User} from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { UserService } from './user.service';
+import { Project } from '../models/project.model';
+import { Task, TaskStatus } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +32,14 @@ export class ProjectService {
       projectTemp.members.push(element.member.uid);
     });
 
-    console.log(input.members);
+    // console.log(input.members);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
     this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
 
+    this.apiService.projectDescription.push({ projectID: this.lastProjectID, description: `Example` })
     this.apiService.project.push(projectTemp);
     this.lastProjectID++;
     this.getUserProject(this.userService.currentUser.uid);
@@ -70,7 +71,7 @@ export class ProjectService {
     });
     return result;
   }
-
+  
   getDiffDays(task: Task): number {
     var diff = task.endDate.getTime() - task.startDate.getTime();
     var diffDays = diff / (1000 * 3600 * 24);
@@ -103,8 +104,10 @@ export class ProjectService {
           task: {
             taskID: null,
             projectID: currentProject.projectID,
+
             name: '',
             description: '',
+
             startDate: new Date(blankTask),
             endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
             owner: uid,
@@ -137,11 +140,16 @@ export class ProjectService {
 
   deleteTask(taskID) {
     for (var i = 0; i < this.apiService.taskList.length; i++) {
+
       if (this.apiService.taskList[i].taskID === taskID) {
         this.apiService.taskList.splice(i, 1);
       }
     }
   }
+
+  getProjectDescription(projectID){
+    return this.apiService.projectDescription.find(element => {return projectID == element.projectID;})
+
 
   calculateTaskStatus(): void {
     const toDay = new Date().getTime();
@@ -158,5 +166,6 @@ export class ProjectService {
         }
       });
     });
+
   }
 }
