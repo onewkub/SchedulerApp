@@ -13,5 +13,6 @@ td{
     text-align: center;
 }
 .addTask:hover{
-    background: rgba(191, 191, 191, 0.6);
+    background: rgba(255, 253, 253, 0.8) !important;
+    
 }
