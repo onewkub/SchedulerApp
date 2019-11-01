@@ -7,7 +7,7 @@ export class Task {
   endDate: Date;
   owner: number;
   status: TaskStatus;
-  reasonForCancel = '';
+  reasonForCancel: string;
 }
 
 export enum TaskStatus {

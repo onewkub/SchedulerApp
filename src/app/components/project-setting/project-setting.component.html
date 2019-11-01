@@ -1,3 +1,56 @@
-<div class="setting">
-    <h1 class="display-4">Setting</h1>
+<div class="setting-container">
+  <div class="setting-row">
+
+    <div>
+      <mat-form-field>
+        <input [formControl]="projectName" matInput placeholder="Project Name" required value="{{project.projectName}}">
+      </mat-form-field>
+      <mat-form-field class="date-picker">
+        <input [formControl]="startDate" [matDatepicker]="startDatePicker" matInput placeholder="Start Date" required
+               value="{{project.startDate.toISOString()}}">
+        <mat-datepicker-toggle [for]="startDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="date-picker">
+        <input [formControl]="endDate" [matDatepicker]="endDatePicker" matInput placeholder="End Date" required
+               value="{{project.endDate.toISOString()}}">
+        <mat-datepicker-toggle [for]="endDatePicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button (click)="saveSetting()" mat-raised-button>
+        Save
+      </button>
+    </div>
+
+  </div>
+
+  <!--  <div class="row">-->
+  <!--    <div class="col-6">-->
+  <!--      <label style="margin-right: 3rem;">Member</label>-->
+  <!--      <mat-form-field>-->
+  <!--        <input [(ngModel)]="searchName" autocomplete="off" matInput placeholder="Search Name" type="text">-->
+  <!--      </mat-form-field>-->
+  <!--    </div>-->
+  <!--    <div class="col-6" style="margin: auto">-->
+  <!--      <label style="vertical-align: middle">Selected</label>-->
+  <!--    </div>-->
+  <!--  </div>-->
+
+  <!--  <mat-nav-list>-->
+  <!--    <mat-list-item (click)="selectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">-->
+  <!--      <mat-checkbox [(ngModel)]="checkList[userItem.id]"-->
+  <!--                    disableRipple="true">{{userItem["user"].displayName}}</mat-checkbox>-->
+  <!--    </mat-list-item>-->
+  <!--  </mat-nav-list>-->
+
+
+  <!--  <mat-list role="list">-->
+  <!--    <mat-list-item *ngFor="let user of selectedUsers" role="listitem">-->
+  <!--      <p>{{user.displayName}}</p>-->
+  <!--    </mat-list-item>-->
+  <!--  </mat-list>-->
+
 </div>

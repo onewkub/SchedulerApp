@@ -54,8 +54,8 @@ export class ProjectService {
     this.userService.userProject = userProject;
   }
 
-  getProject(pid): Project {
-    return this.apiService.project.find(element => (element.projectID === pid));
+  getProject(projectID: number): Project {
+    return this.apiService.project.find(element => (element.projectID === projectID));
   }
 
   getTasks(projectID): Task[] {
@@ -72,33 +72,33 @@ export class ProjectService {
   }
 
   getDiffDays(task: Task): number {
-    var diff = task.endDate.getTime() - task.startDate.getTime();
-    var diffDays = diff / (1000 * 3600 * 24);
+    const diff = task.endDate.getTime() - task.startDate.getTime();
+    const diffDays = diff / (1000 * 3600 * 24);
     return Math.ceil(diffDays);
   }
 
   setUserTask(uid: number, currentProject: Project) {
-    var taskInTable: {
+    const taskInTable: {
       task: Task,
       colspan: number
     }[] = [];
-    var tempTask: Task[] = this.userService.getUserTask(uid);
-    var temp: { task: Task, colspan: number };
-    var currentDate: Date = new Date(currentProject.startDate);
+    const tempTask: Task[] = this.userService.getUserTask(uid);
+    let temp: { task: Task, colspan: number };
+    const currentDate: Date = new Date(currentProject.startDate);
     while (currentDate.getTime() <= currentProject.endDate.getTime()) {
-      var mathchTask = tempTask.find(element => {
-        return element.startDate.getTime() === currentDate.getTime() && element.projectID == currentProject.projectID;
+      const matchTask = tempTask.find(element => {
+        return element.startDate.getTime() === currentDate.getTime() && element.projectID === currentProject.projectID;
       });
-      if (mathchTask) {
+      if (matchTask) {
         temp = {
-          task: mathchTask,
-          colspan: this.getDiffDays(mathchTask)
+          task: matchTask,
+          colspan: this.getDiffDays(matchTask)
         };
         taskInTable.push(temp);
         currentDate.setDate(currentDate.getDate() + temp.colspan);
 
       } else {
-        var blankTask = new Date(currentDate);
+        const blankTask = new Date(currentDate);
         temp = {
           task: {
             taskID: null,
@@ -108,7 +108,8 @@ export class ProjectService {
             startDate: new Date(blankTask),
             endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
             owner: uid,
-            status: TaskStatus.inProgress
+            status: TaskStatus.inProgress,
+            reasonForCancel: ''
           }, colspan: 1
         };
         taskInTable.push(temp);
@@ -116,18 +117,17 @@ export class ProjectService {
 
       }
     }
-    // console.log(taskInTable);
     return taskInTable;
   }
 
-  getDateLabel(currentProject): String[] {
-    var rlt: String[] = [];
-    var currentDate: Date = new Date(currentProject.startDate);
+  getDateLabel(currentProject): string[] {
+    const result: string[] = [];
+    const currentDate: Date = new Date(currentProject.startDate);
     while (currentDate.getTime() <= currentProject.endDate.getTime()) {
-      rlt.push(this.userService.getDate(currentDate));
+      result.push(this.userService.getDate(currentDate));
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    return rlt;
+    return result;
   }
 
   addTask(task: Task) {
@@ -136,7 +136,7 @@ export class ProjectService {
   }
 
   deleteTask(taskID) {
-    for (var i = 0; i < this.apiService.taskList.length; i++) {
+    for (let i = 0; i < this.apiService.taskList.length; i++) {
       if (this.apiService.taskList[i].taskID === taskID) {
         this.apiService.taskList.splice(i, 1);
       }

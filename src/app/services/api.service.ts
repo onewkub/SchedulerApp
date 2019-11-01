@@ -88,7 +88,8 @@ export class ApiService {
         startDate: new Date('2019-10-27'),
         endDate: new Date('2019-10-28'),
         owner: 1,
-        status: TaskStatus.inProgress
+        status: TaskStatus.inProgress,
+        reasonForCancel: ''
       },
       {
         taskID: 1,
@@ -98,7 +99,8 @@ export class ApiService {
         startDate: new Date('2019-10-28'),
         endDate: new Date('2019-11-09'),
         owner: 2,
-        status: TaskStatus.pending
+        status: TaskStatus.pending,
+        reasonForCancel: ''
       },
       {
         taskID: 2,
@@ -108,7 +110,8 @@ export class ApiService {
         startDate: new Date('2019-11-09'),
         endDate: new Date('2019-11-11'),
         owner: 3,
-        status: TaskStatus.pending
+        status: TaskStatus.pending,
+        reasonForCancel: ''
       }
     ];
   }

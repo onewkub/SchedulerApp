@@ -1,4 +1,13 @@
-.setting{
-    padding-left: 2rem;
-    padding-top: 1rem;
+.setting-container {
+  padding-left: 2em;
+  padding-top: 1em;
+}
+
+.setting-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-picker {
+ padding-left: 2em;
 }

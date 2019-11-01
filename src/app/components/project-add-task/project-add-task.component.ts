@@ -63,7 +63,8 @@ export class ProjectAddTaskComponent implements OnInit {
       startDate: form.startDate,
       endDate: form.endDate,
       owner: this.data.owner.uid,
-      status: TaskStatus.inProgress
+      status: TaskStatus.inProgress,
+      reasonForCancel: ''
     };
     this.projectService.addTask(newTask);
     this.projectService.calculateTaskStatus();
