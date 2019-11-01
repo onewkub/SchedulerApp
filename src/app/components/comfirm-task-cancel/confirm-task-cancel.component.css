@@ -3,7 +3,7 @@
 }
 
 .button-confirm {
-  background: #0091ea;
+  background: #ef5350;
   color: #ffffff;
 }
 
@@ -12,4 +12,8 @@
   width: 100%;
   padding-top: 1em;
   justify-content: right;
+}
+
+.cancel-text {
+  width: 100%;
 }

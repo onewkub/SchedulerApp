@@ -30,6 +30,9 @@
           </mat-expansion-panel-header>
           <div class="task-desc-container">
             {{task.description}}
+            <div class="cancel-reason">
+              {{getReasonForCancel(task)}}
+            </div>
             <div class="task-control-container">
               <button mat-stroked-button [disabled]="!enableUploadButton(task)">Upload File</button>
               <div class="task-status-control">
