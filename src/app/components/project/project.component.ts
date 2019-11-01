@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
 import { ActivatedRoute} from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
-import { Task, TaskStatus } from 'src/app/models/task.model';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 
@@ -33,21 +32,11 @@ export class ProjectComponent implements OnInit {
       this.currentProjectID = Number(routeParams.pid);
       this.currentProject = this.projectService.getProject(this.currentProjectID);
       this.memberList = this.projectService.getMember(this.currentProjectID);
-      this.dateLabel = this.getDateLabel();
+      this.dateLabel = this.projectService.getDateLabel(this.currentProject);
       this.memberList.forEach(element => {
         this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
       });
 
     });
-  }
- 
-  getDateLabel(): String[] {
-    var rlt: String[] = [];
-    var currentDate: Date = new Date(this.currentProject.startDate);
-    while (currentDate.getTime() <= this.currentProject.endDate.getTime()) {
-      rlt.push(this.userService.getDate(currentDate));
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-    return rlt;
   }
 }
