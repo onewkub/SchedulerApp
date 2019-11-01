@@ -116,5 +116,26 @@ export class ProjectService {
     // console.log(taskInTable);
     return taskInTable;
   }
+  getDateLabel(currentProject): String[] {
+    var rlt: String[] = [];
+    var currentDate: Date = new Date(currentProject.startDate);
+    while (currentDate.getTime() <= currentProject.endDate.getTime()) {
+      rlt.push(this.userService.getDate(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return rlt;
+  }
 
+  addTask(task:Task){
+    task.taskID = this.apiService.taskList.length;
+    this.apiService.taskList.push(task);
+  }
+
+  deleteTask(taskID){
+    for( var i = 0; i < this.apiService.taskList.length; i++){ 
+      if (this.apiService.taskList[i].taskID == taskID) {
+        this.apiService.taskList.splice(i, 1); 
+      }
+   }
+  }
 }

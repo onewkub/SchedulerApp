@@ -26,7 +26,7 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Close</button>
-    <button mat-button *ngIf="this.data.work.task.taskID != null" [disabled]="this.data.work.task.taskID == null" mat-raised-button color="warn">Delete</button>
+    <button mat-button *ngIf="this.data.work.task.taskID != null" (click)="deleteTask()" [disabled]="this.data.work.task.taskID == null" mat-raised-button color="warn">Delete</button>
     <button mat-raised-button *ngIf="this.data.work.task.taskID == null" (click)="addTask()">Add Task</button>
     <button mat-raised-button *ngIf="this.data.work.task.taskID != null" (click)="editTask()">Edit Task</button>
 
