@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material';
 import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-status.component';
 import {UserService} from '../../services/user.service';
 import {ProjectService} from '../../services/project.service';
+import {ConfirmTaskCancelComponent} from '../comfirm-task-cancel/confirm-task-cancel.component';
 
 @Component({
   selector: 'app-project-task',
@@ -20,7 +21,7 @@ export class ProjectTaskComponent implements OnInit {
   @Input() taskList: Task[];
 
   ngOnInit() {
-    this.calculateStatus();
+    this.projectService.calculateTaskStatus();
   }
 
   getStatusName(status: TaskStatus): string {
@@ -53,21 +54,6 @@ export class ProjectTaskComponent implements OnInit {
     }
   }
 
-  calculateStatus(): void {
-    const toDay = new Date();
-    this.taskList.forEach(task => {
-      if (task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed) {
-        if (task.startDate > toDay) {
-          task.status = TaskStatus.pending;
-        } else if (task.startDate <= toDay && task.endDate < toDay) {
-          task.status = TaskStatus.late;
-        } else {
-          task.status = TaskStatus.inProgress;
-        }
-      }
-    });
-  }
-
   enableDoneButton(task: Task): boolean {
     return (task.status === TaskStatus.inProgress || task.status === TaskStatus.late) && this.isTaskOrProjectOwner(task);
   }
@@ -91,7 +77,7 @@ export class ProjectTaskComponent implements OnInit {
   }
 
   openCancelConfirmDialog(task: Task): void {
-    const dialogRef = this.dialog.open(ConfirmTaskStatusComponent, {
+    const dialogRef = this.dialog.open(ConfirmTaskCancelComponent, {
       width: '30em'
     });
     dialogRef.componentInstance.title = 'Mark as canceled';
@@ -149,5 +135,13 @@ export class ProjectTaskComponent implements OnInit {
   getDiffDays(dateA: Date, dateB: Date): number {
     const diff = dateA.getTime() - dateB.getTime();
     return Math.floor(diff / (1000 * 3600 * 24));
+  }
+
+  getReasonForCancel(task: Task): string {
+    if (task.reasonForCancel === '' || task.reasonForCancel === null || task.reasonForCancel === undefined) {
+      return '';
+    } else {
+      return 'Canceled because : ' + task.reasonForCancel;
+    }
   }
 }

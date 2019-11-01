@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {Task, TaskStatus} from '../../models/task.model';
 

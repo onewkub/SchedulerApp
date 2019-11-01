@@ -71,11 +71,13 @@ export class ProjectService {
     });
     return result;
   }
+  
   getDiffDays(task: Task): number {
     var diff = task.endDate.getTime() - task.startDate.getTime();
     var diffDays = diff / (1000 * 3600 * 24);
     return Math.ceil(diffDays);
   }
+
   setUserTask(uid: number, currentProject: Project) {
     var taskInTable: {
       task: Task,
@@ -96,15 +98,16 @@ export class ProjectService {
         taskInTable.push(temp);
         currentDate.setDate(currentDate.getDate() + temp.colspan);
 
-      }
-      else {
+      } else {
         var blankTask = new Date(currentDate);
         temp = {
           task: {
             taskID: null,
             projectID: currentProject.projectID,
-            name: "",
-            description: "",
+
+            name: '',
+            description: '',
+
             startDate: new Date(blankTask),
             endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
             owner: uid,
@@ -119,6 +122,7 @@ export class ProjectService {
     // console.log(taskInTable);
     return taskInTable;
   }
+
   getDateLabel(currentProject): String[] {
     var rlt: String[] = [];
     var currentDate: Date = new Date(currentProject.startDate);
@@ -136,12 +140,32 @@ export class ProjectService {
 
   deleteTask(taskID) {
     for (var i = 0; i < this.apiService.taskList.length; i++) {
-      if (this.apiService.taskList[i].taskID == taskID) {
+
+      if (this.apiService.taskList[i].taskID === taskID) {
         this.apiService.taskList.splice(i, 1);
       }
     }
   }
+
   getProjectDescription(projectID){
     return this.apiService.projectDescription.find(element => {return projectID == element.projectID;})
+
+
+  calculateTaskStatus(): void {
+    const toDay = new Date().getTime();
+    this.apiService.project.forEach((project) => {
+      this.getTasks(project.projectID).forEach((task) => {
+        if (task.status !== TaskStatus.canceled && task.status !== TaskStatus.completed) {
+          if (task.startDate.getTime() > toDay) {
+            task.status = TaskStatus.pending;
+          } else if (task.startDate.getTime() <= toDay && task.endDate.getTime() < toDay) {
+            task.status = TaskStatus.late;
+          } else {
+            task.status = TaskStatus.inProgress;
+          }
+        }
+      });
+    });
+
   }
 }
