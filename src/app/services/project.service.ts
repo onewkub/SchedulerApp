@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ApiService} from './api.service';
-import {UserService} from './user.service';
-import {Project} from '../models/project.model';
-import {Task, TaskStatus} from '../models/task.model';
-import {User} from '../models/user.model';
+import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { UserService } from './user.service';
+import { Project } from '../models/project.model';
+import { Task, TaskStatus } from '../models/task.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +32,14 @@ export class ProjectService {
       projectTemp.members.push(element.member.uid);
     });
 
-    console.log(input.members);
+    // console.log(input.members);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
     this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
 
+    this.apiService.projectDescription.push({ projectID: this.lastProjectID, description: `Example` })
     this.apiService.project.push(projectTemp);
     this.lastProjectID++;
     this.getUserProject(this.userService.currentUser.uid);
@@ -70,12 +71,12 @@ export class ProjectService {
     });
     return result;
   }
-  getDiffDays(task: Task):number {
+  getDiffDays(task: Task): number {
     var diff = task.endDate.getTime() - task.startDate.getTime();
     var diffDays = diff / (1000 * 3600 * 24);
     return Math.ceil(diffDays);
   }
-  setUserTask(uid:number, currentProject: Project){
+  setUserTask(uid: number, currentProject: Project) {
     var taskInTable: {
       task: Task,
       colspan: number
@@ -84,7 +85,7 @@ export class ProjectService {
     var temp: { task: Task, colspan: number };
     var currentDate: Date = new Date(currentProject.startDate);
     while (currentDate.getTime() <= currentProject.endDate.getTime()) {
-      var mathchTask = tempTask.find(element => {  
+      var mathchTask = tempTask.find(element => {
         return element.startDate.getTime() === currentDate.getTime() && element.projectID == currentProject.projectID;
       });
       if (mathchTask) {
@@ -98,16 +99,18 @@ export class ProjectService {
       }
       else {
         var blankTask = new Date(currentDate);
-        temp = { task: {
-          taskID: null,
-          projectID: currentProject.projectID,
-          name: "",
-          description: "",
-          startDate: new Date(blankTask),
-          endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
-          owner: uid,
-          status: TaskStatus.inProgress
-        }, colspan: 1 };
+        temp = {
+          task: {
+            taskID: null,
+            projectID: currentProject.projectID,
+            name: "",
+            description: "",
+            startDate: new Date(blankTask),
+            endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
+            owner: uid,
+            status: TaskStatus.inProgress
+          }, colspan: 1
+        };
         taskInTable.push(temp);
         currentDate.setDate(currentDate.getDate() + 1);
 
@@ -126,16 +129,19 @@ export class ProjectService {
     return rlt;
   }
 
-  addTask(task:Task){
+  addTask(task: Task) {
     task.taskID = this.apiService.taskList.length;
     this.apiService.taskList.push(task);
   }
 
-  deleteTask(taskID){
-    for( var i = 0; i < this.apiService.taskList.length; i++){ 
+  deleteTask(taskID) {
+    for (var i = 0; i < this.apiService.taskList.length; i++) {
       if (this.apiService.taskList[i].taskID == taskID) {
-        this.apiService.taskList.splice(i, 1); 
+        this.apiService.taskList.splice(i, 1);
       }
-   }
+    }
+  }
+  getProjectDescription(projectID){
+    return this.apiService.projectDescription.find(element => {return projectID == element.projectID;})
   }
 }

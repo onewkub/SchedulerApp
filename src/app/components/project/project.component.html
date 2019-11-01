@@ -1,7 +1,7 @@
 <div>
     <mat-tab-group>
         <mat-tab label="Detail">
-            <app-project-detail></app-project-detail>
+            <app-project-detail [projectDescription] = "projectService.getProjectDescription(currentProjectID)" [project]="currentProject"></app-project-detail>
         </mat-tab>
         <mat-tab label="Table">
             <app-project-table [dateLabel]="dateLabel" [userTask]="userTask" [memberList]="memberList" [project]="currentProject" [taskList]="projectService.getTasks(currentProjectID)"></app-project-table>
