@@ -35,7 +35,7 @@ export class ProjectAddTaskComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log(this.data);
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -70,7 +70,7 @@ export class ProjectAddTaskComponent implements OnInit {
 
   }
   deleteTask(){
-    console.log(this.taskForm.value);
+    // console.log(this.taskForm.value);
     // this.projectService.deleteTask(this.data.work.task.taskID);
     this.openConfirmDialog();
     // this.onNoClick();
