@@ -106,7 +106,7 @@ export class ProjectService {
           startDate: new Date(blankTask),
           endDate: new Date(blankTask.setDate(blankTask.getDate() + 1)),
           owner: uid,
-          status: TaskStatus.pending
+          status: TaskStatus.inProgress
         }, colspan: 1 };
         taskInTable.push(temp);
         currentDate.setDate(currentDate.getDate() + 1);
