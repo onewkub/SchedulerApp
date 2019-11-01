@@ -1,11 +1,8 @@
 import { Component, Inject ,OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { Task } from 'src/app/models/task.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
-import { ProjectComponent } from '../project/project.component';
 import { ProjectService } from 'src/app/services/project.service';
-import { ProjectTableComponent } from '../project-table/project-table.component';
 
 
 @Component({
