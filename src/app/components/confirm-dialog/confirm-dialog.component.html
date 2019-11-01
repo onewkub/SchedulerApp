@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  {{desc}}
+</div>
+<div mat-dialog-actions>
+  <div class="task-confirm-control-container">
+    <button mat-raised-button style="background-color: green;color:white;" (click)="confirmDialog()">Confirm</button>
+    <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+  </div>
+</div>
