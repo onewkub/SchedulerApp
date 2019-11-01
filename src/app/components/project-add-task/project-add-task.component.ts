@@ -42,7 +42,7 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   editTask() {
-    console.log(this.taskForm.value);
+    // console.log(this.taskForm.value);
     const form = this.taskForm.value;
     this.data.work.task.name = form.name;
     this.data.work.task.startDate = form.startDate;
@@ -53,16 +53,8 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   addTask() {
-    console.log(this.taskForm.value);
-
-    var currentDate = new Date();
+    // console.log(this.taskForm.value);
     var form = this.taskForm.value;
-    var progress;
-    if(currentDate.getTime() < form.startDate.getTime()) progress = TaskStatus.pending
-    else if(currentDate.getTime() > form.endDate.getTime()) progress = TaskStatus.late
-    else progress = TaskStatus.inProgress;
-    var newTask : Task = {
-    const form = this.taskForm.value;
     const newTask: Task = {
       taskID: null,
       projectID: this.data.work.task.projectID,
@@ -71,13 +63,15 @@ export class ProjectAddTaskComponent implements OnInit {
       startDate: form.startDate,
       endDate: form.endDate,
       owner: this.data.owner.uid,
-      status: progress
+      status: TaskStatus.inProgress,
+      reasonForCancel: ''
     }
 
     this.projectService.addTask(newTask);
     this.projectService.calculateTaskStatus();
     this.onNoClick();
   }
+
 
   deleteTask() {
     this.openConfirmDialog();
