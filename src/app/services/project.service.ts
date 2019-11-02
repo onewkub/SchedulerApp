@@ -22,8 +22,8 @@ export class ProjectService {
     const projectTemp: Project = {
       projectID: this.lastProjectID,
       projectName: input.projectName,
-      startDate: input.startDate,
-      endDate: input.endDate,
+      startDate: input.startDate === '' ? new Date() : input.startDate,
+      endDate: input.endDate === '' ? new Date() : input.endDate,
       projectOwner: this.userService.currentUser.uid,
       members: []
     };
@@ -58,13 +58,13 @@ export class ProjectService {
     return this.apiService.project.find(element => (element.projectID === projectID));
   }
 
-  getTasks(projectID): Task[] {
+  getTasks(projectID: number): Task[] {
     return this.apiService.taskList.filter(task => (task.projectID === projectID));
   }
 
-  getMember(pid): User[] {
+  getMember(projectID: number): User[] {
     const result: User[] = [];
-    const projectMember = this.getProject(pid).members;
+    const projectMember = this.getProject(projectID).members;
     projectMember.forEach(element => {
       result.push(this.userService.getUser(element));
     });

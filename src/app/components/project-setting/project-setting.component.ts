@@ -4,9 +4,14 @@ import {FormControl} from '@angular/forms';
 import {ProjectService} from '../../services/project.service';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../models/user.model';
-import {UserItem} from '../add-project/add-project.component';
 import {ApiService} from '../../services/api.service';
 import {UserService} from '../../services/user.service';
+
+interface UserListItem {
+  id: number;
+  user: User;
+  selected: boolean;
+}
 
 @Component({
   selector: 'app-project-setting',
@@ -18,43 +23,42 @@ export class ProjectSettingComponent implements OnInit {
   constructor(public projectService: ProjectService,
               public activeRoute: ActivatedRoute,
               public userService: UserService,
-              public apiService: ApiService) { }
+              public apiService: ApiService) {
+  }
 
   project: Project;
   projectName: FormControl;
   startDate: FormControl;
   endDate: FormControl;
-  checkList: boolean[];
+
   userList: User[];
-  userItems: UserItem[];
+  userListItems: UserListItem[];
   selectedUsers: User[];
+  searchName: string;
 
   ngOnInit() {
     this.activeRoute.params.subscribe(routeParams => {
-      const projectID = Number(routeParams.pid);
-      this.project = this.projectService.getProject(projectID);
+      this.project = this.projectService.getProject(Number(routeParams.pid));
+      this.setFormValue();
     });
-    this.projectName = new FormControl(this.project.projectName);
-    this.startDate = new FormControl(this.project.startDate.toISOString());
-    this.endDate = new FormControl(this.project.endDate.toISOString());
-    this.initUserList();
   }
 
   initUserList(): void {
-    this.userList = this.apiService.users;
-    this.userItems = [];
-    for (let i = 0; i < this.userList.length; i++) {
-      const temp = {
-        user: this.userList[i],
-        id: i
-      };
-      if (temp.user.uid !== this.userService.currentUser.uid
-        && temp.user.uid !== 0) {
-        this.userItems.push(temp);
-      }
-    }
-    this.selectedUsers = [];
-    this.checkList = new Array(this.userList.length).fill(false);
+    let itemID = 0;
+    this.selectedUsers = this.projectService.getMember(this.project.projectID).filter(user => user.uid !== this.project.projectOwner);
+    this.userList = this.apiService.users.filter(user => user.uid !== this.project.projectOwner && user.uid !== 0);
+    this.userListItems = this.userList.map(user => {
+      const item = {id: itemID, user, selected: this.selectedUsers.includes(user)};
+      itemID++;
+      return item;
+    });
+  }
+
+  setFormValue(): void {
+    this.initUserList();
+    this.projectName = new FormControl(this.project.projectName);
+    this.startDate = new FormControl(this.project.startDate.toISOString());
+    this.endDate = new FormControl(this.project.endDate.toISOString());
   }
 
   saveSetting(): void {
@@ -69,33 +73,16 @@ export class ProjectSettingComponent implements OnInit {
     } else {
       this.endDate.setValue(this.project.endDate.toISOString());
     }
+    this.project.members = this.selectedUsers.map(user => user.uid);
   }
 
-  selectedUser(userItem: any) {
-    this.checkList[userItem.id] = !this.checkList[userItem.id];
-    let selected = false;
-    this.selectedUsers.forEach(element => {
-      if (userItem.user.uid === element.uid) {
-        selected = true;
-      }
-    });
-    if (!selected) {
-      this.addSelectedUser(userItem.user);
+  selectUser(item: UserListItem) {
+    item.selected = !item.selected;
+    if (item.selected) {
+      this.selectedUsers.push(item.user);
     } else {
-      this.removeSelectedUser(userItem.user);
+      this.selectedUsers = this.selectedUsers.filter(selectedUser => selectedUser.uid !== item.user.uid);
     }
-  }
-
-  addSelectedUser(user: User): void {
-    this.selectedUsers.push(user);
-  }
-
-  removeSelectedUser(user: User): void {
-    for (let i = 0; i < this.selectedUsers.length; i++) {
-      if (this.selectedUsers[i].uid === user.uid) {
-        this.selectedUsers.splice(i, 1);
-        i--;
-      }
-    }
+    this.selectedUsers.sort(((a, b) => a.uid - b.uid));
   }
 }

@@ -7,7 +7,7 @@ import {ApiService} from 'src/app/services/api.service';
 import {UserService} from 'src/app/services/user.service';
 import {ProjectService} from 'src/app/services/project.service';
 
-export interface UserItem {
+interface UserItem {
   user: User;
   id: number;
 }
@@ -24,6 +24,7 @@ export class AddProjectComponent implements OnInit {
   selectedUsers: User[];
   addProjectForm: FormGroup;
   checkList: boolean[];
+  searchName: string;
 
   constructor(
     public dialogRef: MatDialogRef<AddProjectComponent>,
