@@ -1,1 +1,11 @@
-<p>edit-detail-dialog works!</p>
+<h1 mat-dialog-title>Edit Description</h1>
+<div class="mat-dialog-content">
+    <mat-form-field class="textArea">
+        <mat-label>Detail</mat-label>
+        <textarea [formControl]="detail" autocomplete="off" matInput></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button (click)="onSave()">Save</button>
+</div>

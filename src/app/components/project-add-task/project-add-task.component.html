@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Add Task</h1>
 <div class="mat-dialog-content">
     <form [formGroup]="taskForm">
-        <mat-label>Assigned to: {{data.owner.displayName}}</mat-label><br>
+        <mat-label>Assigned to: <b>{{data.owner.displayName}}</b></mat-label><br>
         <mat-form-field>
             <input formControlName="name" type="text" matInput placeholder="Task Name" autocomplete="off">
         </mat-form-field>
