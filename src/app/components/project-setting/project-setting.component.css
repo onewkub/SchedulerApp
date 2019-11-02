@@ -11,3 +11,33 @@
 .date-picker {
  padding-left: 2em;
 }
+
+.project-member-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.project-member-label {
+  display: flex;
+  flex-direction: row;
+}
+
+.project-member-label label {
+  margin: auto;
+}
+
+.setting-buttons {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: row;
+}
+
+.setting-buttons button {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+
+.select-user {
+  margin-top: auto;
+  vertical-align: center;
+}
