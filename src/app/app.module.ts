@@ -20,6 +20,7 @@ import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
 import {AuthGuard} from './guards/auth.guard';
 import {AddProjectComponent} from './components/add-project/add-project.component';
+
 import {MAT_CHECKBOX_CLICK_ACTION, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material';
 import {ProjectDetailComponent} from './components/project-detail/project-detail.component';
 import {ProjectTaskComponent} from './components/project-task/project-task.component';
@@ -30,6 +31,8 @@ import {ProjectAddTaskComponent} from './components/project-add-task/project-add
 import {ConfirmTaskStatusComponent} from './components/confirm-task-status/confirm-task-status.component';
 import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog.component';
 import {ConfirmTaskCancelComponent} from './components/comfirm-task-cancel/confirm-task-cancel.component';
+import { EditDetailDIalogComponent } from './components/edit-detail-dialog/edit-detail-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import {ConfirmTaskCancelComponent} from './components/comfirm-task-cancel/confi
     ConfirmTaskStatusComponent,
     ConfirmDialogComponent,
     ConfirmTaskCancelComponent,
+    EditDetailDIalogComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,8 @@ import {ConfirmTaskCancelComponent} from './components/comfirm-task-cancel/confi
     ConfirmTaskCancelComponent,
     ConfirmDialogComponent,
     AddProjectComponent,
-    ProjectAddTaskComponent
+    ProjectAddTaskComponent,
+    EditDetailDIalogComponent
   ],
 })
 export class AppModule {
