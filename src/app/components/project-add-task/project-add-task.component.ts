@@ -53,8 +53,7 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   addTask() {
-    // console.log(this.taskForm.value);
-    var form = this.taskForm.value;
+    const form = this.taskForm.value;
     const newTask: Task = {
       taskID: null,
       projectID: this.data.work.task.projectID,
@@ -65,13 +64,11 @@ export class ProjectAddTaskComponent implements OnInit {
       owner: this.data.owner.uid,
       status: TaskStatus.inProgress,
       reasonForCancel: ''
-    }
-
+    };
     this.projectService.addTask(newTask);
     this.projectService.calculateTaskStatus();
     this.onNoClick();
   }
-
 
   deleteTask() {
     this.openConfirmDialog();
