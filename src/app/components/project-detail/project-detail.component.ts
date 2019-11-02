@@ -26,7 +26,7 @@ export class ProjectDetailComponent implements OnInit {
     console.log("openDialog");
     console.log('Open Dialog');
     const dialogRef = this.dialog.open(EditDetailDIalogComponent, {
-      width: '30rem',
+      width: '50rem',
       data : this.projectDescription
     });
 
