@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from '../../models/project.model';
 import {FormControl} from '@angular/forms';
 import {ProjectService} from '../../services/project.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../models/user.model';
 import {ApiService} from '../../services/api.service';
 import {UserService} from '../../services/user.service';
+import { MatDialog } from "@angular/material";
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 interface UserListItem {
   id: number;
@@ -23,7 +25,10 @@ export class ProjectSettingComponent implements OnInit {
   constructor(public projectService: ProjectService,
               public activeRoute: ActivatedRoute,
               public userService: UserService,
-              public apiService: ApiService) {
+              public apiService: ApiService,
+              public router: Router,
+              public dialog: MatDialog
+              ) {
   }
 
   project: Project;
@@ -84,5 +89,27 @@ export class ProjectSettingComponent implements OnInit {
       this.selectedUsers = this.selectedUsers.filter(selectedUser => selectedUser.uid !== item.user.uid);
     }
     this.selectedUsers.sort(((a, b) => a.uid - b.uid));
+  }
+  deleteProject(){
+    this.projectService.deleteProject(this.project.projectID);
+    this.projectService.getUserProject(this.userService.currentUser.uid);
+    this.router.navigate(['app/dashboard']);
+    console.log("Deleted");
+  }
+  onDelete(){
+    this.openConfirmDialog();
+  }
+  openConfirmDialog() {
+    console.log('Open Dialog');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '30rem',
+    });
+    dialogRef.componentInstance.title = 'Delete Project';
+    dialogRef.componentInstance.desc = 'Confirm to DELETE THIS PROJECT';
+    dialogRef.componentInstance.confirm = false;
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.deleteProject();
+    });
   }
 }

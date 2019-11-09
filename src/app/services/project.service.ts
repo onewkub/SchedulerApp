@@ -164,4 +164,35 @@ export class ProjectService {
     });
 
   }
+  deleteProject(projectID: number){
+    
+    // for( var i = 0; i < this.apiService.project.length; i++){ 
+    //   if ( this.apiService.project[i].projectID === projectID) {
+    //     this.apiService.project.splice(i, 1); 
+    //     break;
+    //   }
+    //  }
+     this.apiService.userData.forEach((element)=>{
+      for(var i = 0; i < element.projectID.length; i++){
+        if(element.projectID[i] === projectID){
+          element.projectID.splice(i, 1);
+          break;
+        }
+      }
+     });
+     console.log(this.apiService.userData);
+    //  for( var i = 0; i < this.apiService.taskList.length; i++){ 
+    //   if ( this.apiService.taskList[i].projectID === projectID) {
+    //     this.apiService.project.splice(i, 1); 
+    //     i--;
+    //   }
+    //  }
+    //  for( var i = 0; i < this.apiService.projectDescription.length; i++){ 
+    //   if ( this.apiService.projectDescription[i].projectID === projectID) {
+    //     this.apiService.project.splice(i, 1); 
+    //     break;
+    //   }
+    //  }
+   
+  }
 }
