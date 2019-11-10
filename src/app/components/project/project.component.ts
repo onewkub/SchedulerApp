@@ -4,6 +4,7 @@ import { ActivatedRoute} from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { MatTabChangeEvent } from "@angular/material";
 
 @Component({
   selector: 'app-project',
@@ -17,6 +18,7 @@ export class ProjectComponent implements OnInit {
   public memberList: User[];
   public dateLabel: string[];
   public userTask = new Map();
+  public isProjectOwner: boolean;
 
   constructor(
     public activeRoute: ActivatedRoute,
@@ -35,7 +37,20 @@ export class ProjectComponent implements OnInit {
       this.memberList.forEach(element => {
         this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
       });
+      this.isProjectOwner = this.currentProject.projectOwner === this.userService.currentUser.uid;
 
     });
+  }
+  updateProject(){
+    this.memberList = this.projectService.getMember(this.currentProjectID);
+    this.dateLabel = this.projectService.getDateLabel(this.currentProject);
+    this.memberList.forEach(element => {
+      this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
+    });
+    console.log("updated");
+  }
+  onTabChange(event: MatTabChangeEvent){
+    console.log("Change Tab");
+    this.updateProject();
   }
 }
