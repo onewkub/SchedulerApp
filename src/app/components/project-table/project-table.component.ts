@@ -23,12 +23,14 @@ export class ProjectTableComponent implements OnInit {
     public userService: UserService,
     public dialog: MatDialog,
     public projectService: ProjectService
-  ) { }
+  ) { 
+  }
 
 
   ngOnInit() {
   }
 
+  
   clickItem(item: Task): void {
     console.log(item);
   }

@@ -27,7 +27,7 @@ export class ProjectSettingComponent implements OnInit {
               public userService: UserService,
               public apiService: ApiService,
               public router: Router,
-              public dialog: MatDialog
+              public dialog: MatDialog,
               ) {
   }
 
@@ -79,6 +79,7 @@ export class ProjectSettingComponent implements OnInit {
       this.endDate.setValue(this.project.endDate.toISOString());
     }
     this.project.members = this.selectedUsers.map(user => user.uid);
+    alert("This setting has been saved.")
   }
 
   selectUser(item: UserListItem) {
