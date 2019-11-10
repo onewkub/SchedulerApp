@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from 'src/app/services/user.service';
-import { Project } from 'src/app/models/project.model';
+import {Project} from 'src/app/models/project.model';
+import {TaskStatus} from '../../models/task.model';
+import {ProjectService} from '../../services/project.service';
+
 // import {DatePipe} from '@angular/common';
 
 @Component({
@@ -13,18 +16,22 @@ export class DashboardComponent implements OnInit {
 
   todayDate = new Date();
   today: string;
-
+  currentTasks = this.userService.getUserTask(this.userService.currentUser.uid).filter((task) => {
+    this.projectService.calculateTaskStatus();
+    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
+  });
 
   constructor(
     public userService: UserService,
-    // private datePipe: DatePipe
+    public projectService: ProjectService
   ) {
     // dateString = this.datePipe.transform(date, 'yyyy-MM-dd');
     this.today = this.userService.getDate(this.todayDate);
-    
+
   }
 
   ngOnInit() {
+    console.log(this.currentTasks);
   }
 
   getRemainingDay(endDate: Date):string{
