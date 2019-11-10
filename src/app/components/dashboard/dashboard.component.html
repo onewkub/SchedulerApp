@@ -19,10 +19,12 @@
     </div>
 
     <div class="row">
-        <ul>
-            <li>Work 1</li>
-            <li>Work 2</li>
-        </ul>
+      <ul *ngFor="let task of currentTasks">
+        <li>{{task.name}}</li>
+      </ul>
+      <ul *ngIf="currentTasks.length === 0">
+        <li>( None )</li>
+      </ul>
     </div>
     <div>
         <div class="row">
