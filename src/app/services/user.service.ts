@@ -32,15 +32,7 @@ export class UserService {
     return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
   }
 
-  getUserTask(uid): Task[] {
-    const result: Task[] = [];
-    this.apiService.taskList.forEach(element => {
-      if (element.owner === uid) {
-        result.push(element);
-      }
-    });
-    return result;
+  getUserTask(userID: number): Task[] {
+    return this.apiService.taskList.filter((task) => task.owner === userID);
   }
-  
-
 }
