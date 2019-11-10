@@ -109,7 +109,9 @@ export class ProjectSettingComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      this.deleteProject();
+      console.log('Close Dialog');
+      if(dialogRef.componentInstance.confirm)
+        this.deleteProject();
     });
   }
 }
