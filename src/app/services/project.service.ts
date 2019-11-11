@@ -31,7 +31,7 @@ export class ProjectService {
     input.memberArray.forEach(element => {
       projectTemp.members.push(element.member.uid);
     });
-
+    projectTemp.members.push(projectTemp.projectOwner);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
