@@ -36,7 +36,7 @@ export class ProjectService {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
-    this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
+    // this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
 
     this.apiService.projectDescription.push({ projectID: this.lastProjectID, description: `Example` });
     this.apiService.project.push(projectTemp);

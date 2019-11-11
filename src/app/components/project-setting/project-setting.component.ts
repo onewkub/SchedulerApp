@@ -79,6 +79,7 @@ export class ProjectSettingComponent implements OnInit {
       this.endDate.setValue(this.project.endDate.toISOString());
     }
     this.project.members = this.selectedUsers.map(user => user.uid);
+    this.project.members.push(this.project.projectOwner);
     alert("This setting has been saved.")
   }
 
