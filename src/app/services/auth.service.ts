@@ -14,7 +14,7 @@ export class AuthService {
     public apiService: ApiService,
     public router: Router
   ) {
-    this.lastedUid = this.apiService.authTable.length;
+    this.lastedUid = this.apiService.authTable.length+1;
   }
 
   doRegister(input): boolean {
@@ -29,6 +29,8 @@ export class AuthService {
         email: input.email,
       });
       this.apiService.userData.push({uid: this.lastedUid, projectID: []});
+      console.log(this.apiService.users);
+      console.log(this.apiService.authTable);
       alert('Your registration successful.');
       return true;
     }

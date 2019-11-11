@@ -31,12 +31,12 @@ export class ProjectService {
     input.memberArray.forEach(element => {
       projectTemp.members.push(element.member.uid);
     });
-
+    projectTemp.members.push(projectTemp.projectOwner);
     projectTemp.members.forEach(element => {
       this.apiService.userData[element].projectID.push(this.lastProjectID);
     });
 
-    this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
+    // this.apiService.userData[this.userService.currentUser.uid].projectID.push(this.lastProjectID);
 
     this.apiService.projectDescription.push({ projectID: this.lastProjectID, description: `Example` });
     this.apiService.project.push(projectTemp);
