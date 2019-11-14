@@ -80,6 +80,10 @@ export class ProjectSettingComponent implements OnInit {
     }
     this.project.members = this.selectedUsers.map(user => user.uid);
     this.project.members.push(this.project.projectOwner);
+    this.project.members.forEach(element => {
+      const temp = this.apiService.userData.find(data =>{return data.uid === element});
+      if(!temp.projectID.find(pid => {return pid === this.project.projectID}))temp.projectID.push(this.project.projectID);
+    });
     alert("This setting has been saved.")
   }
 
