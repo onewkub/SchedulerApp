@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {UserService} from './user.service';
-import {ApiService} from './api.service';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { MockDataService } from './mock-data.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,11 @@ export class AuthService {
   lastedUid: number;
 
   constructor(
-    public userService: UserService,
-    public apiService: ApiService,
-    public router: Router
+    private apiService: MockDataService,
+    private router: Router,
+    private cookieService: CookieService
   ) {
-    this.lastedUid = this.apiService.authTable.length+1;
+    this.lastedUid = this.apiService.authTable.length;
   }
 
   doRegister(input): boolean {
@@ -22,45 +22,41 @@ export class AuthService {
     const emailUsable = this.apiService.users.find(user => user.email === input.email);
 
     if (!emailUsable) {
-      this.apiService.authTable.push({uid: this.lastedUid, email: input.email, password: input.password, logedIn: false});
+      this.apiService.authTable.push({ uid: this.lastedUid, email: input.email, password: input.password, logedIn: false });
       this.apiService.users.push({
-        uid: this.lastedUid,
+        uid: this.lastedUid++,
         displayName: input.displayName,
         email: input.email,
       });
-      this.apiService.userData.push({uid: this.lastedUid, projectID: []});
-      console.log(this.apiService.users);
-      console.log(this.apiService.authTable);
+
       alert('Your registration successful.');
       return true;
     }
     alert('Your registration not successful.');
-    this.lastedUid++;
     return false;
   }
 
+  // Quick and dirty login using plain text cokkie
   doLogin(input): boolean {
-    const validate = this.apiService.authTable.find(user => {
-      if (user.email === input.email && user.password === input.password) {
-        return user;
-      }
-      return null;
-    });
-    if (validate != null) {
-      this.userService.currentUser = this.apiService.users.find(user => {
-        if (user.uid === validate.uid) {
-          return user;
-        }
-        return null;
-      });
-      console.log(this.userService.currentUser.displayName);
-      this.router.navigate(['app/dashboard']);
-      return true;
+    const login = this.apiService.authTable.find(user =>
+      user.email === input.email && user.password === input.password);
+
+    if (login === undefined) {
+      return false;
     }
-    return false;
+
+    this.cookieService.set('login', login.uid.toString(), 30);
+    this.router.navigate(['app/dashboard']);
+    return true;
   }
 
-  doLogout(): void {
-    this.router.navigate(['']).then(() => console.log('Logout'));
+  isAlreadyLogin(): boolean {
+    console.log(this.cookieService.get('login'));
+    return this.cookieService.get('login') !== '';
+  }
+
+  doLogout() {
+    this.cookieService.delete('login');
+    this.router.navigate(['']);
   }
 }

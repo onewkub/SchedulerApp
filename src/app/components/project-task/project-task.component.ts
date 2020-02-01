@@ -5,6 +5,7 @@ import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-st
 import {UserService} from '../../services/user.service';
 import {ProjectService} from '../../services/project.service';
 import {ConfirmTaskCancelComponent} from '../comfirm-task-cancel/confirm-task-cancel.component';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-project-task',
@@ -13,9 +14,9 @@ import {ConfirmTaskCancelComponent} from '../comfirm-task-cancel/confirm-task-ca
 })
 export class ProjectTaskComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,
-              public userService: UserService,
-              public projectService: ProjectService) {
+  constructor(private dialog: MatDialog,
+              private userService: UserService,
+              private projectService: ProjectService) {
   }
 
   @Input() taskList: Task[];
@@ -86,18 +87,19 @@ export class ProjectTaskComponent implements OnInit {
     dialogRef.componentInstance.toStatus = TaskStatus.canceled;
   }
 
-  getTaskOwnerName(task: Task): string {
-    return this.userService.getUser(task.owner).displayName;
+  getOwnerDisplayName(task: Task): string {
+    console.log(task.ownerID);
+    return this.userService.getUserDisplayName(task.ownerID);
   }
 
   isTaskOwner(task: Task): boolean {
-    return  this.userService.currentUser.uid === task.owner;
+    return this.userService.getCurrentUserID() === task.ownerID;
   }
 
   isTaskOrProjectOwner(task: Task): boolean {
-    const currentUserID = this.userService.currentUser.uid;
+    const currentUserID = this.userService.getCurrentUserID();
     const project = this.projectService.getProject(task.projectID);
-    const isProjectOwner = project.projectOwner === currentUserID;
+    const isProjectOwner = project.projectOwnerID === currentUserID;
     return this.isTaskOwner(task) || isProjectOwner;
   }
 

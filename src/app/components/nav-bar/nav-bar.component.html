@@ -19,10 +19,12 @@
           <mat-icon>person</mat-icon>
         </span>
         <span *ngIf="isExpanded" class="menuText">
-          <p>{{this.userService.currentUser.displayName}}</p>
+          <p>{{this.getUserDisplayName()}}</p>
         </span>
         <span *ngIf="isExpanded" class="menuIcon">
-          <button (click)="logOut()" mat-raised-button style="box-shadow: none; color: tomato;"><mat-icon>exit_to_app</mat-icon></button>
+          <button (click)="logOut()" mat-raised-button style="box-shadow: none; color: tomato;">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
         </span>
       </mat-list-item>
 
@@ -30,9 +32,9 @@
 
       <!-- Dashboard -->
       <!-- <div [ngClass]="{'selectedMenu' : isSelectedDashboard()}"> -->
-        <div>
+      <div>
         <!-- <mat-list-item (click)="switchToDashboard()" routerLinkActive="is-active" > -->
-        <mat-list-item routerLink='dashboard' routerLinkActive="is-active" >
+        <mat-list-item routerLink='dashboard' routerLinkActive="is-active">
           <span class="menuIcon">
             <mat-icon>dashboard</mat-icon>
           </span>
@@ -45,11 +47,11 @@
       <mat-divider></mat-divider>
 
       <!-- Project List -->
-      <div *ngFor="let project of this.userService.userProject">
+      <div *ngFor="let project of getProjectList()">
         <!-- <div [ngClass]="{'selectedMenu' : isSelectedProject(project)}"> -->
         <div>
           <!-- <mat-list-item (click)="switchToProject(project)"> -->
-          <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active" >
+          <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active">
             <span class="menuIcon">
               <mat-icon>label</mat-icon>
             </span>
@@ -78,4 +80,3 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
-

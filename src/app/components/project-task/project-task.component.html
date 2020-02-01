@@ -21,7 +21,7 @@
               </span>
               <span class="task-owner">
                 Assigned to :
-                <a *ngIf="!isTaskOwner(task); else youAreOwner">{{getTaskOwnerName(task)}}</a>
+                <a *ngIf="!isTaskOwner(task); else youAreOwner">{{getOwnerDisplayName(task)}}</a>
                 <ng-template #youAreOwner>
                   You
                 </ng-template>
@@ -36,12 +36,10 @@
             <div class="task-control-container">
               <button mat-stroked-button [disabled]="!enableUploadButton(task)">Upload File</button>
               <div class="task-status-control">
-                <button mat-stroked-button class="button-cancel"
-                        [disabled]="!enableCancelButton(task)"
-                        (click)="openCancelConfirmDialog(task)">Cancel</button>
-                <button mat-raised-button class="button-done"
-                        [disabled]="!enableDoneButton(task)"
-                        (click)="openDoneConfirmDialog(task)">Done</button>
+                <button mat-stroked-button class="button-cancel" [disabled]="!enableCancelButton(task)"
+                  (click)="openCancelConfirmDialog(task)">Cancel</button>
+                <button mat-raised-button class="button-done" [disabled]="!enableDoneButton(task)"
+                  (click)="openDoneConfirmDialog(task)">Done</button>
               </div>
             </div>
           </div>

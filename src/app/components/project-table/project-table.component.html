@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <th style="width: 10%;">Member</th>
-                    <th *ngFor="let date of dateLabel">{{date}}</th>
+                    <th *ngFor="let date of dateList">{{date | date:'mediumDate'}}</th>
                 </tr>
             </thead>
             <tbody>

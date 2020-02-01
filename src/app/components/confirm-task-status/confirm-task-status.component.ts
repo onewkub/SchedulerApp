@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {Task, TaskStatus} from '../../models/task.model';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { Task, TaskStatus } from '../../models/task.model';
 
 @Component({
   selector: 'app-confirm-task-done',
@@ -15,7 +15,7 @@ export class ConfirmTaskStatusComponent implements OnInit {
   task: Task;
   toStatus: TaskStatus;
 
-ngOnInit() {
+  ngOnInit() {
   }
 
   onClose(): void {

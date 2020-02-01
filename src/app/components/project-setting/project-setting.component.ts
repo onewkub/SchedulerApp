@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Project} from '../../models/project.model';
-import {FormControl} from '@angular/forms';
-import {ProjectService} from '../../services/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../../models/user.model';
-import {ApiService} from '../../services/api.service';
-import {UserService} from '../../services/user.service';
-import { MatDialog } from "@angular/material";
+import { Component, OnInit } from '@angular/core';
+import { Project } from '../../models/project.model';
+import { FormControl } from '@angular/forms';
+import { ProjectService } from '../../services/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
+import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 interface UserListItem {
@@ -22,14 +21,13 @@ interface UserListItem {
 })
 export class ProjectSettingComponent implements OnInit {
 
-  constructor(public projectService: ProjectService,
-              public activeRoute: ActivatedRoute,
-              public userService: UserService,
-              public apiService: ApiService,
-              public router: Router,
-              public dialog: MatDialog,
-              ) {
-  }
+  constructor(
+    public projectService: ProjectService,
+    public activeRoute: ActivatedRoute,
+    public userService: UserService,
+    public router: Router,
+    public dialog: MatDialog,
+  ) { }
 
   project: Project;
   projectName: FormControl;
@@ -50,10 +48,10 @@ export class ProjectSettingComponent implements OnInit {
 
   initUserList(): void {
     let itemID = 0;
-    this.selectedUsers = this.projectService.getMember(this.project.projectID).filter(user => user.uid !== this.project.projectOwner);
-    this.userList = this.apiService.users.filter(user => user.uid !== this.project.projectOwner && user.uid !== 0);
+    this.selectedUsers = this.projectService.getMembers(this.project.projectID).filter(user => user.uid !== this.project.projectOwnerID);
+    this.userList = this.userService.getUsers().filter(user => user.uid !== this.project.projectOwnerID);
     this.userListItems = this.userList.map(user => {
-      const item = {id: itemID, user, selected: this.selectedUsers.includes(user)};
+      const item = { id: itemID, user, selected: this.selectedUsers.includes(user) };
       itemID++;
       return item;
     });
@@ -78,13 +76,9 @@ export class ProjectSettingComponent implements OnInit {
     } else {
       this.endDate.setValue(this.project.endDate.toISOString());
     }
-    this.project.members = this.selectedUsers.map(user => user.uid);
-    this.project.members.push(this.project.projectOwner);
-    this.project.members.forEach(element => {
-      const temp = this.apiService.userData.find(data =>{return data.uid === element});
-      if(!temp.projectID.find(pid => {return pid === this.project.projectID}))temp.projectID.push(this.project.projectID);
-    });
-    alert("This setting has been saved.")
+    this.project.membersID = this.selectedUsers.map(user => user.uid);
+    this.project.membersID.push(this.project.projectOwnerID);
+    alert('The project settings have been saved.');
   }
 
   selectUser(item: UserListItem) {
@@ -96,13 +90,12 @@ export class ProjectSettingComponent implements OnInit {
     }
     this.selectedUsers.sort(((a, b) => a.uid - b.uid));
   }
-  deleteProject(){
+  deleteProject() {
     this.projectService.deleteProject(this.project.projectID);
-    this.projectService.getUserProject(this.userService.currentUser.uid);
+    this.projectService.getUserProjects(this.userService.getCurrentUserID());
     this.router.navigate(['app/dashboard']);
-    console.log("Deleted");
   }
-  onDelete(){
+  onDelete() {
     this.openConfirmDialog();
   }
   openConfirmDialog() {
@@ -115,9 +108,9 @@ export class ProjectSettingComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('Close Dialog');
-      if(dialogRef.componentInstance.confirm)
+      if (dialogRef.componentInstance.confirm) {
         this.deleteProject();
+      }
     });
   }
 }

@@ -1,38 +1,42 @@
-import {Injectable} from '@angular/core';
-import {User} from '../models/user.model';
-import {Project} from '../models/project.model';
-import {ApiService} from './api.service';
-import {Task} from '../models/task.model';
+import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { MockDataService } from './mock-data.service';
+import { User } from '../models/user.model';
+import { Task } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  currentUser: User = {
-    uid: 0,
-    displayName: 'Test Account',
-    email: 'test@scheduler.com'
-  };
-  userProject: Project[];
+  constructor(
+    private dataService: MockDataService,
+    private cookieService: CookieService
+  ) { }
 
-  constructor(public apiService: ApiService) {
+  getCurrentUser(): User {
+    return this.getUser(Number(this.cookieService.get('login')));
   }
 
-  getUser(uid: number): User {
-    return this.apiService.users.find(element => {
-      return element.uid === uid;
+  getCurrentUserID(): number {
+    return this.getCurrentUser().uid;
+  }
+
+  getUser(userID: number): User {
+    return this.dataService.users.find(user => {
+      return user.uid === userID;
     });
   }
 
-  getDate(date: Date): string {
-    const months = ['Jan', 'Feb', 'Mar',
-      'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-      'Oct', 'Nov', 'Dec'];
-    return date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  getUserDisplayName(userID: number): string {
+    return this.getUser(userID).displayName;
+  }
+
+  getUsers(): User[] {
+    return this.dataService.users;
   }
 
   getUserTask(userID: number): Task[] {
-    return this.apiService.taskList.filter((task) => task.owner === userID);
+    return this.dataService.taskList.filter((task) => task.ownerID === userID);
   }
 }

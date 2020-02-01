@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Task, TaskStatus} from 'src/app/models/task.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {User} from 'src/app/models/user.model';
-import {ProjectService} from 'src/app/services/project.service';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Task, TaskStatus } from 'src/app/models/task.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { ProjectService } from 'src/app/services/project.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -42,7 +42,6 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   editTask() {
-    // console.log(this.taskForm.value);
     const form = this.taskForm.value;
     this.data.work.task.name = form.name;
     this.data.work.task.startDate = form.startDate;
@@ -61,7 +60,7 @@ export class ProjectAddTaskComponent implements OnInit {
       description: form.description,
       startDate: form.startDate,
       endDate: form.endDate,
-      owner: this.data.owner.uid,
+      ownerID: this.data.owner.uid,
       status: TaskStatus.inProgress,
       reasonForCancel: ''
     };

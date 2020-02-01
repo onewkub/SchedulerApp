@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
-import { FormControl } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { FormControl } from '@angular/forms';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-edit-detail-dialog',
@@ -10,22 +11,24 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class EditDetailDIalogComponent implements OnInit {
 
-  detail : FormControl;
+  detail: FormControl;
+
   constructor(
-    public dialogRef : MatDialogRef<EditDetailDIalogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog
-  ) { 
-    this.detail = new FormControl(this.data.description);
+    @Inject(MAT_DIALOG_DATA) public projectID: number,
+    public dialogRef: MatDialogRef<EditDetailDIalogComponent>,
+    public dialog: MatDialog,
+    private projectService: ProjectService
+  ) {
+    this.detail = new FormControl(projectService.getProject(projectID).description);
   }
 
   ngOnInit() {
-    console.log(this.data);
   }
-  onNoClick(): void{
+
+  onNoClick(): void {
     this.dialogRef.close();
   }
-  onSave(){
+  onSave() {
     this.openConfirmDialog();
   }
   openConfirmDialog() {
@@ -40,7 +43,7 @@ export class EditDetailDIalogComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
       if (dialogRef.componentInstance.confirm) {
-        this.data.description = this.detail.value;
+        this.projectService.getProject(this.projectID).description = this.detail.value;
         this.onNoClick();
       }
     });

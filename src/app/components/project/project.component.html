@@ -1,10 +1,10 @@
 <div>
     <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <mat-tab (click)= "updateProject()" label="Detail">
-            <app-project-detail [projectDescription] = "projectService.getProjectDescription(currentProjectID)" [project]="currentProject"></app-project-detail>
+            <app-project-detail [project]="currentProject"></app-project-detail>
         </mat-tab>
         <mat-tab (click)="updateProject()"  label="Table">
-            <app-project-table [dateLabel]="dateLabel" [userTask]="userTask" [memberList]="memberList" [project]="currentProject" [taskList]="projectService.getTasks(currentProjectID)"></app-project-table>
+            <app-project-table [dateList]="dateList" [userTask]="userTask" [memberList]="memberList" [project]="currentProject" [taskList]="projectService.getTasks(currentProjectID)"></app-project-table>
         </mat-tab>
         <mat-tab (click)="updateProject()"  label="Task">
             <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>

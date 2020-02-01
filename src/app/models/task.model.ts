@@ -5,7 +5,7 @@ export class Task {
   description: string;
   startDate: Date;
   endDate: Date;
-  owner: number;
+  ownerID: number;
   status: TaskStatus;
   reasonForCancel: string;
 }

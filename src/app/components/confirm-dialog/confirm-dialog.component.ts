@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from "@angular/material";
+import { MatDialogRef } from '@angular/material';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -11,20 +11,20 @@ export class ConfirmDialogComponent implements OnInit {
   title: string;
   desc: string;
   taskID: any;
-  confirm: boolean
+  confirm: boolean;
 
   constructor(
-    public dialogRef : MatDialogRef<ConfirmDialogComponent>,
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     public projectService: ProjectService
   ) { }
 
   ngOnInit() {
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
-  confirmDialog(){
+  confirmDialog() {
     this.projectService.deleteTask(this.taskID);
     this.confirm = true;
     this.closeDialog();

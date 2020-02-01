@@ -3,6 +3,7 @@ export class Project {
     projectName: string;
     startDate: Date;
     endDate: Date;
-    projectOwner: number;
-    members: number[];
+    projectOwnerID: number;
+    membersID: number[];
+    description: string;
 }
