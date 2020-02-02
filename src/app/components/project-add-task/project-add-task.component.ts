@@ -74,7 +74,6 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   openConfirmDialog() {
-    console.log('Open Dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
     });
@@ -84,7 +83,6 @@ export class ProjectAddTaskComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       if (dialogRef.componentInstance.confirm) {
         this.onNoClick();
       }

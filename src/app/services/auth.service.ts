@@ -17,16 +17,15 @@ export class AuthService {
     this.lastedUid = this.apiService.authTable.length;
   }
 
-  doRegister(input): boolean {
-    console.log('Registering user account');
-    const emailUsable = this.apiService.users.find(user => user.email === input.email);
+  doRegister(displayName: string, email: string, password: string): boolean {
+    const isEmailUseable = this.apiService.users.find(user => user.email === email);
 
-    if (!emailUsable) {
-      this.apiService.authTable.push({ uid: this.lastedUid, email: input.email, password: input.password, logedIn: false });
+    if (!isEmailUseable) {
+      this.apiService.authTable.push({ uid: this.lastedUid, email, password, logedIn: false });
       this.apiService.users.push({
         uid: this.lastedUid++,
-        displayName: input.displayName,
-        email: input.email,
+        displayName,
+        email
       });
 
       alert('Your registration successful.');
@@ -37,9 +36,9 @@ export class AuthService {
   }
 
   // Quick and dirty login using plain text cokkie
-  doLogin(input): boolean {
+  doLogin(email: string, password: string): boolean {
     const login = this.apiService.authTable.find(user =>
-      user.email === input.email && user.password === input.password);
+      user.email === email && user.password === password);
 
     if (login === undefined) {
       return false;
@@ -51,7 +50,6 @@ export class AuthService {
   }
 
   isAlreadyLogin(): boolean {
-    console.log(this.cookieService.get('login'));
     return this.cookieService.get('login') !== '';
   }
 

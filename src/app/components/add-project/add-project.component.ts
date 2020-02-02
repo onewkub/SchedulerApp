@@ -122,7 +122,6 @@ export class AddProjectComponent implements OnInit {
       membersID: member,
       description: ''
     };
-    console.log(this.addProjectForm.value);
     this.projectService.addProject(tempProject);
     this.addProjectForm.reset();
     this.onNoClick();

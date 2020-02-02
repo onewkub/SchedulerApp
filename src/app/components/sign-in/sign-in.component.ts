@@ -23,13 +23,12 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-
   onSubmit(formDirective: FormGroupDirective) {
     this.tryLogin(this.loginForm.value, formDirective);
   }
 
-  tryLogin(value, formDirective: FormGroupDirective) {
-    if (!this.authService.doLogin(value)) {
+  tryLogin(input: { email: string; password: string; }, formDirective: FormGroupDirective) {
+    if (!this.authService.doLogin(input.email, input.password)) {
       alert('Your Email or Password Wrong');
       this.loginForm.reset();
       formDirective.resetForm();

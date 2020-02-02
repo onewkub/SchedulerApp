@@ -54,8 +54,8 @@ export class SignUpComponent implements OnInit {
 
   }
 
-  tryRegister(value) {
-    this.authService.doRegister(value);
+  tryRegister(input: { displayName: string; email: string; password: string; }) {
+    this.authService.doRegister(input.displayName, input.email, input.password);
   }
 
 }

@@ -28,12 +28,7 @@ export class ProjectTableComponent implements OnInit {
   ngOnInit() {
   }
 
-  clickItem(item: Task) {
-    console.log(item);
-  }
-
-  openDialog(task, member) {
-    console.log('Open Dialog');
+  openDialog(task: Task, member: User) {
     const dialogRef = this.dialog.open(ProjectAddTaskComponent, {
       width: '45rem',
       data: { work: task, owner: member }
@@ -41,17 +36,16 @@ export class ProjectTableComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.updateTable();
-      console.log('The dialog was closed');
     });
   }
 
   updateTable() {
-    this.memberList.forEach(element => {
-      this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.project));
+    this.memberList.forEach(user => {
+      this.userTask.set(user.uid, this.projectService.setUserTask(user.uid, this.project));
     });
   }
 
-  getStyle(item) {
+  getStyle(item: Task) {
     const hasColor = (item.taskID != null);
     const Color: string[] = [
       '#ffeeff', '#c3fdff', '#e6ceff', '#c8e6c9'

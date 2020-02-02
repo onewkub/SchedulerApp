@@ -99,7 +99,6 @@ export class ProjectSettingComponent implements OnInit {
     this.openConfirmDialog();
   }
   openConfirmDialog() {
-    console.log('Open Dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
     });

@@ -32,7 +32,6 @@ export class EditDetailDIalogComponent implements OnInit {
     this.openConfirmDialog();
   }
   openConfirmDialog() {
-    console.log('Open Dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
     });
@@ -41,7 +40,6 @@ export class EditDetailDIalogComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       if (dialogRef.componentInstance.confirm) {
         this.projectService.getProject(this.projectID).description = this.detail.value;
         this.onNoClick();

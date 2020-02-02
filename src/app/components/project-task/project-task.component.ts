@@ -88,7 +88,6 @@ export class ProjectTaskComponent implements OnInit {
   }
 
   getOwnerDisplayName(task: Task): string {
-    console.log(task.ownerID);
     return this.userService.getUserDisplayName(task.ownerID);
   }
 

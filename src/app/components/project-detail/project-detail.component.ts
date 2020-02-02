@@ -26,13 +26,9 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(EditDetailDIalogComponent, {
+    this.dialog.open(EditDetailDIalogComponent, {
       width: '50rem',
       data: this.project.projectID
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
     });
   }
 }
