@@ -14,15 +14,15 @@ import { User } from 'src/app/models/user.model';
 })
 export class ProjectTaskComponent implements OnInit {
 
+  @Input() taskList: Task[];
+
   constructor(private dialog: MatDialog,
               private userService: UserService,
               private projectService: ProjectService) {
   }
 
-  @Input() taskList: Task[];
-
   ngOnInit() {
-    this.projectService.calculateTaskStatus();
+    this.projectService.updateTaskStatus();
   }
 
   getStatusName(status: TaskStatus): string {

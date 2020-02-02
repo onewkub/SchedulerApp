@@ -108,7 +108,7 @@ export class ProjectService {
     }
   }
 
-  calculateTaskStatus() {
+  updateTaskStatus() {
     const toDay = new Date().getTime();
     this.dataService.project.forEach((project) => {
       this.getTasks(project.projectID).forEach((task) => {

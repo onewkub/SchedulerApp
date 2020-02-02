@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   todayDate = new Date(); // TODO: Update this with timer
   currentTasks = this.userService.getUserTask(this.userService.getCurrentUserID()).filter((task) => {
-    this.projectService.calculateTaskStatus();
+    this.projectService.updateTaskStatus();
     return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
   });
 

@@ -17,9 +17,9 @@ export class ProjectAddTaskComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { work: any, owner: User },
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { work: any, owner: User },
     public formBuilder: FormBuilder,
     public projectService: ProjectService,
   ) {
@@ -47,7 +47,7 @@ export class ProjectAddTaskComponent implements OnInit {
     this.data.work.task.startDate = form.startDate;
     this.data.work.task.endDate = form.endDate;
     this.data.work.task.description = form.description;
-    this.projectService.calculateTaskStatus();
+    this.projectService.updateTaskStatus();
     this.onNoClick();
   }
 
@@ -65,7 +65,7 @@ export class ProjectAddTaskComponent implements OnInit {
       reasonForCancel: ''
     };
     this.projectService.addTask(newTask);
-    this.projectService.calculateTaskStatus();
+    this.projectService.updateTaskStatus();
     this.onNoClick();
   }
 

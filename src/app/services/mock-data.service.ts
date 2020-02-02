@@ -97,7 +97,7 @@ export class MockDataService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
         startDate: new Date('2019-10-27'),
         endDate: new Date('2019-10-28'),
-        ownerID: 1,
+        ownerID: 0,
         status: TaskStatus.inProgress,
         reasonForCancel: ''
       },
@@ -108,7 +108,7 @@ export class MockDataService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
         startDate: new Date('2019-10-28'),
         endDate: new Date('2019-11-09'),
-        ownerID: 2,
+        ownerID: 1,
         status: TaskStatus.pending,
         reasonForCancel: ''
       },
@@ -119,7 +119,7 @@ export class MockDataService {
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget ullamcorper eros, posuere volutpat lacus.',
         startDate: new Date('2019-11-09'),
         endDate: new Date('2019-11-11'),
-        ownerID: 3,
+        ownerID: 2,
         status: TaskStatus.pending,
         reasonForCancel: ''
       }

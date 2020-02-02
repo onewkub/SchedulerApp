@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from 'src/app/models/task.model';
 import { Project } from 'src/app/models/project.model';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { ProjectAddTaskComponent } from '../project-add-task/project-add-task.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,18 +21,18 @@ export class ProjectTableComponent implements OnInit {
   styleColor = 0;
 
   constructor(
-    public userService: UserService,
-    public dialog: MatDialog,
-    public projectService: ProjectService
+    private dialog: MatDialog,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
   }
 
-  clickItem(item: Task): void {
+  clickItem(item: Task) {
     console.log(item);
   }
-  openDialog(task, member): void {
+
+  openDialog(task, member) {
     console.log('Open Dialog');
     const dialogRef = this.dialog.open(ProjectAddTaskComponent, {
       width: '45rem',
