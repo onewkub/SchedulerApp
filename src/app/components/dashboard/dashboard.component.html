@@ -32,7 +32,7 @@
     </div>
     <mat-nav-list>
       <mat-list-item *ngFor="let project of getProjects()" routerLink='/app/projects/{{project.projectID}}'>
-        <div class="table projectProgress">
+        <div class="table project-progress">
           <div class="row w-100 display-4 text-left proLabel">
             <div class="col-4">
               {{project.projectName}}

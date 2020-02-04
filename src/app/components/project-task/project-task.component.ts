@@ -1,11 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Task, TaskStatus} from '../../models/task.model';
-import {MatDialog} from '@angular/material';
-import {ConfirmTaskStatusComponent} from '../confirm-task-status/confirm-task-status.component';
-import {UserService} from '../../services/user.service';
-import {ProjectService} from '../../services/project.service';
-import {ConfirmTaskCancelComponent} from '../comfirm-task-cancel/confirm-task-cancel.component';
-import { User } from 'src/app/models/user.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { Task, TaskStatus } from '../../models/task.model';
+import { UserService } from '../../services/user.service';
+import { ProjectService } from '../../services/project.service';
+import { ConfirmTaskStatusComponent } from '../confirm-task-status/confirm-task-status.component';
+import { ConfirmTaskCancelComponent } from '../comfirm-task-cancel/confirm-task-cancel.component';
 
 @Component({
   selector: 'app-project-task',
@@ -16,10 +15,10 @@ export class ProjectTaskComponent implements OnInit {
 
   @Input() taskList: Task[];
 
-  constructor(private dialog: MatDialog,
-              private userService: UserService,
-              private projectService: ProjectService) {
-  }
+  constructor(
+    private dialog: MatDialog,
+    private userService: UserService,
+    private projectService: ProjectService) { }
 
   ngOnInit() {
     this.projectService.updateTaskStatus();

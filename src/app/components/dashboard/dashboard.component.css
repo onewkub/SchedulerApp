@@ -1,8 +1,9 @@
-.display-4{
-    font-size: 2rem;
+.display-4 {
+  font-size: 2rem;
 }
-.display-3{
-    font-size: 3rem;
+
+.display-3 {
+  font-size: 3rem;
 }
 
 .home-container {
@@ -13,19 +14,21 @@
   flex-direction: column;
 }
 
-.projectProgress{
-    width: 100%;
+.project-progress {
+  width: 100%;
+}
 
+.mat-list-item {
+  height: 5rem;
 }
-.mat-list-item{
-    height: 5rem;
+
+.probar {
+  margin-top: 1rem;
 }
-.probar{
-    margin-top: 1rem;
-}
-.dashboard{
-    padding-top: 1rem;
-    padding-left: 3rem;
-    width: 100%;
-    overflow: hidden;
+
+.dashboard {
+  padding-top: 1rem;
+  padding-left: 3rem;
+  width: 100%;
+  overflow: hidden;
 }

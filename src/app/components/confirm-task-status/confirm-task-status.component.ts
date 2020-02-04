@@ -8,7 +8,7 @@ import { Task, TaskStatus } from '../../models/task.model';
   styleUrls: ['./confirm-task-status.component.css']
 })
 export class ConfirmTaskStatusComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<ConfirmTaskStatusComponent>) { }
+  constructor(private dialogRef: MatDialogRef<ConfirmTaskStatusComponent>) { }
 
   title: string;
   desc: string;

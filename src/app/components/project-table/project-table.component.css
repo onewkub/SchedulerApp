@@ -1,18 +1,20 @@
-.schedule{
-    padding-left: 2rem;
-    padding-top: 2rem;
+td {
+  text-align: center;
+}
 
+.display-4 {
+  font-size: 1.5rem;
 }
-.display-4{
-    font-size: 1.5rem;
+
+.display-3 {
+  font-size: 1.5rem;
 }
-.display-3{
-    font-size: 1.5rem;
+
+.schedule {
+  padding-left: 2rem;
+  padding-top: 2rem;
 }
-td{
-    text-align: center;
-}
-.addTask:hover{
-    background: rgba(255, 253, 253, 0.8) !important;
-    
+
+.addTask:hover {
+  background: rgba(255, 253, 253, 0.8) !important;
 }

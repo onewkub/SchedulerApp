@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Task, TaskStatus} from '../../models/task.model';
-import {MatDialogRef} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import { Task, TaskStatus } from '../../models/task.model';
+import { MatDialogRef } from '@angular/material';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-confirm-task-cancel',

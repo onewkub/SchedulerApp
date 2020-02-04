@@ -1,16 +1,17 @@
 <div>
-    <mat-tab-group (selectedTabChange)="onTabChange($event)">
-        <mat-tab (click)= "updateProject()" label="Detail">
-            <app-project-detail [project]="currentProject"></app-project-detail>
-        </mat-tab>
-        <mat-tab (click)="updateProject()"  label="Table">
-            <app-project-table [dateList]="dateList" [userTask]="userTask" [memberList]="memberList" [project]="currentProject" [taskList]="projectService.getTasks(currentProjectID)"></app-project-table>
-        </mat-tab>
-        <mat-tab (click)="updateProject()"  label="Task">
-            <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>
-        </mat-tab>
-        <mat-tab *ngIf="isProjectOwner" label="Setting">
-            <app-project-setting></app-project-setting>
-        </mat-tab>
-    </mat-tab-group>
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab (click)="updateProject()" label="Detail">
+      <app-project-detail [project]="currentProject"></app-project-detail>
+    </mat-tab>
+    <mat-tab (click)="updateProject()" label="Table">
+      <app-project-table [dateList]="dateList" [userTask]="userTask" [memberList]="memberList"
+        [project]="currentProject" [taskList]="projectService.getTasks(currentProjectID)"></app-project-table>
+    </mat-tab>
+    <mat-tab (click)="updateProject()" label="Task">
+      <app-project-task [taskList]="projectService.getTasks(currentProjectID)"></app-project-task>
+    </mat-tab>
+    <mat-tab *ngIf="isProjectOwner" label="Setting">
+      <app-project-setting></app-project-setting>
+    </mat-tab>
+  </mat-tab-group>
 </div>

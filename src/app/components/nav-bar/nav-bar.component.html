@@ -1,12 +1,12 @@
 <mat-drawer-container autosize class="sidenav">
-  <mat-drawer class="sideDrawer" disableClose="true" mode="side" opened="true">
+  <mat-drawer class="drawer" disableClose="true" mode="side" opened="true">
     <mat-nav-list>
 
       <mat-list-item (click)="toggleMenu()">
-        <span class="menuIcon">
+        <span class="menu-icon">
           <mat-icon>menu</mat-icon>
         </span>
-        <span *ngIf="isExpanded" class="menuText">
+        <span *ngIf="isExpanded" class="menu-text">
           <p>Menu</p>
         </span>
       </mat-list-item>
@@ -15,13 +15,13 @@
 
       <!-- User Info -->
       <mat-list-item disableRipple style="background-color: transparent;">
-        <span class="menuIcon">
+        <span class="menu-icon">
           <mat-icon>person</mat-icon>
         </span>
-        <span *ngIf="isExpanded" class="menuText">
+        <span *ngIf="isExpanded" class="menu-text">
           <p>{{this.getUserDisplayName()}}</p>
         </span>
-        <span *ngIf="isExpanded" class="menuIcon">
+        <span *ngIf="isExpanded" class="menu-icon">
           <button (click)="logOut()" mat-raised-button style="box-shadow: none; color: tomato;">
             <mat-icon>exit_to_app</mat-icon>
           </button>
@@ -31,14 +31,12 @@
       <mat-divider></mat-divider>
 
       <!-- Dashboard -->
-      <!-- <div [ngClass]="{'selectedMenu' : isSelectedDashboard()}"> -->
       <div>
-        <!-- <mat-list-item (click)="switchToDashboard()" routerLinkActive="is-active" > -->
         <mat-list-item routerLink='dashboard' routerLinkActive="is-active">
-          <span class="menuIcon">
+          <span class="menu-icon">
             <mat-icon>dashboard</mat-icon>
           </span>
-          <span *ngIf="isExpanded" class="menuText">
+          <span *ngIf="isExpanded" class="menu-text">
             <p>Dashboard</p>
           </span>
         </mat-list-item>
@@ -48,14 +46,12 @@
 
       <!-- Project List -->
       <div *ngFor="let project of getProjectList()">
-        <!-- <div [ngClass]="{'selectedMenu' : isSelectedProject(project)}"> -->
         <div>
-          <!-- <mat-list-item (click)="switchToProject(project)"> -->
           <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active">
-            <span class="menuIcon">
+            <span class="menu-icon">
               <mat-icon>label</mat-icon>
             </span>
-            <span *ngIf="isExpanded" class="menuText">
+            <span *ngIf="isExpanded" class="menu-text">
               <p>{{project.projectName}}</p>
             </span>
           </mat-list-item>
@@ -66,10 +62,10 @@
 
       <!-- Add Project -->
       <mat-list-item (click)="openDialog()">
-        <span class="menuIcon">
+        <span class="menu-icon">
           <mat-icon>add</mat-icon>
         </span>
-        <span *ngIf="isExpanded" class="menuText">
+        <span *ngIf="isExpanded" class="menu-text">
           <p>Add Project</p>
         </span>
       </mat-list-item>
