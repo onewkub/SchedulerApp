@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { EditDetailDIalogComponent } from '../edit-detail-dialog/edit-detail-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
 

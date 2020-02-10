@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task, TaskStatus } from '../../models/task.model';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 
 @Component({

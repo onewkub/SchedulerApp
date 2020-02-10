@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Task, TaskStatus } from '../../models/task.model';
 import { UserService } from '../../services/user.service';
 import { ProjectService } from '../../services/project.service';

@@ -1,7 +1,8 @@
 // Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { MAT_CHECKBOX_CLICK_ACTION, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material';
+import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 // Core Module
 import { AppRoutingModule } from './app-routing.module';

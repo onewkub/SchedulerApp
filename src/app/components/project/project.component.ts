@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-project',

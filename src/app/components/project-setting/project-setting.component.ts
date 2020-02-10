@@ -5,7 +5,7 @@ import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 interface UserListItem {
