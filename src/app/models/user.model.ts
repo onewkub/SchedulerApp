@@ -1,5 +1,6 @@
-export class User {
-  uid: number;
-  displayName: string;
-  email: string;
+export interface User {
+  uid: string;
+  email?: string;
+  displayName?: string;
+  photoURL?: string;
 }

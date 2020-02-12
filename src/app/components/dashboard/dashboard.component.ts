@@ -12,10 +12,11 @@ import { ProjectService } from '../../services/project.service';
 export class DashboardComponent implements OnInit {
 
   todayDate = new Date(); // TODO: Update this with timer
-  currentTasks = this.userService.getUserTask(this.userService.getCurrentUserID()).filter((task) => {
-    this.projectService.updateTaskStatus();
-    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
-  });
+  // currentTasks = this.userService.getUserTask(this.userService.getCurrentUserID()).filter((task) => {
+  //   this.projectService.updateTaskStatus();
+  //   return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
+  // });
+  currentTasks = null;
 
   constructor(
     private userService: UserService,
@@ -27,11 +28,13 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserDisplayName(): string {
-    return this.userService.getCurrentUser().displayName;
+    // return this.userService.getCurrentUser().displayName;
+    return null;
   }
 
   getProjects(): Project[] {
-    return this.projectService.getUserProjects(this.userService.getCurrentUserID());
+    // return this.projectService.getUserProjects(this.userService.getCurrentUserID());
+    return null;
   }
 
   getProjectOwnerDisplayName(projectId: number): string {

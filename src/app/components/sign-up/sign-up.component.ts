@@ -51,11 +51,17 @@ export class SignUpComponent implements OnInit {
     this.tryRegister(this.registerForm.value);
     this.registerForm.reset();
     formDirective.resetForm();
-
   }
 
   tryRegister(input: { displayName: string; email: string; password: string; }) {
-    this.authService.doRegister(input.displayName, input.email, input.password);
+    this.authService.register(input.displayName, input.email, input.password).then(
+      () => {
+        this.router.navigate(['/']);
+      }
+    ).catch(
+      err => {
+        console.error(err);
+      }
+    );
   }
-
 }

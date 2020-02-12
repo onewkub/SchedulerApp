@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Task, TaskStatus } from '../../models/task.model';
 import { UserService } from '../../services/user.service';
-import { ProjectService } from '../../services/project.service';
+// import { ProjectService } from '../../services/project.service';
 import { ConfirmTaskStatusComponent } from '../confirm-task-status/confirm-task-status.component';
 import { ConfirmTaskCancelComponent } from '../comfirm-task-cancel/confirm-task-cancel.component';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project-task',
@@ -87,17 +88,20 @@ export class ProjectTaskComponent implements OnInit {
   }
 
   getOwnerDisplayName(task: Task): string {
-    return this.userService.getUserDisplayName(task.ownerID);
+    // return this.userService.getUserDisplayName(task.ownerID);
+    return '';
   }
 
   isTaskOwner(task: Task): boolean {
-    return this.userService.getCurrentUserID() === task.ownerID;
+    // return this.userService.getCurrentUserID() === task.ownerID;
+    return true;
   }
 
   isTaskOrProjectOwner(task: Task): boolean {
-    const currentUserID = this.userService.getCurrentUserID();
+    // const currentUserID = this.userService.getCurrentUserID();
+    const currentUserID = 0;
     const project = this.projectService.getProject(task.projectID);
-    const isProjectOwner = project.projectOwnerID === currentUserID;
+    const isProjectOwner = project.manager === currentUserID;
     return this.isTaskOwner(task) || isProjectOwner;
   }
 

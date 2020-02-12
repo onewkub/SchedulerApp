@@ -40,9 +40,9 @@ export class ProjectTableComponent implements OnInit {
   }
 
   updateTable() {
-    this.memberList.forEach(user => {
-      this.userTask.set(user.uid, this.projectService.setUserTask(user.uid, this.project));
-    });
+    // this.memberList.forEach(user => {
+    //   this.userTask.set(user.uid, this.projectService.setUserTask(user.uid, this.project));
+    // });
   }
 
   getStyle(item: Task) {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
 import { ActivatedRoute } from '@angular/router';
-import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-project',
@@ -31,22 +31,22 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.activeRoute.params.subscribe(routeParams => {
       this.currentProjectID = Number(routeParams.pid);
-      this.currentProject = this.projectService.getProject(this.currentProjectID);
-      this.memberList = this.projectService.getMembers(this.currentProjectID);
+      // this.currentProject = this.projectService.getProject(this.currentProjectID);
+      // this.memberList = this.projectService.getMembers(this.currentProjectID);
       this.dateList = this.getDateList(this.currentProject);
       this.memberList.forEach(element => {
-        this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
+        // this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
       });
-      this.isProjectOwner = this.currentProject.projectOwnerID === this.userService.getCurrentUserID();
+      // this.isProjectOwner = this.currentProject.projectOwnerID === this.userService.getCurrentUserID();
     });
   }
 
   updateProject() {
-    this.memberList = this.projectService.getMembers(this.currentProjectID);
-    this.dateList = this.getDateList(this.currentProject);
-    this.memberList.forEach(element => {
-      this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
-    });
+    // this.memberList = this.projectService.getMembers(this.currentProjectID);
+    // this.dateList = this.getDateList(this.currentProject);
+    // this.memberList.forEach(element => {
+    //   this.userTask.set(element.uid, this.projectService.setUserTask(element.uid, this.currentProject));
+    // });
   }
 
   getDateList(project: Project): Date[] {

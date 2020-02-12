@@ -17,7 +17,7 @@
       Your work today:
     </h1>
   </div>
-
+<!--
   <div class="row">
     <ul *ngFor="let task of currentTasks">
       <li>{{task.name}}</li>
@@ -25,13 +25,13 @@
     <ul *ngIf="currentTasks.length === 0">
       <li>( None )</li>
     </ul>
-  </div>
+  </div> -->
   <div>
     <div class="row">
       <h1 class="display-4">Dashboard</h1>
     </div>
     <mat-nav-list>
-      <mat-list-item *ngFor="let project of getProjects()" routerLink='/app/projects/{{project.projectID}}'>
+      <!-- <mat-list-item *ngFor="let project of getProjects()" routerLink='/app/projects/{{project.projectID}}'>
         <div class="table project-progress">
           <div class="row w-100 display-4 text-left proLabel">
             <div class="col-4">
@@ -49,7 +49,7 @@
             <mat-progress-bar mode="determinate" [value]="getProgress(project)"></mat-progress-bar>
           </div>
         </div>
-      </mat-list-item>
+      </mat-list-item> -->
     </mat-nav-list>
   </div>
 

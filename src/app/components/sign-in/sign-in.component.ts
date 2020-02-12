@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,6 +12,7 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
+    private router: Router,
     public formBuilder: FormBuilder,
     public authService: AuthService,
   ) {
@@ -21,6 +23,13 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.isLoggedIn().then(
+      () => {
+        this.router.navigate(['app/dashboard']);
+      }
+    ).catch(
+      () => { }
+    );
   }
 
   onSubmit(formDirective: FormGroupDirective) {
@@ -28,10 +37,16 @@ export class SignInComponent implements OnInit {
   }
 
   tryLogin(input: { email: string; password: string; }, formDirective: FormGroupDirective) {
-    if (!this.authService.doLogin(input.email, input.password)) {
-      alert('Your Email or Password Wrong');
-      this.loginForm.reset();
-      formDirective.resetForm();
-    }
+    this.authService.logIn(input.email, input.password).then(
+      () => {
+        this.router.navigate(['app/dashboard']);
+      }
+    ).catch(
+      () => {
+        this.loginForm.reset();
+        formDirective.resetForm();
+        alert('Incorrect email or password.');
+      }
+    );
   }
 }

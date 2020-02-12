@@ -22,13 +22,14 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   isOwnedByCurrentUser(): boolean {
-    return this.projectService.isOwnedByCurrentUser(this.project.projectID);
+    return true;
+    // return this.projectService.isOwnedByCurrentUser(this.project.uid);
   }
 
   openDialog() {
     this.dialog.open(EditDetailDIalogComponent, {
       width: '50rem',
-      data: this.project.projectID
+      data: this.project.uid
     });
   }
 }

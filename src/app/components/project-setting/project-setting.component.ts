@@ -48,8 +48,8 @@ export class ProjectSettingComponent implements OnInit {
 
   initUserList(): void {
     let itemID = 0;
-    this.selectedUsers = this.projectService.getMembers(this.project.projectID).filter(user => user.uid !== this.project.projectOwnerID);
-    this.userList = this.userService.getUsers().filter(user => user.uid !== this.project.projectOwnerID);
+    // this.selectedUsers = this.projectService.getMembers(this.project.projectID).filter(user => user.uid !== this.project.projectOwnerID);
+    // this.userList = this.userService.getUsers().filter(user => user.uid !== this.project.projectOwnerID);
     this.userListItems = this.userList.map(user => {
       const item = { id: itemID, user, selected: this.selectedUsers.includes(user) };
       itemID++;
@@ -59,13 +59,13 @@ export class ProjectSettingComponent implements OnInit {
 
   setFormValue(): void {
     this.initUserList();
-    this.projectName = new FormControl(this.project.projectName);
+    this.projectName = new FormControl(this.project.name);
     this.startDate = new FormControl(this.project.startDate.toISOString());
     this.endDate = new FormControl(this.project.endDate.toISOString());
   }
 
   saveSetting(): void {
-    this.project.projectName = this.projectName.value;
+    this.project.name = this.projectName.value;
     if (this.project.endDate.getTime() > new Date(this.startDate.value).getTime()) {
       this.project.startDate = new Date(this.startDate.value);
     } else {
@@ -76,8 +76,8 @@ export class ProjectSettingComponent implements OnInit {
     } else {
       this.endDate.setValue(this.project.endDate.toISOString());
     }
-    this.project.membersID = this.selectedUsers.map(user => user.uid);
-    this.project.membersID.push(this.project.projectOwnerID);
+    // this.project.membersID = this.selectedUsers.map(user => user.uid);
+    this.project.member.push(this.project.manager);
     alert('The project settings have been saved.');
   }
 
@@ -88,11 +88,11 @@ export class ProjectSettingComponent implements OnInit {
     } else {
       this.selectedUsers = this.selectedUsers.filter(selectedUser => selectedUser.uid !== item.user.uid);
     }
-    this.selectedUsers.sort(((a, b) => a.uid - b.uid));
+    // this.selectedUsers.sort(((a, b) => a.uid - b.uid));
   }
   deleteProject() {
-    this.projectService.deleteProject(this.project.projectID);
-    this.projectService.getUserProjects(this.userService.getCurrentUserID());
+    // this.projectService.deleteProject(this.project.uid);
+    // this.projectService.getUserProjects(this.userService.getCurrentUserID());
     this.router.navigate(['app/dashboard']);
   }
   onDelete() {

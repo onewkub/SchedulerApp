@@ -6,6 +6,8 @@ import { UserService } from 'src/app/services/user.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { Project } from '../../models/project.model';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { Observable } from 'rxjs';
 
 enum PageType {
   dashboard,
@@ -19,34 +21,37 @@ enum PageType {
 })
 export class NavBarComponent implements OnInit {
   isExpanded = false;
-  selectedProjectID: number = null;
+  displayNanme: string;
+  selectedProjectID: number;
   activePage = PageType.dashboard;
 
   constructor(
     private authService: AuthService,
-    private dialog: MatDialog,
-    private router: Router,
     private userService: UserService,
-    private projectService: ProjectService,
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      user => {
+        this.displayNanme = user.displayName;
+      }
+    );
   }
 
   logOut() {
-    this.authService.doLogout();
+    this.authService.logOut();
+    this.router.navigate(['/']);
   }
 
   toggleMenu() {
     this.isExpanded = !this.isExpanded;
   }
 
-  getUserDisplayName(): string {
-    return this.userService.getCurrentUser().displayName;
-  }
-
   getProjectList(): Project[] {
-    return this.projectService.getUserProjects(this.userService.getCurrentUserID());
+    // return this.projectService.getUserProjects(this.userService.getCurrentUserID());
+    return null;
   }
 
   openDialog() {
@@ -56,21 +61,22 @@ export class NavBarComponent implements OnInit {
   }
 
   isSelectedProject(project: Project): boolean {
-    return this.selectedProjectID === project.projectID && this.activePage === PageType.project;
+    return false;
+    // return this.selectedProjectID === project.uid && this.activePage === PageType.project;
   }
 
   isSelectedDashboard(): boolean {
     return this.activePage === PageType.dashboard;
   }
 
-  switchToProject(project: Project): void {
-    this.router.navigate([`/app/projects/${project.projectID}`]).then(() => {
-      this.activePage = PageType.project;
-      this.selectedProjectID = project.projectID;
-    });
+  switchToProject(project: Project) {
+    // this.router.navigate([`/app/projects/${project.uid}`]).then(() => {
+    //   this.activePage = PageType.project;
+    //   this.selectedProjectID = project.uid;
+    // });
   }
 
-  switchToDashboard(): void {
+  switchToDashboard() {
     this.router.navigate(['/app']).then(() => {
       this.activePage = PageType.dashboard;
     });

@@ -19,7 +19,7 @@
           <mat-icon>person</mat-icon>
         </span>
         <span *ngIf="isExpanded" class="menu-text">
-          <p>{{this.getUserDisplayName()}}</p>
+          <p>{{ displayNanme }}</p>
         </span>
         <span *ngIf="isExpanded" class="menu-icon">
           <button (click)="logOut()" mat-raised-button style="box-shadow: none; color: tomato;">
@@ -45,7 +45,7 @@
       <mat-divider></mat-divider>
 
       <!-- Project List -->
-      <div *ngFor="let project of getProjectList()">
+      <!-- <div *ngFor="let project of getProjectList()">
         <div>
           <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active">
             <span class="menu-icon">
@@ -56,7 +56,7 @@
             </span>
           </mat-list-item>
         </div>
-      </div>
+      </div> -->
 
       <mat-divider></mat-divider>
 

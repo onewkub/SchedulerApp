@@ -52,21 +52,21 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   addTask() {
-    const form = this.taskForm.value;
-    const newTask: Task = {
-      taskID: null,
-      projectID: this.data.work.task.projectID,
-      name: form.name,
-      description: form.description,
-      startDate: form.startDate,
-      endDate: form.endDate,
-      ownerID: this.data.owner.uid,
-      status: TaskStatus.inProgress,
-      reasonForCancel: ''
-    };
-    this.projectService.addTask(newTask);
-    this.projectService.updateTaskStatus();
-    this.onNoClick();
+    // const form = this.taskForm.value;
+    // const newTask: Task = {
+    //   taskID: null,
+    //   projectID: this.data.work.task.projectID,
+    //   name: form.name,
+    //   description: form.description,
+    //   startDate: form.startDate,
+    //   endDate: form.endDate,
+    //   ownerID: this.data.owner.uid,
+    //   status: TaskStatus.inProgress,
+    //   reasonForCancel: ''
+    // };
+    // this.projectService.addTask(newTask);
+    // this.projectService.updateTaskStatus();
+    // this.onNoClick();
   }
 
   deleteTask() {

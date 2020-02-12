@@ -1,60 +1,79 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { MockDataService } from './mock-data.service';
-import { CookieService } from 'ngx-cookie-service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  lastedUid: number;
 
   constructor(
-    private apiService: MockDataService,
-    private router: Router,
-    private cookieService: CookieService
-  ) {
-    this.lastedUid = this.apiService.authTable.length;
+    private fireauth: AngularFireAuth
+    ) { }
+
+  register(displayName: string, email: string, password: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.fireauth.auth.createUserWithEmailAndPassword(email, password).then(
+        res => {
+          this.updateAuthDisplayName(res.user, displayName);
+          resolve();
+        }
+      ).catch(
+        err => {
+          reject('User registration error: ' + err.message);
+        }
+      );
+    });
   }
 
-  doRegister(displayName: string, email: string, password: string): boolean {
-    const isEmailUseable = this.apiService.users.find(user => user.email === email);
-
-    if (!isEmailUseable) {
-      this.apiService.authTable.push({ uid: this.lastedUid, email, password, logedIn: false });
-      this.apiService.users.push({
-        uid: this.lastedUid++,
-        displayName,
-        email
-      });
-
-      alert('Your registration successful.');
-      return true;
-    }
-    alert('Your registration not successful.');
-    return false;
+  logIn(email: string, password: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.fireauth.auth.signInWithEmailAndPassword(email, password).then(
+        res => {
+          resolve();
+        }
+      ).catch(
+        err => {
+          reject(err);
+        }
+      );
+    });
   }
 
-  // Quick and dirty login using plain text cokkie
-  doLogin(email: string, password: string): boolean {
-    const login = this.apiService.authTable.find(user =>
-      user.email === email && user.password === password);
-
-    if (login === undefined) {
-      return false;
-    }
-
-    this.cookieService.set('login', login.uid.toString(), 30);
-    this.router.navigate(['app/dashboard']);
-    return true;
+  isLoggedIn(): Promise<firebase.User> {
+    return new Promise((resolve, reject) => {
+      this.fireauth.auth.onAuthStateChanged(
+        user => {
+          if (user) {
+            resolve(user);
+          } else {
+            reject('');
+          }
+        },
+        err => reject(err)
+      );
+    });
   }
 
-  isAlreadyLogin(): boolean {
-    return this.cookieService.get('login') !== '';
+  updateAuthDisplayName(user: firebase.User, displayName: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.fireauth.auth.currentUser.updateProfile({ displayName }).then(
+        () => {
+          resolve();
+        }
+      ).catch(
+        err => {
+          console.error(err);
+          reject();
+        }
+      );
+    });
   }
 
-  doLogout() {
-    this.cookieService.delete('login');
-    this.router.navigate(['']);
+  getCurrentUserUID(): string {
+    return this.fireauth.auth.currentUser.uid;
+  }
+
+  logOut(): Promise<void> {
+    return this.fireauth.auth.signOut();
   }
 }

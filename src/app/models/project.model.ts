@@ -1,9 +1,9 @@
-export class Project {
-  projectID: number;
-  projectName: string;
-  startDate: Date;
-  endDate: Date;
-  projectOwnerID: number;
-  membersID: number[];
-  description: string;
+export interface Project {
+  uid: string;
+  name?: string;
+  startDate?: Date;
+  endDate?: Date;
+  manager?: number;
+  member?: number[];
+  description?: string;
 }
