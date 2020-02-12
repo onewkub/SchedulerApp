@@ -3,7 +3,7 @@
   <form [formGroup]="addProjectForm" (ngSubmit)="onSubmit()">
     <div>
       <mat-form-field>
-        <input formControlName="projectName" type="text" matInput placeholder="Project Name" autocomplete="off"
+        <input formControlName="name" type="text" matInput placeholder="Project Name" autocomplete="off"
           required>
       </mat-form-field>
       <mat-form-field>
@@ -33,23 +33,22 @@
   <div class="row">
     <div class="col-6">
       <mat-nav-list>
-        <mat-list-item (click)="selectedUser(userItem)" *ngFor="let userItem of userItems | filter:searchName">
-          <mat-checkbox disableRipple="true" [(ngModel)]="checkList[userItem.id]">{{userItem.user.displayName}}
+        <mat-list-item (click)="selecteUserItem(item)" *ngFor="let item of userItems | filter:searchName">
+          <mat-checkbox disableRipple="true" [(ngModel)]="item.selected">{{ item.user.displayName }}
           </mat-checkbox>
-
         </mat-list-item>
       </mat-nav-list>
     </div>
     <div class="col-6">
       <mat-list role="list">
-        <mat-list-item role="listitem" *ngFor="let user of selectedUsers">
-          <p>{{user.displayName}}</p>
+        <mat-list-item role="listitem" *ngFor="let item of getSelectUserItems()">
+          <p>{{item.user.displayName}}</p>
         </mat-list-item>
       </mat-list>
     </div>
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button (click)="onClose()">Close</button>
   <button (click)="onSubmit()" [disabled]="addProjectForm.invalid" mat-raised-button>Add Project</button>
 </div>

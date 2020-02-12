@@ -3,7 +3,7 @@ export interface Project {
   name?: string;
   startDate?: Date;
   endDate?: Date;
-  manager?: number;
-  member?: number[];
+  manager?: string;
+  member?: string[];
   description?: string;
 }

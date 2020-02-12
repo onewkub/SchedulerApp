@@ -99,10 +99,11 @@ export class ProjectTaskComponent implements OnInit {
 
   isTaskOrProjectOwner(task: Task): boolean {
     // const currentUserID = this.userService.getCurrentUserID();
-    const currentUserID = 0;
-    const project = this.projectService.getProject(task.projectID);
-    const isProjectOwner = project.manager === currentUserID;
-    return this.isTaskOwner(task) || isProjectOwner;
+    // const currentUserID = 0;
+    // const project = this.projectService.getProject(task.projectID);
+    // const isProjectOwner = project.manager === currentUserID;
+    // return this.isTaskOwner(task) || isProjectOwner;
+    return true;
   }
 
   getRemainingTimeString(task: Task): string {

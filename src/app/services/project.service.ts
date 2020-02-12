@@ -3,23 +3,29 @@ import { UserService } from './user.service';
 import { Project } from '../models/project.model';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  lastProjectID: number;
+  private projectCollection: AngularFirestoreCollection<Project>;
 
   constructor(
-    public userService: UserService
+    private firestore: AngularFirestore,
+    private userService: UserService
   ) {
-    // this.lastProjectID = dataService.project.length;
+    this.projectCollection = this.firestore.collection<Project>('projects');
   }
 
   addProject(project: Project) {
-    // project.projectID = this.lastProjectID++;
-    // this.dataService.project.push(project);
-    return null;
+    const projectRef = this.projectCollection.add(project);
+    projectRef.then(ref => {
+      const newUID: Project = {
+        uid: ref.id,
+      };
+      ref.update(newUID);
+    });
   }
 
   getProject(projectID: number): Project {
