@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.authService.isLoggedIn().then(
       () => {
-        this.router.navigate(['app/dashboard']);
+        this.router.navigate(['/']);
       }
     ).catch(
       () => { }
@@ -33,13 +33,13 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit(formDirective: FormGroupDirective) {
-    this.tryLogin(this.loginForm.value, formDirective);
+    this.logIn(this.loginForm.value, formDirective);
   }
 
-  tryLogin(input: { email: string; password: string; }, formDirective: FormGroupDirective) {
+  logIn(input: { email: string; password: string; }, formDirective: FormGroupDirective) {
     this.authService.logIn(input.email, input.password).then(
       () => {
-        this.router.navigate(['app/dashboard']);
+        this.router.navigate(['/']);
       }
     ).catch(
       () => {

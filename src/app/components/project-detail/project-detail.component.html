@@ -1,14 +1,16 @@
 <div class="detail">
   <div>
-    <!-- <h1 class="display-4">Project Name: {{project.projectName}}</h1> -->
-    <h1 class="display-3">Start Date: {{project.startDate | date:'longDate'}}</h1>
-    <h1 class="display-3">End Date: {{project.endDate | date:'longDate'}}</h1>
+    <h1 class="display-4">Project Name: {{project?.name}}</h1>
+    <h1 class="display-3">Start Date: {{project?.startDate.toDate() | date:'longDate'}}</h1>
+    <h1 class="display-3">End Date: {{project?.endDate.toDate() | date:'longDate'}}</h1>
     <h1 class="display-3">Description</h1>
     <div *ngIf="isOwnedByCurrentUser()">
-      <span><button mat-mini-fab>
+      <span>
+        <button mat-mini-fab>
           <mat-icon (click)="openDialog()">edit</mat-icon>
-        </button></span>
+        </button>
+      </span>
     </div>
-    <p>{{project.description}}</p>
+    <p>{{project?.description}}</p>
   </div>
 </div>

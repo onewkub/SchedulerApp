@@ -27,7 +27,6 @@ export class ConfirmTaskCancelComponent implements OnInit {
 
   onConfirm(): void {
     this.task.status = this.toStatus;
-    this.task.reasonForCancel = this.reason.value;
     this.dialogRef.close();
   }
 }

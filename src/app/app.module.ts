@@ -32,18 +32,18 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { HomeComponent } from './components/home/home.component';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
 import { ProjectTaskComponent } from './components/project-task/project-task.component';
 import { ProjectComponent } from './components/project/project.component';
 import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
-import { ProjectTableComponent } from './components/project-table/project-table.component';
 import { ProjectAddTaskComponent } from './components/project-add-task/project-add-task.component';
 import { ConfirmTaskStatusComponent } from './components/confirm-task-status/confirm-task-status.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ConfirmTaskCancelComponent } from './components/comfirm-task-cancel/confirm-task-cancel.component';
 import { EditDetailDIalogComponent } from './components/edit-detail-dialog/edit-detail-dialog.component';
+import { ProjectTimelineComponent } from './components/project-timeline/project-timeline.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
 @NgModule({
@@ -53,18 +53,18 @@ import { EditDetailDIalogComponent } from './components/edit-detail-dialog/edit-
     DashboardComponent,
     SignInComponent,
     SignUpComponent,
-    HomeComponent,
     AddProjectComponent,
     ProjectDetailComponent,
     ProjectTaskComponent,
     ProjectComponent,
     ProjectSettingComponent,
-    ProjectTableComponent,
     ProjectAddTaskComponent,
     ConfirmTaskStatusComponent,
     ConfirmDialogComponent,
     ConfirmTaskCancelComponent,
     EditDetailDIalogComponent,
+    ProjectTimelineComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -84,9 +84,7 @@ import { EditDetailDIalogComponent } from './components/edit-detail-dialog/edit-
   providers: [
     AuthService,
     UserService,
-    AuthGuard,
-    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' },
-    { provide: MAT_DATE_LOCALE, useValue: 'en-US' },
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [

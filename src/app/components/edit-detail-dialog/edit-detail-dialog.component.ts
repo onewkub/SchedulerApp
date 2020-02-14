@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { FormControl } from '@angular/forms';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project.model';
 
 @Component({
   selector: 'app-edit-detail-dialog',
@@ -14,23 +15,24 @@ export class EditDetailDIalogComponent implements OnInit {
   detail: FormControl;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public projectID: number,
+    @Inject(MAT_DIALOG_DATA) public project: Project,
     public dialogRef: MatDialogRef<EditDetailDIalogComponent>,
     public dialog: MatDialog,
     private projectService: ProjectService
   ) {
-    this.detail = new FormControl(projectService.getProject(projectID).description);
+    this.detail = new FormControl(this.project.description);
   }
 
   ngOnInit() {
   }
 
-  onNoClick(): void {
+  onClose() {
     this.dialogRef.close();
   }
   onSave() {
     this.openConfirmDialog();
   }
+
   openConfirmDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
@@ -41,8 +43,8 @@ export class EditDetailDIalogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       if (dialogRef.componentInstance.confirm) {
-        this.projectService.getProject(this.projectID).description = this.detail.value;
-        this.onNoClick();
+        this.project.description = this.detail.value;
+        this.onClose();
       }
     });
   }

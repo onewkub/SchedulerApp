@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Project } from 'src/app/models/project.model';
 import { TaskStatus } from '../../models/task.model';
 import { ProjectService } from '../../services/project.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,34 +12,31 @@ import { ProjectService } from '../../services/project.service';
 })
 export class DashboardComponent implements OnInit {
 
-  todayDate = new Date(); // TODO: Update this with timer
-  // currentTasks = this.userService.getUserTask(this.userService.getCurrentUserID()).filter((task) => {
-  //   this.projectService.updateTaskStatus();
-  //   return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
-  // });
+  user: User;
+  todayDate = new Date();
   currentTasks = null;
 
   constructor(
     private userService: UserService,
     private projectService: ProjectService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser().subscribe(
+      user => this.user = user
+    );
   }
 
   getUserDisplayName(): string {
-    // return this.userService.getCurrentUser().displayName;
     return null;
   }
 
   getProjects(): Project[] {
-    // return this.projectService.getUserProjects(this.userService.getCurrentUserID());
     return null;
   }
 
-  getProjectOwnerDisplayName(projectId: number): string {
-    return this.projectService.getOwner(projectId).displayName;
+  getProjectOwnerDisplayName(projectID: string): string {
+    return null;
   }
 
   getRemainingDay(endDate: Date): string {
@@ -51,9 +49,9 @@ export class DashboardComponent implements OnInit {
   }
 
   getProgress(project: Project) {
-    const diff = project.endDate.getTime() - project.startDate.getTime();
+    const diff = project.endDate.toDate().getTime() - project.startDate.toDate().getTime();
     const diffDays = Math.floor(diff / (1000 * 3600 * 24));
-    const currentDate = this.todayDate.getTime() - project.startDate.getTime();
+    const currentDate = this.todayDate.getTime() - project.startDate.toDate().getTime();
     const currentDays = Math.floor(currentDate / (1000 * 3600 * 24));
     let progress;
     if (currentDate < 0) {

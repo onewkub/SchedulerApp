@@ -25,11 +25,11 @@ export class AuthService {
     });
   }
 
-  logIn(email: string, password: string): Promise<void> {
+  logIn(email: string, password: string): Promise<firebase.User> {
     return new Promise((resolve, reject) => {
       this.fireauth.auth.signInWithEmailAndPassword(email, password).then(
         res => {
-          resolve();
+          resolve(res.user);
         }
       ).catch(
         err => {

@@ -25,7 +25,6 @@ export class ConfirmDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   confirmDialog() {
-    this.projectService.deleteTask(this.taskID);
     this.confirm = true;
     this.closeDialog();
   }

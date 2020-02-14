@@ -7,6 +7,7 @@ import { User } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { firestore } from 'firebase';
 
 interface UserListItem {
   id: number;
@@ -41,7 +42,8 @@ export class ProjectSettingComponent implements OnInit {
 
   ngOnInit() {
     this.activeRoute.params.subscribe(routeParams => {
-      this.project = this.projectService.getProject(Number(routeParams.pid));
+      // this.project = this.projectService.getCachedProject(routeParams.uid);
+      this.project = null;
       this.setFormValue();
     });
   }
@@ -51,8 +53,7 @@ export class ProjectSettingComponent implements OnInit {
     // this.selectedUsers = this.projectService.getMembers(this.project.projectID).filter(user => user.uid !== this.project.projectOwnerID);
     // this.userList = this.userService.getUsers().filter(user => user.uid !== this.project.projectOwnerID);
     this.userListItems = this.userList.map(user => {
-      const item = { id: itemID, user, selected: this.selectedUsers.includes(user) };
-      itemID++;
+      const item = { id: itemID++, user, selected: this.selectedUsers.includes(user) };
       return item;
     });
   }
@@ -60,21 +61,21 @@ export class ProjectSettingComponent implements OnInit {
   setFormValue(): void {
     this.initUserList();
     this.projectName = new FormControl(this.project.name);
-    this.startDate = new FormControl(this.project.startDate.toISOString());
-    this.endDate = new FormControl(this.project.endDate.toISOString());
+    this.startDate = new FormControl(this.project.startDate.toDate().toISOString());
+    this.endDate = new FormControl(this.project.endDate.toDate().toISOString());
   }
 
   saveSetting(): void {
     this.project.name = this.projectName.value;
-    if (this.project.endDate.getTime() > new Date(this.startDate.value).getTime()) {
-      this.project.startDate = new Date(this.startDate.value);
+    if (this.project.endDate.toDate().getTime() > new Date(this.startDate.value).getTime()) {
+      this.project.startDate = firestore.Timestamp.fromDate(new Date(this.startDate.value));
     } else {
-      this.startDate.setValue(this.project.startDate.toISOString());
+      this.startDate.setValue(this.project.startDate.toDate().toISOString());
     }
-    if (this.project.startDate.getTime() < new Date(this.endDate.value).getTime()) {
-      this.project.endDate = new Date(this.endDate.value);
+    if (this.project.startDate.toDate().getTime() < new Date(this.endDate.value).getTime()) {
+      this.project.endDate = firestore.Timestamp.fromDate(new Date(this.endDate.value));
     } else {
-      this.endDate.setValue(this.project.endDate.toISOString());
+      this.endDate.setValue(this.project.endDate.toDate().toISOString());
     }
     // this.project.membersID = this.selectedUsers.map(user => user.uid);
     this.project.member.push(this.project.manager);

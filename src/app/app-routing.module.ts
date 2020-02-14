@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProjectComponent } from './components/project/project.component';
-import { AuthGuard } from './guards/auth.guard';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
   {
-    path: 'app', component: NavBarComponent, children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'projects/:pid', component: ProjectComponent },
-      { path: 'dashboard', pathMatch: 'full', redirectTo: 'dashboard' },
+    path: '', component: NavBarComponent, children: [
+      { path: '', component: DashboardComponent },
+      { path: 'projects/:uid', component: ProjectComponent }
     ],
     canActivate: [AuthGuard]
   },
-  { path: '', component: HomeComponent },
+  { path: 'auth', component: WelcomeComponent },
   { path: '**', redirectTo: '' }
 ];
 

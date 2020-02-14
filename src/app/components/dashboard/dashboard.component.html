@@ -6,11 +6,11 @@
   </div>
   <div class="row">
     <h1 class="display-4">
-      {{todayDate | date:'longDate'}}
+      {{ todayDate | date:'longDate' }}
     </h1>
   </div>
   <div class="row">
-    <h1 class="display-4">Hello {{getUserDisplayName()}}</h1>
+    <h1 class="display-4">Hello {{ user?.displayName }}</h1>
   </div>
   <div class="row">
     <h1 class="display-4">

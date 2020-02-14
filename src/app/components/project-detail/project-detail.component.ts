@@ -3,6 +3,9 @@ import { Project } from 'src/app/models/project.model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDetailDIalogComponent } from '../edit-detail-dialog/edit-detail-dialog.component';
 import { ProjectService } from 'src/app/services/project.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-project-detail',
@@ -11,25 +14,43 @@ import { ProjectService } from 'src/app/services/project.service';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  @Input() project: Project;
+  project: Project;
+  user: User;
 
   constructor(
     private dialog: MatDialog,
-    private projectService: ProjectService
+    private activeRoute: ActivatedRoute,
+    private projectService: ProjectService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
+    this.getCurrentProject();
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.userService.getCurrentUser().subscribe(
+      user => this.user = user
+    );
+  }
+
+  getCurrentProject() {
+    this.activeRoute.params.subscribe(params => {
+      this.projectService.getProject(params.uid).subscribe(
+        project => this.project = project
+      );
+    });
   }
 
   isOwnedByCurrentUser(): boolean {
-    return true;
-    // return this.projectService.isOwnedByCurrentUser(this.project.uid);
+    return this.user?.uid === this.project?.manager;
   }
 
   openDialog() {
     this.dialog.open(EditDetailDIalogComponent, {
       width: '50rem',
-      data: this.project.uid
+      data: this.project
     });
   }
 }

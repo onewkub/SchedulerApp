@@ -45,18 +45,18 @@
       <mat-divider></mat-divider>
 
       <!-- Project List -->
-      <!-- <div *ngFor="let project of getProjectList()">
+      <div *ngFor="let project of projectList">
         <div>
-          <mat-list-item routerLink="projects/{{project.projectID}}" routerLinkActive="is-active">
+          <mat-list-item routerLink="projects/{{ project.uid }}" routerLinkActive="is-active">
             <span class="menu-icon">
               <mat-icon>label</mat-icon>
             </span>
             <span *ngIf="isExpanded" class="menu-text">
-              <p>{{project.projectName}}</p>
+              <p>{{ project.name }}</p>
             </span>
           </mat-list-item>
         </div>
-      </div> -->
+      </div>
 
       <mat-divider></mat-divider>
 

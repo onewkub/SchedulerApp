@@ -18,12 +18,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Promise<boolean> {
     return this.authService.isLoggedIn().then(
       user => {
-        this.userService.setUserData(user);
+        this.userService.updateUser(user);
         return true;
       }
     ).catch(
       () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth']);
         return false;
       }
     );

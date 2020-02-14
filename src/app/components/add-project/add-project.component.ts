@@ -82,6 +82,7 @@ export class AddProjectComponent implements OnInit {
         endDate: this.addProjectForm.value.endDate === '' ? new Date() : this.addProjectForm.value.endDate,
         manager: user.uid,
         member,
+        tasks: [],
         description: ''
       });
     });

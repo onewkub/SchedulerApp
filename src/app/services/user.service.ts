@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User } from '../models/user.model';
-import { Task } from '../models/task.model';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 
@@ -20,17 +19,6 @@ export class UserService {
     this.users = this.userCollection.valueChanges();
   }
 
-  setUserData(user: User): Promise<void> {
-    const ref = this.firestore.doc<User>(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-    };
-    return ref.set(data, { merge: true });
-  }
-
   getUser(uid: string): Observable<User> {
     return this.firestore.doc<User>(`users/${uid}`).valueChanges();
   }
@@ -44,8 +32,14 @@ export class UserService {
     return this.users;
   }
 
-  getUserTask(userID: number): Task[] {
-    // return this.dataService.taskList.filter((task) => task.ownerID === userID);
-    return null;
+  updateUser(user: firebase.User): Promise<void> {
+    const ref = this.firestore.doc<User>(`users/${user.uid}`);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
+    return ref.set(data, { merge: true });
   }
 }
