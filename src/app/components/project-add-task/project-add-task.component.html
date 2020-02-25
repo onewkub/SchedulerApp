@@ -1,33 +1,33 @@
 <h1 mat-dialog-title>Add Task</h1>
 <div class="mat-dialog-content">
-    <form [formGroup]="taskForm">
-        <mat-label>Assigned to: <b>{{data.owner.displayName}}</b></mat-label><br>
-        <mat-form-field>
-            <input formControlName="name" type="text" matInput placeholder="Task Name" autocomplete="off">
-        </mat-form-field>
-        <mat-form-field>
-            <input formControlName="startDate" matInput [matDatepicker]="startPicker" placeholder="Start Date"
-                autocomplete="off">
-            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-            <mat-datepicker #startPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-            <input formControlName="endDate" matInput [matDatepicker]="endPicker" placeholder="End Date"
-                autocomplete="off">
-            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-            <mat-datepicker #endPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field class="textArea">
-            <mat-label>Description</mat-label>
-            <textarea formControlName="description" autocomplete="off" matInput></textarea>
-        </mat-form-field>
+  <form [formGroup]="taskForm">
+    <mat-label>Assigned to: <b>{{data.owner.displayName}}</b></mat-label><br>
+    <mat-form-field>
+      <input formControlName="name" type="text" matInput placeholder="Task Name" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="startDate" matInput [matDatepicker]="startPicker" placeholder="Start Date"
+        autocomplete="off">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="endDate" matInput [matDatepicker]="endPicker" placeholder="End Date" autocomplete="off">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="text-area">
+      <mat-label>Description</mat-label>
+      <textarea formControlName="description" autocomplete="off" matInput></textarea>
+    </mat-form-field>
 
-    </form>
+  </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Close</button>
-    <button mat-button *ngIf="this.data.work.task.taskID != null" (click)="deleteTask()" [disabled]="this.data.work.task.taskID == null" mat-raised-button color="warn">Delete</button>
-    <button mat-raised-button *ngIf="this.data.work.task.taskID == null" (click)="addTask()">Add Task</button>
-    <button mat-raised-button *ngIf="this.data.work.task.taskID != null" (click)="editTask()">Edit Task</button>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button *ngIf="this.data.work.task.taskID != null" (click)="deleteTask()"
+    [disabled]="this.data.work.task.taskID == null" mat-raised-button color="warn">Delete</button>
+  <button mat-raised-button *ngIf="this.data.work.task.taskID == null" (click)="addTask()">Add Task</button>
+  <button mat-raised-button *ngIf="this.data.work.task.taskID != null" (click)="editTask()">Edit Task</button>
 
 </div>

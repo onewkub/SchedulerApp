@@ -1,9 +1,11 @@
-.textArea{
-    width: 100%;
+.detail {
+  width: 100%;
 }
-.mat-dialog-actions{
-    justify-content: flex-end;
+
+.mat-dialog-actions {
+  justify-content: flex-end;
 }
-textarea{
-    height: 10rem;
+
+.text-area {
+  height: 10rem;
 }

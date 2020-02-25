@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {Router} from '@angular/router';
-import {AuthService} from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit {
       email: ['', Validators.email],
       password: [''],
       confirmPassword: ['']
-    }, {validator: this.checkPasswords});
+    }, { validator: this.checkPasswords });
   }
 
   registerForm: FormGroup;
@@ -44,18 +44,24 @@ export class SignUpComponent implements OnInit {
     const pass = group.controls.password.value;
     const confirmPass = group.controls.confirmPassword.value;
 
-    return pass === confirmPass ? null : {notSame: true};
+    return pass === confirmPass ? null : { notSame: true };
   }
 
   onSubmit(formDirective: FormGroupDirective) {
     this.tryRegister(this.registerForm.value);
     this.registerForm.reset();
     formDirective.resetForm();
-
   }
 
-  tryRegister(value) {
-    this.authService.doRegister(value);
+  tryRegister(input: { displayName: string; email: string; password: string; }) {
+    this.authService.register(input.displayName, input.email, input.password).then(
+      () => {
+        this.router.navigate(['/']);
+      }
+    ).catch(
+      err => {
+        console.error(err);
+      }
+    );
   }
-
 }

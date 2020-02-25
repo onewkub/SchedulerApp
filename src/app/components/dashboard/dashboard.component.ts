@@ -1,63 +1,64 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from 'src/app/services/user.service';
-import {Project} from 'src/app/models/project.model';
-import {TaskStatus} from '../../models/task.model';
-import {ProjectService} from '../../services/project.service';
-
-// import {DatePipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { Project } from 'src/app/models/project.model';
+import { TaskStatus } from '../../models/task.model';
+import { ProjectService } from '../../services/project.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  // providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
 
+  user: User;
   todayDate = new Date();
-  today: string;
-  currentTasks = this.userService.getUserTask(this.userService.currentUser.uid).filter((task) => {
-    this.projectService.calculateTaskStatus();
-    return task.status === TaskStatus.inProgress || task.status === TaskStatus.late;
-  });
+  currentTasks = null;
 
   constructor(
-    public userService: UserService,
-    public projectService: ProjectService
-  ) {
-    // dateString = this.datePipe.transform(date, 'yyyy-MM-dd');
-    this.today = this.userService.getDate(this.todayDate);
-
-  }
+    private userService: UserService,
+    private projectService: ProjectService
+  ) { }
 
   ngOnInit() {
-    console.log(this.currentTasks);
+    this.userService.getCurrentUser().subscribe(
+      user => this.user = user
+    );
   }
 
-  getRemainingDay(endDate: Date):string{
-    var diff = endDate.getTime() - this.todayDate.getTime();
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
-    if(diff >= 0){
-      return diffDays + " Days";
-    }
-    return "Late";
+  getUserDisplayName(): string {
+    return null;
   }
-  getProgress(project: Project){
-    var diff = project.endDate.getTime() - project.startDate.getTime();
-    var diffDays = Math.floor(diff / (1000 * 3600 * 24));
-    var currentDate = this.todayDate.getTime() - project.startDate.getTime();
-    var currentDays = Math.floor(currentDate / (1000 * 3600 * 24));
-    var progress;
-    if(currentDate < 0){
+
+  getProjects(): Project[] {
+    return null;
+  }
+
+  getProjectOwnerDisplayName(projectID: string): string {
+    return null;
+  }
+
+  getRemainingDay(endDate: Date): string {
+    const diff = endDate.getTime() - this.todayDate.getTime();
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    if (diff >= 0) {
+      return diffDays + ' Days';
+    }
+    return 'Late';
+  }
+
+  getProgress(project: Project) {
+    const diff = project.endDate.toDate().getTime() - project.startDate.toDate().getTime();
+    const diffDays = Math.floor(diff / (1000 * 3600 * 24));
+    const currentDate = this.todayDate.getTime() - project.startDate.toDate().getTime();
+    const currentDays = Math.floor(currentDate / (1000 * 3600 * 24));
+    let progress;
+    if (currentDate < 0) {
       progress = 0;
+    } else {
+      progress = ((currentDays) / diffDays) * 100;
     }
-    else{
-      progress = ((currentDays)/diffDays)*100;
-    }
-    // console.log(project.projectName + " : " + progress + " : " + currentDays + " " + diffDays)
     return progress;
-
-
-
   }
 }

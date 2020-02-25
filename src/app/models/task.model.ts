@@ -1,13 +1,13 @@
-export class Task {
-  taskID: number;
-  projectID: number;
-  name: string;
-  description: string;
-  startDate: Date;
-  endDate: Date;
-  owner: number;
-  status: TaskStatus;
-  reasonForCancel: string;
+import { firestore } from 'firebase';
+
+export interface Task {
+  uid: string;
+  name?: string;
+  description?: string;
+  startDate?: firestore.Timestamp;
+  endDate?: firestore.Timestamp;
+  owner?: string;
+  status?: TaskStatus;
 }
 
 export enum TaskStatus {

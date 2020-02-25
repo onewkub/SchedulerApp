@@ -1,13 +1,16 @@
-textarea{
-    height: 10rem;
+textarea {
+  height: 10rem;
 }
-.mat-form-field{
-    margin-right: 1rem;
-    margin-top: 1rem;
+
+.mat-form-field {
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
-.textArea{
-    width: 100%;
+
+.text-area {
+  width: 100%;
 }
-.mat-dialog-actions{
-    justify-content: flex-end;
+
+.mat-dialog-actions {
+  justify-content: flex-end;
 }

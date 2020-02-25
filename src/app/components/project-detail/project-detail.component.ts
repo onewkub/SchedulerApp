@@ -1,8 +1,11 @@
-import {Component, OnInit, Input} from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { Project } from 'src/app/models/project.model';
-import { MatDialog } from "@angular/material";
+import { MatDialog } from '@angular/material/dialog';
 import { EditDetailDIalogComponent } from '../edit-detail-dialog/edit-detail-dialog.component';
+import { ProjectService } from 'src/app/services/project.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-project-detail',
@@ -10,28 +13,44 @@ import { EditDetailDIalogComponent } from '../edit-detail-dialog/edit-detail-dia
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-  @Input() project : Project; 
-  @Input() projectDescription: any;
+
+  project: Project;
+  user: User;
+
   constructor(
-    public userService: UserService,
-    public dialog: MatDialog
-  ) {
-    
-  }
+    private dialog: MatDialog,
+    private activeRoute: ActivatedRoute,
+    private projectService: ProjectService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
-
+    this.getCurrentProject();
+    this.getCurrentUser();
   }
-  openDialog(){
-    console.log("openDialog");
-    console.log('Open Dialog');
-    const dialogRef = this.dialog.open(EditDetailDIalogComponent, {
-      width: '50rem',
-      data : this.projectDescription
-    });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+  getCurrentUser() {
+    this.userService.getCurrentUser().subscribe(
+      user => this.user = user
+    );
+  }
+
+  getCurrentProject() {
+    this.activeRoute.params.subscribe(params => {
+      this.projectService.getProject(params.uid).subscribe(
+        project => this.project = project
+      );
+    });
+  }
+
+  isOwnedByCurrentUser(): boolean {
+    return this.user?.uid === this.project?.manager;
+  }
+
+  openDialog() {
+    this.dialog.open(EditDetailDIalogComponent, {
+      width: '50rem',
+      data: this.project
     });
   }
 }

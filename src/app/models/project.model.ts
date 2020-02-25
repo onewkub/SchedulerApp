@@ -1,8 +1,12 @@
-export class Project {
-    projectID: number;
-    projectName: string;
-    startDate: Date;
-    endDate: Date;
-    projectOwner: number;
-    members: number[];
+import { firestore } from 'firebase';
+
+export interface Project {
+  uid: string;
+  name?: string;
+  startDate?: firestore.Timestamp;
+  endDate?: firestore.Timestamp;
+  manager?: string;
+  member?: string[];
+  tasks?: string[];
+  description?: string;
 }

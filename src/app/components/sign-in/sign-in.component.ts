@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormGroupDirective} from '@angular/forms';
-import {AuthService} from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,6 +12,7 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
+    private router: Router,
     public formBuilder: FormBuilder,
     public authService: AuthService,
   ) {
@@ -21,18 +23,30 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.isLoggedIn().then(
+      () => {
+        this.router.navigate(['/']);
+      }
+    ).catch(
+      () => { }
+    );
   }
-
 
   onSubmit(formDirective: FormGroupDirective) {
-    this.tryLogin(this.loginForm.value, formDirective);
+    this.logIn(this.loginForm.value, formDirective);
   }
 
-  tryLogin(value, formDirective: FormGroupDirective) {
-    if (!this.authService.doLogin(value)) {
-      alert('Your Email or Password Wrong');
-      this.loginForm.reset();
-      formDirective.resetForm();
-    }
+  logIn(input: { email: string; password: string; }, formDirective: FormGroupDirective) {
+    this.authService.logIn(input.email, input.password).then(
+      () => {
+        this.router.navigate(['/']);
+      }
+    ).catch(
+      () => {
+        this.loginForm.reset();
+        formDirective.resetForm();
+        alert('Incorrect email or password.');
+      }
+    );
   }
 }

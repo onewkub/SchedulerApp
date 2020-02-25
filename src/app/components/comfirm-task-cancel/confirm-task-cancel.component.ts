@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Task, TaskStatus} from '../../models/task.model';
-import {MatDialogRef} from '@angular/material';
-import {FormControl} from '@angular/forms';
+import { Task, TaskStatus } from '../../models/task.model';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-confirm-task-cancel',
@@ -27,7 +27,6 @@ export class ConfirmTaskCancelComponent implements OnInit {
 
   onConfirm(): void {
     this.task.status = this.toStatus;
-    this.task.reasonForCancel = this.reason.value;
     this.dialogRef.close();
   }
 }

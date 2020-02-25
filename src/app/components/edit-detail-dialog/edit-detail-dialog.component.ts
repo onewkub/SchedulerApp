@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
-import { FormControl } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ProjectService } from 'src/app/services/project.service';
+import { Project } from 'src/app/models/project.model';
 
 @Component({
   selector: 'app-edit-detail-dialog',
@@ -10,26 +12,28 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class EditDetailDIalogComponent implements OnInit {
 
-  detail : FormControl;
+  detail: FormControl;
+
   constructor(
-    public dialogRef : MatDialogRef<EditDetailDIalogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialog: MatDialog
-  ) { 
-    this.detail = new FormControl(this.data.description);
+    @Inject(MAT_DIALOG_DATA) public project: Project,
+    public dialogRef: MatDialogRef<EditDetailDIalogComponent>,
+    public dialog: MatDialog,
+    private projectService: ProjectService
+  ) {
+    this.detail = new FormControl(this.project.description);
   }
 
   ngOnInit() {
-    console.log(this.data);
   }
-  onNoClick(): void{
+
+  onClose() {
     this.dialogRef.close();
   }
-  onSave(){
+  onSave() {
     this.openConfirmDialog();
   }
+
   openConfirmDialog() {
-    console.log('Open Dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
     });
@@ -38,10 +42,9 @@ export class EditDetailDIalogComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       if (dialogRef.componentInstance.confirm) {
-        this.data.description = this.detail.value;
-        this.onNoClick();
+        this.project.description = this.detail.value;
+        this.onClose();
       }
     });
   }

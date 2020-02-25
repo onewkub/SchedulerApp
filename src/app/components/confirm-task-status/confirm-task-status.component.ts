@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {Task, TaskStatus} from '../../models/task.model';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Task, TaskStatus } from '../../models/task.model';
 
 @Component({
   selector: 'app-confirm-task-done',
@@ -8,14 +8,14 @@ import {Task, TaskStatus} from '../../models/task.model';
   styleUrls: ['./confirm-task-status.component.css']
 })
 export class ConfirmTaskStatusComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<ConfirmTaskStatusComponent>) { }
+  constructor(private dialogRef: MatDialogRef<ConfirmTaskStatusComponent>) { }
 
   title: string;
   desc: string;
   task: Task;
   toStatus: TaskStatus;
 
-ngOnInit() {
+  ngOnInit() {
   }
 
   onClose(): void {

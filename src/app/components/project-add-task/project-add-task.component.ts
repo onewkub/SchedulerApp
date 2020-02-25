@@ -1,10 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Task, TaskStatus} from 'src/app/models/task.model';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {User} from 'src/app/models/user.model';
-import {ProjectService} from 'src/app/services/project.service';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Task, TaskStatus } from 'src/app/models/task.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { ProjectService } from 'src/app/services/project.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -17,9 +17,9 @@ export class ProjectAddTaskComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { work: any, owner: User },
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ProjectAddTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { work: any, owner: User },
     public formBuilder: FormBuilder,
     public projectService: ProjectService,
   ) {
@@ -42,32 +42,16 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   editTask() {
-    // console.log(this.taskForm.value);
     const form = this.taskForm.value;
     this.data.work.task.name = form.name;
     this.data.work.task.startDate = form.startDate;
     this.data.work.task.endDate = form.endDate;
     this.data.work.task.description = form.description;
-    this.projectService.calculateTaskStatus();
+    // this.projectService.updateTaskStatus();
     this.onNoClick();
   }
 
   addTask() {
-    const form = this.taskForm.value;
-    const newTask: Task = {
-      taskID: null,
-      projectID: this.data.work.task.projectID,
-      name: form.name,
-      description: form.description,
-      startDate: form.startDate,
-      endDate: form.endDate,
-      owner: this.data.owner.uid,
-      status: TaskStatus.inProgress,
-      reasonForCancel: ''
-    };
-    this.projectService.addTask(newTask);
-    this.projectService.calculateTaskStatus();
-    this.onNoClick();
   }
 
   deleteTask() {
@@ -75,7 +59,6 @@ export class ProjectAddTaskComponent implements OnInit {
   }
 
   openConfirmDialog() {
-    console.log('Open Dialog');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '30rem',
     });
@@ -85,7 +68,6 @@ export class ProjectAddTaskComponent implements OnInit {
     dialogRef.componentInstance.confirm = false;
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       if (dialogRef.componentInstance.confirm) {
         this.onNoClick();
       }

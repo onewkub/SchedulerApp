@@ -1,56 +1,56 @@
 <div class="dashboard">
+  <div class="row">
+    <h1 class="display-3">
+      Today
+    </h1>
+  </div>
+  <div class="row">
+    <h1 class="display-4">
+      {{ todayDate | date:'longDate' }}
+    </h1>
+  </div>
+  <div class="row">
+    <h1 class="display-4">Hello {{ user?.displayName }}</h1>
+  </div>
+  <div class="row">
+    <h1 class="display-4">
+      Your work today:
+    </h1>
+  </div>
+<!--
+  <div class="row">
+    <ul *ngFor="let task of currentTasks">
+      <li>{{task.name}}</li>
+    </ul>
+    <ul *ngIf="currentTasks.length === 0">
+      <li>( None )</li>
+    </ul>
+  </div> -->
+  <div>
     <div class="row">
-        <h1 class="display-3">
-            Today
-        </h1>
+      <h1 class="display-4">Dashboard</h1>
     </div>
-    <div class="row">
-        <h1 class="display-4">
-            {{today}}
-        </h1>
-    </div>
-    <div class="row">
-        <h1 class="display-4">Hello {{this.userService.currentUser.displayName}}</h1>
-    </div>
-    <div class="row">
-        <h1 class="display-4">
-            Your work today:
-        </h1>
-    </div>
+    <mat-nav-list>
+      <!-- <mat-list-item *ngFor="let project of getProjects()" routerLink='/app/projects/{{project.projectID}}'>
+        <div class="table project-progress">
+          <div class="row w-100 display-4 text-left proLabel">
+            <div class="col-4">
+              {{project.projectName}}
+            </div>
+            <div class="col-4 text-center">
+              {{getProjectOwnerDisplayName(project.projectID)}}
+            </div>
+            <div class="col-4 text-right">
+              {{getRemainingDay(project.endDate)}}
+            </div>
 
-    <div class="row">
-      <ul *ngFor="let task of currentTasks">
-        <li>{{task.name}}</li>
-      </ul>
-      <ul *ngIf="currentTasks.length === 0">
-        <li>( None )</li>
-      </ul>
-    </div>
-    <div>
-        <div class="row">
-            <h1 class="display-4">Dashboard</h1>
+          </div>
+          <div class="row w-100 probar">
+            <mat-progress-bar mode="determinate" [value]="getProgress(project)"></mat-progress-bar>
+          </div>
         </div>
-        <mat-nav-list>
-            <mat-list-item *ngFor="let item of this.userService.userProject" routerLink='/app/projects/{{item.projectID}}' >
-                <div class="table projectProgress">
-                    <div class="row w-100 display-4 text-left proLabel">
-                        <div class="col-4">
-                            {{item.projectName}}
-                        </div>
-                        <div class="col-4 text-center">
-                            {{this.userService.getUser(item.projectOwner).displayName}}
-                        </div>
-                        <div class="col-4 text-right">
-                            {{getRemainingDay(item.endDate)}}
-                        </div>
-
-                    </div>
-                    <div class="row w-100 probar">
-                        <mat-progress-bar mode="determinate" [value]="getProgress(item)"></mat-progress-bar>
-                    </div>
-                </div>
-            </mat-list-item>
-        </mat-nav-list>
-    </div>
+      </mat-list-item> -->
+    </mat-nav-list>
+  </div>
 
 </div>
