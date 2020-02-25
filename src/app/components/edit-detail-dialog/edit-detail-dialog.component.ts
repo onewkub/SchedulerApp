@@ -44,6 +44,7 @@ export class EditDetailDIalogComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => {
       if (dialogRef.componentInstance.confirm) {
         this.project.description = this.detail.value;
+        this.projectService.updateProject({uid: this.project.uid, description: this.detail.value});
         this.onClose();
       }
     });
